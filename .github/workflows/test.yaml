@@ -18,7 +18,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout this repo
         uses: actions/checkout@v4
 
@@ -35,7 +34,36 @@ jobs:
 
       - name: Fetch apio example
         run: |
-          mkdir project
-          cd project
+          mkdir test-project
+          cd test-project
           apio examples fetch alhambra-ii/blinky
 
+      - name: Get apio packages dir
+        run: |
+          apio_packages_dir=$(apio api get-system | jq -r '.system["apio-packages-dir"]')
+          echo "APIO_PACKAGES_DIR=$apio_packages_dir" >> $GITHUB_ENV
+
+      - name: Patch apio definitions package
+        run: |
+          ls $APIO_PACKAGES_DIR
+          rm -rf $APIO_PACKAGES_DIR/definitions
+          ls $APIO_PACKAGES_DIR
+          cp -r ./definitions $APIO_PACKAGES_DIR/definitions
+          ls $APIO_PACKAGES_DIR
+
+      - name: Show the patched boards definitions
+        run: |
+          apio api get-boards
+
+      - name: Show the patched fpgas definitions
+        run: |
+          apio api get-fpgas
+
+      - name: Show the patched programmers definitions
+        run: |
+          apio api get-programmes
+
+      - name: Build the test apio example
+        run: |
+          cd test-project
+          apio build
