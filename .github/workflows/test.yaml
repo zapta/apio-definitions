@@ -43,6 +43,8 @@ jobs:
           apio_packages_dir=$(apio api get-system | jq -r '.system["apio-packages-dir"]')
           echo "APIO_PACKAGES_DIR=$apio_packages_dir" >> $GITHUB_ENV
 
+      # Replace the content of the fetched apio definitions packages from
+      # definitions from this repository.
       - name: Patch apio definitions package
         run: |
           ls $APIO_PACKAGES_DIR
