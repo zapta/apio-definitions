@@ -1,0 +1,41 @@
+name: test
+
+on:
+  # Run on each commit to this repo.
+  push:
+
+  # Run on pull requests.
+  pull_request:
+    branches:
+      - main
+
+  # Daily at 10AM UTC
+  schedule:
+    - cron: "0 10 * * *"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout this repo
+        uses: actions/checkout@v4
+
+      - name: Install the latest python
+        uses: actions/setup-python@v5
+
+      - name: Show python version
+        run: |
+          python --version
+
+      - name: Install latest apio dev
+        run: |
+          pip install --force-reinstall -U \ git+https://github.com/fpgawars/apio.git@develop
+
+      - name: Fetch apio example
+        run: |
+          mkdir project
+          cd project
+          apio examples fetch alhambra-ii/blinky
+
