@@ -13,6 +13,9 @@ on:
   schedule:
     - cron: "0 10 * * *"
 
+  # Allow manual triggers.
+  workflow_dispatch:
+
 jobs:
   test:
     runs-on: ubuntu-latest
