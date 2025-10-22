@@ -1,0 +1,75 @@
+name: test
+
+on:
+  # Run on each commit to this repo.
+  push:
+
+  # Run on pull requests.
+  pull_request:
+    branches:
+      - main
+
+  # Daily at 10AM UTC
+  schedule:
+    - cron: "0 10 * * *"
+
+  # Allow manual triggers.
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v4
+
+      - name: Install the latest python
+        uses: actions/setup-python@v5
+
+      - name: Show python version
+        run: |
+          python --version
+
+      - name: Install latest apio dev
+        run: |
+          pip install --force-reinstall -U \ git+https://github.com/fpgawars/apio.git@develop
+
+      - name: Fetch apio example
+        run: |
+          mkdir test-project
+          cd test-project
+          apio examples fetch alhambra-ii/blinky
+
+      - name: Get apio packages dir
+        run: |
+          apio_packages_dir=$(apio api get-system | jq -r '.system["apio-packages-dir"]')
+          echo "APIO_PACKAGES_DIR=$apio_packages_dir" >> $GITHUB_ENV
+
+      # Replace the content of the fetched apio definitions packages from
+      # definitions from this repository.
+      - name: Patch apio definitions package
+        run: |
+          ls $APIO_PACKAGES_DIR
+          rm -rf $APIO_PACKAGES_DIR/definitions
+          ls $APIO_PACKAGES_DIR
+          cp -r ./definitions $APIO_PACKAGES_DIR/definitions
+          ls $APIO_PACKAGES_DIR
+
+      - name: Show the patched boards definitions
+        run: |
+          apio api get-boards
+
+      - name: Show the patched fpgas definitions
+        run: |
+          apio api get-fpgas
+
+      # TODO: Enable
+      # - name: Show the patched programmers definitions
+      #   run: |
+      #     apio api get-programmes
+
+      - name: Build the test apio example
+        run: |
+          cd test-project
+          apio build
