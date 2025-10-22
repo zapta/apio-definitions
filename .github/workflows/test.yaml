@@ -64,9 +64,10 @@ jobs:
         run: |
           apio api get-fpgas
 
-      - name: Show the patched programmers definitions
-        run: |
-          apio api get-programmes
+      # TODO: Enable
+      # - name: Show the patched programmers definitions
+      #   run: |
+      #     apio api get-programmes
 
       - name: Build the test apio example
         run: |
