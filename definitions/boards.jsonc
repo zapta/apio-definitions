@@ -751,6 +751,18 @@
       "pid": "6010"
     }
   },
+  "sipeed-tang-primer-20k": {
+    "description": "Sipeed Tang Primer 20k",
+    "fpga-id": "gw2a-lv18pg256c8-i7",
+    "programmer": {
+      "id": "openfpgaloader",
+      "extra-args": "-b tangprimer20k -f"
+    },
+    "usb": {
+      "vid": "0403",
+      "pid": "6010"
+    }
+  },
   "thetamachines-eth4k": {
     "legacy-name": "ThetaMachines-ETH4K",
     "description": "Theta Machines ETH4K",
