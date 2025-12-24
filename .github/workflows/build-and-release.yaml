@@ -102,7 +102,7 @@ jobs:
           \`\`\`
           EOF
 
-          cat -n $RELEASE_BODY.txt
+          cat -n RELEASE_BODY.txt
 
       - name: Write job summary
         run: |
