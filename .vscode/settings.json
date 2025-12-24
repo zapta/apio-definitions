@@ -3,6 +3,9 @@
         "apio",
         "elif",
         "fpgas",
-        "fpgawars"
+        "fpgawars",
+        "popd",
+        "pushd",
+        "softprops"
     ]
 }
