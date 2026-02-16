@@ -1,0 +1,162 @@
+name: build-pre-release
+
+on:
+  # Runs daily at UTC midnight to minimize risk of overstepping
+  # manual builds of same date.
+  schedule:
+    - cron: "0 0 * * *"
+
+  # Allow manual activations.
+  workflow_dispatch:
+
+permissions:
+  # Allow release creation
+  contents: write
+
+env:
+  # These are set latter in the workflow
+  RELEASE_TAG: ""
+  PACKAGE_TAG: ""
+
+jobs:
+  # ----- Parameters collection job
+  build-pre-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v4
+
+      - name: Get release and package tags
+        uses: fpgawars/apio-workflows/.github/actions/get-release-and-package-tags@main
+        with:
+          release-tag-var: RELEASE_TAG
+          package-tag-var: PACKAGE_TAG
+
+      # - name: Get repository commit
+      #   uses: fpgawars/apio-workflows/.github/actions/get-repo-commit@main
+      #   with:
+      #     repo-dir: .
+      #     env-var-name: RELEASE_COMMIT
+
+      - name: Get repository commit
+        uses: fpgawars/apio-workflows/.github/actions/get-repo-info@main
+        with:
+          repo-dir: .
+          commit-var: RELEASE_COMMIT
+
+      - name: Determine package file name
+        run: |
+          package_name="apio-definitions-${PACKAGE_TAG}.tgz"
+          echo "PACKAGE_NAME=$package_name"
+          echo "PACKAGE_NAME=$package_name" >> $GITHUB_ENV
+
+      - name: Create build info
+        run: |
+          cat > build-info.json <<EOF
+          {
+            "package-name":  "definitions",
+            "description" : "Apio definitions package",
+            "release-tag":  "$RELEASE_TAG",
+            "target-platform":  "all",
+            "build-repo":  "${{github.repository}}",
+            "build-workflow":  "${{ github.workflow }}",
+            "workflow-run-id":  "${{github.run_id}}",
+            "workflow-run-number": "${{github.run_number}}",
+            "build-time":  "$(date +'%Y-%m-%d %H:%M:%S %Z')",
+            "commit":  "$RELEASE_COMMIT",
+            "file-name":  "$PACKAGE_NAME"
+          }
+          EOF
+
+          cat -n build-info.json
+
+      - name: Format build info json file in-place
+        uses: fpgawars/apio-workflows/.github/actions/format-json-file@main
+        with:
+          json-file: build-info.json
+
+      - name: Collect package files
+        run: |
+          mkdir "_package"
+          cp -r ./definitions/* _package
+          cp ./LICENSE _package
+          cp build-info.json _package/BUILD-INFO.json
+          find _package
+
+      - name: Compress the package directory
+        run: |
+          pushd _package
+          tar zcf ../${PACKAGE_NAME} ./*
+          popd
+          ls -al
+
+      - name: Convert json build info to text
+        uses: fpgawars/apio-workflows/.github/actions/json-to-text@main
+        with:
+          input-json: build-info.json
+          output-text: build-info.txt
+
+      # Summary for the workflow run page.
+      - name: Prepare workflow run summary
+        run: |
+          cat  > RUN-SUMMARY.txt <<EOF
+
+          Build info:
+          \`\`\`
+          $(cat build-info.txt)
+          \`\`\`
+
+          - [Cutoff commit](https://github.com/${{ github.repository }}/commit/${RELEASE_COMMIT})
+
+          - [Generated pre-release](https://github.com/${{ github.repository }}/releases/tag/${RELEASE_TAG})
+          EOF
+
+          ls -al
+          cat -n RUN-SUMMARY.txt
+
+      - name: Post workflow run summary
+        run: |
+          cat RUN-SUMMARY.txt >> $GITHUB_STEP_SUMMARY
+
+      - name: Prepare release text
+        run: |
+          cat  > RELEASE-BODY.txt <<EOF
+
+          > ### Pre-release note
+          >
+          > This daily release was created as a pre-release and
+          > will be deleted after 5 days unless if it's marked as a stable release. To make
+          > this a  stable release, do the following:
+          > * Open the release for editing.
+          > * Turn off the \`Set as a pre-release\` checkbox below.
+          > * (optional) Turn on the \`Set as the latest release\` checkbox.
+          > * Remove this pre-release note.
+          > * (optional) Add release notes.
+          > * Click \`Update Release\` button to save your changes.
+
+          ### Build info
+
+          \`\`\`
+          $(cat build-info.txt)
+          \`\`\`
+          EOF
+
+          cat -n RELEASE-BODY.txt
+
+      - name: Cleanup old pre-releases
+        uses: fpgawars/apio-workflows/.github/actions/cleanup-old-prereleases@main
+
+      - name: Ensure no conflicting release (again)
+        uses: fpgawars/apio-workflows/.github/actions/ensure-no-conflicting-release@main
+        with:
+          release-tag: ${{ env.RELEASE_TAG }}
+
+      - name: Create GitHub pre-release
+        uses: fpgawars/apio-workflows/.github/actions/create-pre-release@main
+        with:
+          release_tag: ${{ env.RELEASE_TAG }}
+          body_path: RELEASE-BODY.txt
+          # We intensionally list explicitly all the expected files.
+          files: |
+            apio-definitions-${{env.PACKAGE_TAG}}.tgz
