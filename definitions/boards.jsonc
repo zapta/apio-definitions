@@ -751,6 +751,20 @@
       "pid": "6010"
     }
   },
+  // URL: TBD
+  "Soan-Papdi": {
+    "legacy-name": "Soan-Papdi",
+    "description": "Soan-Papdi",
+    "fpga-id": "ice40up5k-sg48",
+    "programmer": {
+      "id": "dfu"
+    },
+    "usb": {
+      "vid": "1d50",
+      "pid": "6146",
+      "product-regex": "^Soan Papdi.*"
+    }
+  },
   "thetamachines-eth4k": {
     "legacy-name": "ThetaMachines-ETH4K",
     "description": "Theta Machines ETH4K",
