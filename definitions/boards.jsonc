@@ -752,7 +752,7 @@
     }
   },
   // URL: TBD
-  "Soan-Papdi": {
+  "soan-papdi": {
     "legacy-name": "Soan-Papdi",
     "description": "Soan-Papdi",
     "fpga-id": "ice40up5k-sg48",
