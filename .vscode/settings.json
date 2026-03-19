@@ -1,11 +1,17 @@
 {
     "cSpell.words": [
         "apio",
+        "CABGA",
+        "CSFBGA",
         "elif",
         "fpgas",
         "fpgawars",
+        "gowin",
+        "nextpnr",
+        "oversizing",
         "popd",
         "pushd",
-        "softprops"
+        "softprops",
+        "yosys"
     ]
 }
