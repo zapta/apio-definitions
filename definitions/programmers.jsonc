@@ -81,7 +81,7 @@
   "openfpgaloader": {
     "command": "openFPGALoader",
     // Per https://github.com/trabucayre/openFPGALoader/issues/629
-    "args": "--force-terminal-mode"
+    "args": "--force-terminal-mode --verify"
   },
   "apollo": {
     "command": "apollo",
