@@ -558,6 +558,8 @@
   },
   // IceSugar Pro using the built in programmer.
   // https://github.com/wuxx/icesugar-pro
+  // This board definition writes to FPGA (slower). The one below
+  // it writes to RAM (faster).
   "icesugar-pro": {
     "description": "Icesugar Pro",
     "fpga-id": "lfe5u-25f-6bg256c",
@@ -572,6 +574,23 @@
       "product-regex": "^DAPLink"
     }
   },
+  // Same as above but writing to ram.
+  "icesugar-pro-ram": {
+    "description": "Icesugar Pro (RAM)",
+    "fpga-id": "lfe5u-25f-6bg256c",
+    "programmer": {
+      "id": "openfpgaloader",
+      // Notice that there is no --write-flash
+      "extra-args": "-c cmsisdap --vid 0x${VID} --pid 0x${PID} --file-type bin"
+    },
+    "usb": {
+      "vid": "1d50",
+      "pid": "602b",
+      "product-regex": "^DAPLink"
+    }
+  },
+  // TODO: These iCESugar-Pro definitions seems to be copy/paste
+  // from ColorLight, do we still need them?
   "icesugar-pro-ft2232h": {
     "legacy-name": "iCESugar-Pro_(FT2232H)",
     "description": "ColorLight-i5",
