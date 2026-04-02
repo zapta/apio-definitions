@@ -556,6 +556,22 @@
       "pid": "602b"
     }
   },
+  // IceSugar Pro using the built in programmer.
+  // https://github.com/wuxx/icesugar-pro
+  "icesugar-pro": {
+    "description": "Icesugar Pro",
+    "fpga-id": "lfe5u-25f-6bg256c",
+    "programmer": {
+      "id": "openfpgaloader",
+      "extra-args": "-c cmsisdap --vid 0x${VID} --pid 0x${PID} --write-flash --file-type bin"
+    },
+    "usb": {
+      "vid": "1d50",
+      "pid": "602b",
+      // TODO: As vendor for a more specific name.
+      "product-regex": "^DAPLink"
+    }
+  },
   "icesugar-pro-ft2232h": {
     "legacy-name": "iCESugar-Pro_(FT2232H)",
     "description": "ColorLight-i5",
