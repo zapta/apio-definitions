@@ -570,8 +570,9 @@
     "usb": {
       "vid": "1d50",
       "pid": "602b",
-      // TODO: As vendor for a more specific name.
-      "product-regex": "^DAPLink"
+      // NOTE: We are getting different product names on macOs and windows
+      // hence the two expressions.
+      "product-regex": "^DAPLink CMSIS-DAP|^CMSIS-DAP-v1-MuseLab"
     }
   },
   // Same as above but writing to ram.
@@ -586,7 +587,8 @@
     "usb": {
       "vid": "1d50",
       "pid": "602b",
-      "product-regex": "^DAPLink"
+      // This regex should be identical to icesugar-pro board above.
+      "product-regex": "^DAPLink CMSIS-DAP|^CMSIS-DAP-v1-MuseLab"
     }
   },
   // TODO: These iCESugar-Pro definitions seems to be copy/paste
