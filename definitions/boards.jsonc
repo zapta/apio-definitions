@@ -591,35 +591,41 @@
       "product-regex": "^DAPLink CMSIS-DAP|^CMSIS-DAP-v1-MuseLab"
     }
   },
-  // TODO: These iCESugar-Pro definitions seems to be copy/paste
-  // from ColorLight, do we still need them?
-  "icesugar-pro-ft2232h": {
-    "legacy-name": "iCESugar-Pro_(FT2232H)",
-    "description": "ColorLight-i5",
-    "fpga-id": "lfe5u-25f-6bg256c",
-    "programmer": {
-      "id": "openfpgaloader",
-      "extra-args": "-c ft2232 -v --file-type bin"
-    }
-  },
-  "icesugar-pro-ft232h": {
-    "legacy-name": "iCESugar-Pro_(FT232H)",
-    "description": "ColorLight-i5",
-    "fpga-id": "lfe5u-25f-6bg256c",
-    "programmer": {
-      "id": "openfpgaloader",
-      "extra-args": "-c ft232 -v --file-type bin"
-    }
-  },
-  "icesugar-pro-usb-blaster": {
-    "legacy-name": "iCESugar-Pro_(USB-Blaster)",
-    "description": "ColorLight-i5",
-    "fpga-id": "lfe5u-25f-6bg256c",
-    "programmer": {
-      "id": "openfpgaloader",
-      "extra-args": "-c usb-blaster -v --file-type bin"
-    }
-  },
+  // These three board definition seem to be copy/paste from Colorlight-I5
+  // and are not related to the actual programmer that comes with the
+  // icesugar-pro. If they are for one-of, user can add a custom boards.jsonc
+  // files in their project. If there is a wider demand for them, we will
+  // fix them (e.g. adding 'usb' section with VID:PID, and product regex)
+  // and reneable them.
+  //
+  // "icesugar-pro-ft2232h": {
+  //   "legacy-name": "iCESugar-Pro_(FT2232H)",
+  //   "description": "ColorLight-i5",
+  //   "fpga-id": "lfe5u-25f-6bg256c",
+  //   "programmer": {
+  //     "id": "openfpgaloader",
+  //     "extra-args": "-c ft2232 -v --file-type bin"
+  //   }
+  // },
+  // "icesugar-pro-ft232h": {
+  //   "legacy-name": "iCESugar-Pro_(FT232H)",
+  //   "description": "ColorLight-i5",
+  //   "fpga-id": "lfe5u-25f-6bg256c",
+  //   "programmer": {
+  //     "id": "openfpgaloader",
+  //     "extra-args": "-c ft232 -v --file-type bin"
+  //   }
+  // },
+  // "icesugar-pro-usb-blaster": {
+  //   "legacy-name": "iCESugar-Pro_(USB-Blaster)",
+  //   "description": "ColorLight-i5",
+  //   "fpga-id": "lfe5u-25f-6bg256c",
+  //   "programmer": {
+  //     "id": "openfpgaloader",
+  //     "extra-args": "-c usb-blaster -v --file-type bin"
+  //   }
+  // },
+  //
   // https://www.robotshop.com/products/devantech-icewerx-kit-ice40-hx8k-fpga-module
   "icewerx": {
     "legacy-name": "iceWerx",
