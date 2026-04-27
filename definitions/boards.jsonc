@@ -561,6 +561,18 @@
       "pid": "ffee"
     }
   },
+  // https://icenode.no
+  "icenode": {
+    "description": "ICENode",
+    "fpga-id": "ice40up5k-sg48",
+    "programmer": {
+      "id": "iceprog"
+    },
+    "usb": {
+      "vid": "0403",
+      "pid": "6010"
+    }
+  },
   // https://www.latticesemi.com/icestick
   "icestick": {
     "description": "iCEstick Eval Kit",
