@@ -201,33 +201,75 @@
       "extra-args": "-c usb-blaster -v --file-type bin"
     }
   },
-  "colorlight-i5-v7-0-ft2232h": {
-    "legacy-name": "ColorLight-i5-v7.0_(FT2232H)",
+  // ColorLight i5 using the built in programmer.
+  // https://github.com/wuxx/Colorlight-FPGA-Projects
+  // This board definition writes to FPGA (slower). The one below
+  // it writes to RAM (faster).
+  "colorlight-i5-v7-0": {
     "description": "ColorLight-i5",
     "fpga-id": "lfe5u-25f-6bg381c",
     "programmer": {
       "id": "openfpgaloader",
-      "extra-args": "-c ft2232 -v --file-type bin"
+      "extra-args": "-c cmsisdap --vid 0x${VID} --pid 0x${PID} --write-flash --unprotect-flash --file-type bin"
+    },
+    "usb": {
+      "vid": "0d28",
+      "pid": "0204",
+      // NOTE: We are getting different product names on macOs and windows
+      // hence the two expressions.
+      "product-regex": "^DAPLink CMSIS-DAP|^CMSIS-DAP-v1-MuseLab"
     }
   },
-  "colorlight-i5-v7-0-ft232h": {
-    "legacy-name": "ColorLight-i5-v7.0_(FT232H)",
-    "description": "ColorLight-i5",
+  // Same as above, but writing to RAM.
+  "colorlight-i5-v7-0-ram": {
+    "description": "ColorLight-i5 (RAM)",
     "fpga-id": "lfe5u-25f-6bg381c",
     "programmer": {
       "id": "openfpgaloader",
-      "extra-args": "-c ft232 -v --file-type bin"
+      // Notice that there is no --write-flash
+      "extra-args": "-c cmsisdap --vid 0x${VID} --pid 0x${PID} --file-type bin"
+    },
+    "usb": {
+      "vid": "0d28",
+      "pid": "0204",
+      // This regex should be identical to icesugar-pro board above.
+      "product-regex": "^DAPLink CMSIS-DAP|^CMSIS-DAP-v1-MuseLab"
     }
   },
-  "colorlight-i5-v7-0-usb-blaster": {
-    "legacy-name": "ColorLight-i5-v7.0_(USB-Blaster)",
-    "description": "ColorLight-i5",
-    "fpga-id": "lfe5u-25f-6bg381c",
-    "programmer": {
-      "id": "openfpgaloader",
-      "extra-args": "-c usb-blaster -v --file-type bin"
-    }
-  },
+  // These three board definition seem to be copy/paste from Colorlight-5A
+  // and are not related to the actual programmer that comes with the
+  // ColorLight i5. If they are useful for one-offs, users can add a custom
+  // boards.jsonc files in their project. If there is a wider demand for
+  // them, we will fix them (e.g. adding 'usb' section with VID:PID, and
+  // product regex) and reneable them.
+  //
+  // "colorlight-i5-v7-0-ft2232h": {
+  //   "legacy-name": "ColorLight-i5-v7.0_(FT2232H)",
+  //   "description": "ColorLight-i5",
+  //   "fpga-id": "lfe5u-25f-6bg381c",
+  //   "programmer": {
+  //     "id": "openfpgaloader",
+  //     "extra-args": "-c ft2232 -v --file-type bin"
+  //   }
+  // },
+  // "colorlight-i5-v7-0-ft232h": {
+  //   "legacy-name": "ColorLight-i5-v7.0_(FT232H)",
+  //   "description": "ColorLight-i5",
+  //   "fpga-id": "lfe5u-25f-6bg381c",
+  //   "programmer": {
+  //     "id": "openfpgaloader",
+  //     "extra-args": "-c ft232 -v --file-type bin"
+  //   }
+  // },
+  // "colorlight-i5-v7-0-usb-blaster": {
+  //   "legacy-name": "ColorLight-i5-v7.0_(USB-Blaster)",
+  //   "description": "ColorLight-i5",
+  //   "fpga-id": "lfe5u-25f-6bg381c",
+  //   "programmer": {
+  //     "id": "openfpgaloader",
+  //     "extra-args": "-c usb-blaster -v --file-type bin"
+  //   }
+  // },
   "colorlight-i9-v7-2-ft2232h": {
     "legacy-name": "ColorLight-i9-v7.2_(FT2232H)",
     "description": "ColorLight-i9",
