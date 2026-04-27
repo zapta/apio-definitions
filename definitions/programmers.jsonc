@@ -19,10 +19,10 @@
 //   ${DEV}          - The USB device address number.
 //
 // SERIAL device placeholders
-//   ${SERIAL_NUM}   - The USB serial number string.
+//   ${SERIAL_PORT}   - The serial port to use.
 //
 // Common placeholders
-//   ${BIN_FILE}     - The path to the bitstream file
+//   ${BIN_FILE}     - The path to the bitstream file.
 //
 // In addition, the placeholder ${BIN_FILE} is replaced by apio with the
 // path to the bitstream file. If it doesn't appear in the programmer command,
@@ -80,7 +80,8 @@
   },
   "openfpgaloader": {
     "command": "openFPGALoader",
-    "args": ""
+    // Per https://github.com/trabucayre/openFPGALoader/issues/629
+    "args": "--force-terminal-mode --verify"
   },
   "apollo": {
     "command": "apollo",
