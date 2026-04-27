@@ -519,6 +519,7 @@
       "pid": "ffee"
     }
   },
+  // https://icenode.no
   "icenode": {
     "description": "ICENode",
     "fpga-id": "ice40up5k-sg48",
