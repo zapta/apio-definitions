@@ -1088,5 +1088,207 @@
       "pid": "6010",
       "product-regex": "^Digilent USB Device*"
     }
+  },
+
+  // https://alchitry.com/boards/au/
+  "alchitry-au": {
+    "description": "Alchitry Au (Xilinx, Artix7)",
+    "fpga-id": "xc7a35tftg256",
+    "programmer": {
+      "id": "openfpgaloader",
+      "extra-args": "--board alchitry_au"
+    },
+    "usb": {
+      "vid": "0403",
+      "pid": "6010"
+    }
+  },
+
+  // https://alchitry.com/boards/au/
+  "alchitry-au-plus": {
+    "description": "Alchitry Au+ (Xilinx, Artix7)",
+    "fpga-id": "xc7a100tftg256",
+    "programmer": {
+      "id": "openfpgaloader",
+      "extra-args": "--board alchitry_au_plus"
+    },
+    "usb": {
+      "vid": "0403",
+      "pid": "6010"
+    }
+  },
+
+  // https://digilent.com/reference/programmable-logic/arty-a7/start
+  "arty-a7-35t": {
+    "description": "Arty A7-35T (Xilinx, Artix7)",
+    "fpga-id": "xc7a35tcsg324",
+    "programmer": {
+      "id": "openfpgaloader",
+      "extra-args": "--board arty_a7_35t"
+    },
+    "usb": {
+      "vid": "0403",
+      "pid": "6010"
+    }
+  },
+
+  // https://digilent.com/reference/programmable-logic/arty-a7/start
+  "arty-a7-100t": {
+    "description": "Arty A7-100T (Xilinx, Artix7)",
+    "fpga-id": "xc7a100tcsg324",
+    "programmer": {
+      "id": "openfpgaloader",
+      "extra-args": "--board arty_a7_100t"
+    },
+    "usb": {
+      "vid": "0403",
+      "pid": "6010"
+    }
+  },
+
+  // https://digilent.com/reference/programmable-logic/cmod-a7/start
+  "cmod-a7-35t": {
+    "description": "Cmod A7-35T (Xilinx, Artix7)",
+    "fpga-id": "xc7a35tcpg236",
+    "programmer": {
+      "id": "openfpgaloader",
+      "extra-args": "--board cmoda7_35t"
+    },
+    "usb": {
+      "vid": "0403",
+      "pid": "6010"
+    }
+  },
+
+  // Artix-7 drop-in module for the Colorlight i5/i9 EVB (no onboard JTAG;
+  // the EVB exposes a CMSIS-DAP USB debugger)
+  // https://github.com/wuxx/Colorlight-FPGA-Projects
+  "colorlight-i9plus": {
+    "description": "Colorlight i9+ (Xilinx, Artix7)",
+    "fpga-id": "xc7a50tfgg484",
+    "programmer": {
+      "id": "openfpgaloader",
+      "extra-args": "--board colorlight-i9+ -c cmsisdap"
+    },
+    "usb": {
+      "vid": "0d28",
+      "pid": "0204"
+    }
+  },
+
+  // Onboard FT232H USB-JTAG; no openFPGALoader board id -> generic cable
+  // https://github.com/microphase-tech/A7-Lite
+  "microphase-a7-lite": {
+    "description": "MicroPhase A7-Lite (Xilinx, Artix7)",
+    "fpga-id": "xc7a200tfbg484",
+    "programmer": {
+      "id": "openfpgaloader",
+      "extra-args": "-c ft232 --fpga-part xc7a200tfbg484"
+    },
+    "usb": {
+      "vid": "0403",
+      "pid": "6014"
+    }
+  },
+
+  // https://numato.com/product/mimas-a7-fpga-development-board/
+  "mimas-a7": {
+    "description": "Mimas A7 (Xilinx, Artix7)",
+    "fpga-id": "xc7a50tfgg484",
+    "programmer": {
+      "id": "openfpgaloader",
+      "extra-args": "--board mimas_a7"
+    },
+    "usb": {
+      "vid": "2a19",
+      "pid": "1009"
+    }
+  },
+
+  // https://digilent.com/reference/programmable-logic/nexys-a7/start
+  "nexys-a7-50t": {
+    "description": "Nexys A7-50T (Xilinx, Artix7)",
+    "fpga-id": "xc7a50tcsg324",
+    "programmer": {
+      "id": "openfpgaloader",
+      "extra-args": "--board nexys_a7_50"
+    },
+    "usb": {
+      "vid": "0403",
+      "pid": "6010"
+    }
+  },
+
+  // https://digilent.com/reference/programmable-logic/nexys-a7/start
+  // Same fpga and pinout as the older Nexys 4 DDR
+  "nexys-a7-100t": {
+    "description": "Nexys A7-100T / Nexys 4 DDR (Xilinx, Artix7)",
+    "fpga-id": "xc7a100tcsg324",
+    "programmer": {
+      "id": "openfpgaloader",
+      "extra-args": "--board nexys_a7_100"
+    },
+    "usb": {
+      "vid": "0403",
+      "pid": "6010"
+    }
+  },
+
+  // QMTECH XC7A100T core board: no onboard JTAG -> external FT2232H cable
+  // https://github.com/ChinaQMTECH
+  "qmtech-xc7a100t-ft2232h": {
+    "description": "QMTECH XC7A100T core board (Xilinx, Artix7)",
+    "fpga-id": "xc7a100tfgg676",
+    "programmer": {
+      "id": "openfpgaloader",
+      "extra-args": "-c ft2232 --fpga-part xc7a100tfgg676"
+    }
+  },
+
+  // ZX Spectrum clone family; bare JTAG points (TMS/TDI/TDO/TCK/GND), the
+  // official manual documents openFPGALoader with an Altera USB-Blaster
+  // (alternative: -c ft232). All three variants share the PCB/pinout.
+  // https://zxtres.github.io/wiki/manual_en.html
+  "zxtres": {
+    "description": "ZXTRES (Xilinx, Artix7)",
+    "fpga-id": "xc7a35tfgg484",
+    "programmer": {
+      "id": "openfpgaloader",
+      "extra-args": "-c usb-blaster"
+    },
+    "usb": {
+      "vid": "09fb",
+      "pid": "6001"
+    }
+  },
+
+  // https://zxtres.github.io/wiki/manual_en.html
+  "zxtres-plus": {
+    "description": "ZXTRES+ (Xilinx, Artix7)",
+    "fpga-id": "xc7a100tfgg484",
+    "programmer": {
+      "id": "openfpgaloader",
+      "extra-args": "-c usb-blaster"
+    },
+    "usb": {
+      "vid": "09fb",
+      "pid": "6001"
+    }
+  },
+
+  // The ++ mounts the lidless FBV484 package (Vivado name); prjxray/openXC7
+  // use the footprint-identical xc7a200tfbg484
+  // https://zxtres.github.io/wiki/manual_en.html
+  "zxtres-plus-plus": {
+    "description": "ZXTRES++ (Xilinx, Artix7)",
+    "fpga-id": "xc7a200tfbg484-2",
+    "programmer": {
+      "id": "openfpgaloader",
+      "extra-args": "-c usb-blaster"
+    },
+    "usb": {
+      "vid": "09fb",
+      "pid": "6001"
+    }
   }
 }

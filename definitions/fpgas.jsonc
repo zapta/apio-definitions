@@ -813,5 +813,139 @@
       "package": "xc7a35tcpg236",
       "speed": "1"
     }
+  },
+
+  "xc7a35tcsg324": {
+    "part-num": "XC7A35TCSG324",
+    "arch": "xilinx",
+    "size": "35k",
+    "xilinx-params": {
+      "family": "artix7",
+      "yosys-arch": "xc7",
+      "package": "xc7a35tcsg324",
+      "speed": "1"
+    }
+  },
+
+  "xc7a35tfgg484": {
+    "part-num": "XC7A35TFGG484",
+    "arch": "xilinx",
+    "size": "35k",
+    "xilinx-params": {
+      "family": "artix7",
+      "yosys-arch": "xc7",
+      "package": "xc7a35tfgg484",
+      "speed": "2"
+    }
+  },
+
+  "xc7a35tftg256": {
+    "part-num": "XC7A35TFTG256",
+    "arch": "xilinx",
+    "size": "35k",
+    "xilinx-params": {
+      "family": "artix7",
+      "yosys-arch": "xc7",
+      "package": "xc7a35tftg256",
+      "speed": "1"
+    }
+  },
+
+  "xc7a50tcsg324": {
+    "part-num": "XC7A50TCSG324",
+    "arch": "xilinx",
+    "size": "50k",
+    "xilinx-params": {
+      "family": "artix7",
+      "yosys-arch": "xc7",
+      "package": "xc7a50tcsg324",
+      "speed": "1"
+    }
+  },
+
+  "xc7a50tfgg484": {
+    "part-num": "XC7A50TFGG484",
+    "arch": "xilinx",
+    "size": "50k",
+    "xilinx-params": {
+      "family": "artix7",
+      "yosys-arch": "xc7",
+      "package": "xc7a50tfgg484",
+      "speed": "1"
+    }
+  },
+
+  "xc7a100tcsg324": {
+    "part-num": "XC7A100TCSG324",
+    "arch": "xilinx",
+    "size": "100k",
+    "xilinx-params": {
+      "family": "artix7",
+      "yosys-arch": "xc7",
+      "package": "xc7a100tcsg324",
+      "speed": "1"
+    }
+  },
+
+  "xc7a100tftg256": {
+    "part-num": "XC7A100TFTG256",
+    "arch": "xilinx",
+    "size": "100k",
+    "xilinx-params": {
+      "family": "artix7",
+      "yosys-arch": "xc7",
+      "package": "xc7a100tftg256",
+      "speed": "1"
+    }
+  },
+
+  "xc7a100tfgg484": {
+    "part-num": "XC7A100TFGG484",
+    "arch": "xilinx",
+    "size": "100k",
+    "xilinx-params": {
+      "family": "artix7",
+      "yosys-arch": "xc7",
+      "package": "xc7a100tfgg484",
+      "speed": "2"
+    }
+  },
+
+  "xc7a100tfgg676": {
+    "part-num": "XC7A100TFGG676",
+    "arch": "xilinx",
+    "size": "100k",
+    "xilinx-params": {
+      "family": "artix7",
+      "yosys-arch": "xc7",
+      "package": "xc7a100tfgg676",
+      "speed": "1"
+    }
+  },
+
+  "xc7a200tfbg484": {
+    "part-num": "XC7A200TFBG484",
+    "arch": "xilinx",
+    "size": "200k",
+    "xilinx-params": {
+      "family": "artix7",
+      "yosys-arch": "xc7",
+      "package": "xc7a200tfbg484",
+      "speed": "3"
+    }
+  },
+
+  // Same package as above, -2 speed grade (ZXTres++); the chipdb .bin is
+  // shared, only fasm2frames/xc7frames2bit use the speed
+  "xc7a200tfbg484-2": {
+    "part-num": "XC7A200TFBG484",
+    "arch": "xilinx",
+    "size": "200k",
+    "xilinx-params": {
+      "family": "artix7",
+      "yosys-arch": "xc7",
+      "package": "xc7a200tfbg484",
+      "speed": "2"
+    }
   }
 }
