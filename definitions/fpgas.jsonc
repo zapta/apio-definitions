@@ -973,6 +973,18 @@
     }
   },
 
+  "xc7z020clg484": {
+    "part-num": "XC7Z020CLG484",
+    "arch": "xilinx",
+    "size": "85k",
+    "xilinx-params": {
+      "family": "zynq7",
+      "yosys-arch": "xc7",
+      "package": "xc7z020clg484",
+      "speed": "1"
+    }
+  },
+
   "xc7z020clg400": {
     "part-num": "XC7Z020CLG400",
     "arch": "xilinx",

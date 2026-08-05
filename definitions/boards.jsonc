@@ -1217,6 +1217,21 @@
     }
   },
 
+  // https://digilent.com/reference/programmable-logic/zedboard/start
+  // Digilent JTAG-HS2 on board (FT232H)
+  "zedboard": {
+    "description": "ZedBoard (Xilinx, Zynq7 PL)",
+    "fpga-id": "xc7z020clg484",
+    "programmer": {
+      "id": "openfpgaloader",
+      "extra-args": "--board zedboard"
+    },
+    "usb": {
+      "vid": "0403",
+      "pid": "6014"
+    }
+  },
+
   // https://digilent.com/reference/programmable-logic/cmod-a7/start
   "cmod-a7-35t": {
     "description": "Cmod A7-35T (Xilinx, Artix7)",
