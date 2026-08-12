@@ -875,6 +875,19 @@
       "product-regex": "^Soan Papdi.*"
     }
   },
+  "vsdsquadron-fm": {
+    "legacy-name": "VSDSquadron-FM",
+    "description": "VSDSquadron FPGA Mini",
+    "fpga-id": "ice40up5k-sg48",
+    "programmer": {
+      "id": "iceprog"
+    },
+    "usb": {
+      "vid": "0403",
+      "pid": "6014",
+      "product-regex": "^.*Single RS232.*"
+    }
+  },
   "thetamachines-eth4k": {
     "legacy-name": "ThetaMachines-ETH4K",
     "description": "Theta Machines ETH4K",
