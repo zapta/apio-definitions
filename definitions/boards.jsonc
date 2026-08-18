@@ -53,6 +53,20 @@
       "product-regex": "^Single RS232-HS"
     }
   },
+  // https://github.com/maxisimonazzi/Azukar-FPGA
+  // https://www.azukar.com.ar
+    "azukar2": {
+    "description": "AZUKAR v2",
+    "fpga-id": "ice40hx4k-tq144-8k",
+    "programmer": {
+      "id": "iceprog"
+    },
+    "usb": {
+      "vid": "0403",
+      "pid": "6010",
+      "product-regex": "^--.. Azukar FPGA ..--"
+    }
+  },
   // URL: TBD
   "blackice": {
     "description": "BlackIce",
@@ -329,6 +343,19 @@
       "vid": "0403",
       "pid": "6010",
       "product-regex": "^Dual RS232-HS"
+    }
+  },
+  // https://github.com/BrisbaneSilicon/EPM11-FPGA
+  "epm11": {
+    "description": "BrisbaneSilicon EPM11",
+    "fpga-id": "gw1nr-lv9qn88pc6-i5",
+    "programmer": {
+      "id": "openfpgaloader",
+      "extra-args": "-b epm11 -f"
+    },
+    "usb": {
+      "vid": "0403",
+      "pid": "6010"
     }
   },
   "fleafpga-ohm-ft2232h": {
@@ -831,6 +858,19 @@
       "vid": "1d50",
       "pid": "6146",
       "product-regex": "^Soan Papdi.*"
+    }
+  },
+  "vsdsquadron-fm": {
+    "legacy-name": "VSDSquadron-FM",
+    "description": "VSDSquadron FPGA Mini",
+    "fpga-id": "ice40up5k-sg48",
+    "programmer": {
+      "id": "iceprog"
+    },
+    "usb": {
+      "vid": "0403",
+      "pid": "6014",
+      "product-regex": "^.*Single RS232.*"
     }
   },
   "thetamachines-eth4k": {
