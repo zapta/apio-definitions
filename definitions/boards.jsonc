@@ -861,7 +861,6 @@
     }
   },
   "vsdsquadron-fm": {
-    "legacy-name": "VSDSquadron-FM",
     "description": "VSDSquadron FPGA Mini",
     "fpga-id": "ice40up5k-sg48",
     "programmer": {
