@@ -70,12 +70,17 @@ jobs:
         with:
           json-file: build-info.json
 
+      - name: Copy common files to each example
+        run: |
+          ls -al .
+          ls -al ./scripts
+          python ./scripts/copy-common-examples-files.py     
+
       - name: Collect package files
         run: |
           mkdir "_package"
           cp -r ./definitions/* _package
           cp -r ./examples _package
-          cp -r ./common-examples-files _package
           cp ./LICENSE _package
           cp build-info.json _package/BUILD-INFO.json
           find _package
