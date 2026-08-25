@@ -33,6 +33,12 @@ jobs:
           release-tag-var: RELEASE_TAG
           package-tag-var: PACKAGE_TAG
 
+      - name: Early check for no conflicting release
+        uses: fpgawars/apio-workflows/.github/actions/ensure-no-conflicting-release@main
+        with:
+          release-tag: ${{ env.RELEASE_TAG }}
+          just-check: true
+
       - name: Get repository commit
         uses: fpgawars/apio-workflows/.github/actions/get-repo-info@main
         with:
@@ -148,7 +154,7 @@ jobs:
       - name: Cleanup old pre-releases
         uses: fpgawars/apio-workflows/.github/actions/cleanup-old-prereleases@main
 
-      - name: Ensure no conflicting release (again)
+      - name: Ensure no conflicting release
         uses: fpgawars/apio-workflows/.github/actions/ensure-no-conflicting-release@main
         with:
           release-tag: ${{ env.RELEASE_TAG }}
