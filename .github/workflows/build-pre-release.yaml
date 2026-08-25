@@ -74,7 +74,7 @@ jobs:
         run: |
           ls -al .
           ls -al ./scripts
-          python ./scripts/copy-common-examples-files.py     
+          python ./scripts/copy_common_examples_files.py     
 
       - name: Collect package files
         run: |
