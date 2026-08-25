@@ -8,6 +8,7 @@ error status code on the first error it detects.
 import sys
 import re
 import os
+import argparse
 import json
 from pathlib import Path
 import subprocess
@@ -16,19 +17,28 @@ from glob import glob
 from subprocess import CompletedProcess
 from typing import List, Union, Dict
 
-# -- Examples repo top dir.
-REPO_DIR = Path(".").absolute()
+parser = argparse.ArgumentParser(description="Test examples")
+parser.add_argument(
+    "--examples-root",
+    type=Path,
+    default=Path("./examples"),
+    help="Path to the examples root directory (default ./examples)",
+)
+args = parser.parse_args()
 
-# -- The examples dir with the boards.
-EXAMPLES_DIR = REPO_DIR / "examples"
+
+# -- The absolute path of the dir with the examples. The entries
+# -- in this dir are the board names.
+EXAMPLES_DIR = args.examples_root.absolute()
 
 # Valid format of board and example names.
 NAME_REGEX = r"^[a-z][a-z0-9-]*$"
 
-# List of examples that break the Verible formatter.
-# TODO: Report to Verible
-# TODO: Can we find a more reliable formatter.
-NO_FORMAT_EXAMPLES = ["fomu/blink", "icezum/marcha-imperial"]
+# List of examples that are known to break the Verible formatter.
+NO_FORMAT_EXAMPLES = [
+    "fomu/blink",
+    "icezum/marcha-imperial",
+]
 
 
 def read_file_lines(file: Union[str, Path]) -> List[str]:
@@ -59,7 +69,7 @@ def run_cmd(
     return result
 
 
-def getApioBoardDefinitions() -> Dict:
+def get_apio_boards_definitions() -> Dict:
     """Get from 'apio api' the list of all board definitions."""
     # -- Make sure packages are updated to not contaminate the output
     # -- of apio api with on the file package update.
@@ -69,7 +79,7 @@ def getApioBoardDefinitions() -> Dict:
     cmd_result: CompletedProcess = run_cmd(["apio", "api", "get-boards"])
 
     # -- Filter out optional env var info message at the beginning of the outout.
-    start =  cmd_result.stdout.find('{')
+    start = cmd_result.stdout.find("{")
     assert start >= 0, "Error, '{' not found in get-boards json."
     json_text = cmd_result.stdout[start:]
 
@@ -80,7 +90,7 @@ def getApioBoardDefinitions() -> Dict:
     result = result["boards"]
 
     # -- Dump for debugging.
-    print(json.dumps(result, indent=4))
+    print(json.dumps(result, indent=2))
 
     # -- Sanity check
     assert 50 < len(result.keys()) < 500
@@ -125,6 +135,8 @@ def test_example_env(
     testbenches: List[str],
 ) -> None:
     """Test the given env of an example."""
+
+    _ = source_files # Unused
 
     print(f"\nENV: {board_name}/{example_name}:{env_name}")
 
@@ -176,6 +188,8 @@ def test_example_env(
 
 def test_example(board_name: str, example_name: str, board_defs: Dict) -> None:
     """Test an example."""
+
+    # pylint: disable=too-many-locals
 
     print(f"\nEXAMPLE: {board_name}/{example_name}")
 
@@ -241,7 +255,7 @@ def test_example(board_name: str, example_name: str, board_defs: Dict) -> None:
     run_cmd(["apio", "clean"])
 
 
-def test_board(board_name: str, board_defs: Dict) -> None:
+def test_board(board_name: str, apio_board_defs: Dict) -> None:
     """Test board's examples."""
 
     print("\n--------------------------")
@@ -250,7 +264,6 @@ def test_board(board_name: str, board_defs: Dict) -> None:
     assert re.match(NAME_REGEX, board_name), f"Invalid example name {board_name}"
 
     board_dir = EXAMPLES_DIR / board_name
-    os.chdir(board_dir)
 
     example_names = glob("*", root_dir=board_dir)
     example_names = sorted(example_names)
@@ -262,21 +275,22 @@ def test_board(board_name: str, board_defs: Dict) -> None:
         assert (
             example_dir.is_dir()
         ), f"Example {board_name}/{example_name} is not a dir."
-        test_example(board_name, example_name, board_defs)
+        test_example(board_name, example_name, apio_board_defs)
 
 
 def main() -> None:
     """Main."""
 
-    print("Examples repo test.")
+    print("Examples test.")
+    # print(f"{REPO_DIR=}")
+    print(f"EXAMPLES_DIR={str(EXAMPLES_DIR)}")
     print()
-    print(f"{REPO_DIR=}")
-    print(f"{EXAMPLES_DIR=}")
 
     # -- Get apio board definitions
-    board_defs: Dict = getApioBoardDefinitions()
+    apio_board_defs: Dict = get_apio_boards_definitions()
 
     # -- Get names of boards with examples.
+    print(f"{EXAMPLES_DIR=}")
     board_names = glob("*", root_dir=EXAMPLES_DIR)
     board_names = sorted(board_names)
     assert len(board_names) > 20, f"Found too few boards: {board_names}"
@@ -286,7 +300,7 @@ def main() -> None:
         board_dir = EXAMPLES_DIR / board_name
         assert board_dir.is_dir(), f"Board dir is not a dir: {board_dir}"
         # -- This may call chdir().
-        test_board(board_name, board_defs)
+        test_board(board_name, apio_board_defs)
 
     print()
     print("Test completed OK.")
