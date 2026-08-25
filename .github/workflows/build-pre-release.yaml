@@ -33,12 +33,6 @@ jobs:
           release-tag-var: RELEASE_TAG
           package-tag-var: PACKAGE_TAG
 
-      # - name: Get repository commit
-      #   uses: fpgawars/apio-workflows/.github/actions/get-repo-commit@main
-      #   with:
-      #     repo-dir: .
-      #     env-var-name: RELEASE_COMMIT
-
       - name: Get repository commit
         uses: fpgawars/apio-workflows/.github/actions/get-repo-info@main
         with:
@@ -80,6 +74,8 @@ jobs:
         run: |
           mkdir "_package"
           cp -r ./definitions/* _package
+          cp -r ./examples _package
+          cp -r ./common-examples-files _package
           cp ./LICENSE _package
           cp build-info.json _package/BUILD-INFO.json
           find _package
