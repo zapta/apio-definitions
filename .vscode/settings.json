@@ -1,8 +1,12 @@
 {
     "cSpell.words": [
+        "Alchitry",
+        "alinx",
         "apio",
+        "ARTIX",
         "CABGA",
         "CSFBGA",
+        "Digilent",
         "dumpfile",
         "elif",
         "fomu",
@@ -11,9 +15,11 @@
         "gowin",
         "gtkw",
         "gtkwave",
+        "iceprog",
         "icezum",
         "marcha",
         "nextpnr",
+        "openfpgaloader",
         "oversizing",
         "popd",
         "pushd",
@@ -21,6 +27,8 @@
         "softprops",
         "testbench",
         "testbenches",
+        "tfgg",
+        "tinyprog",
         "yosys"
     ]
 }
