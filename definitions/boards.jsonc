@@ -27,6 +27,23 @@
       "product-regex": "^Alchitry Cu"
     }
   },
+  // https://www.en.alinx.com/Product/FPGA-Development-Boards/Artix-7/AX7035B.html
+  // Programming via Alinx Usb Cable AL321 (FT232) which presents itself as a
+  // Digilent device.
+  "alinx-ax7035": {
+    "description": "Alinx ARTIX-7 AX7035",
+    "fpga-id": "xc7a35tfgg484",
+    "programmer": {
+      "id": "openfpgaloader",
+      // Removing the '-f' program to RAM which is faster but volatile.
+      "extra-args": "-f -c ft232 --fpga-part xc7a35t"
+    },
+    "usb": {
+      "vid": "0403",
+      "pid": "6014",
+      "product-regex": "Digilent USB Device"
+    }
+  },
   // https://github.com/FPGAwars/Alhambra-II-FPGA
   "alhambra-ii": {
     "description": "Alhambra II",
@@ -55,7 +72,7 @@
   },
   // https://github.com/maxisimonazzi/Azukar-FPGA
   // https://www.azukar.com.ar
-    "azukar2": {
+  "azukar2": {
     "description": "AZUKAR v2",
     "fpga-id": "ice40hx4k-tq144-8k",
     "programmer": {
@@ -1066,7 +1083,6 @@
       "product-regex": "^(USB <-> Serial Converter)|(Lattice ECP5 Versa Board)"
     }
   },
-
   // https://digilent.com/reference/programmable-logic/basys-3/start
   "basys3": {
     "description": "Basys3 (Xilinx, Artix7)",
@@ -1081,7 +1097,6 @@
       "product-regex": "^Digilent USB Device*"
     }
   },
-
   // https://alchitry.com/boards/au/
   "alchitry-au": {
     "description": "Alchitry Au (Xilinx, Artix7)",
@@ -1095,7 +1110,6 @@
       "pid": "6010"
     }
   },
-
   // https://alchitry.com/boards/au/
   "alchitry-au-plus": {
     "description": "Alchitry Au+ (Xilinx, Artix7)",
@@ -1109,7 +1123,6 @@
       "pid": "6010"
     }
   },
-
   // https://digilent.com/reference/programmable-logic/arty-a7/start
   "arty-a7-35t": {
     "description": "Arty A7-35T (Xilinx, Artix7)",
@@ -1123,7 +1136,6 @@
       "pid": "6010"
     }
   },
-
   // https://digilent.com/reference/programmable-logic/arty-a7/start
   "arty-a7-100t": {
     "description": "Arty A7-100T (Xilinx, Artix7)",
@@ -1137,7 +1149,6 @@
       "pid": "6010"
     }
   },
-
   // https://digilent.com/reference/programmable-logic/arty-s7/start
   "arty-s7-50": {
     "description": "Arty S7-50 (Xilinx, Spartan7)",
@@ -1151,7 +1162,6 @@
       "pid": "6010"
     }
   },
-
   // https://digilent.com/reference/programmable-logic/zybo-z7/start
   // Zynq PL-only flow: the bitstream configures the fabric over JTAG.
   "zybo-z7-10": {
@@ -1166,7 +1176,6 @@
       "pid": "6010"
     }
   },
-
   // https://digilent.com/reference/programmable-logic/zybo-z7/start
   "zybo-z7-20": {
     "description": "Zybo Z7-20 (Xilinx, Zynq7 PL)",
@@ -1180,7 +1189,6 @@
       "pid": "6010"
     }
   },
-
   // https://digilent.com/reference/programmable-logic/pynq-z1/start
   "pynq-z1": {
     "description": "Pynq-Z1 (Xilinx, Zynq7 PL)",
@@ -1194,7 +1202,6 @@
       "pid": "6010"
     }
   },
-
   // https://www.tulembedded.com/FPGA/ProductsPYNQ-Z2.html
   "pynq-z2": {
     "description": "Pynq-Z2 (Xilinx, Zynq7 PL)",
@@ -1208,7 +1215,6 @@
       "pid": "6010"
     }
   },
-
   // https://digilent.com/reference/programmable-logic/zedboard/start
   // Digilent JTAG-HS2 on board (FT232H)
   "zedboard": {
@@ -1223,7 +1229,6 @@
       "pid": "6014"
     }
   },
-
   // https://digilent.com/reference/programmable-logic/cmod-a7/start
   "cmod-a7-35t": {
     "description": "Cmod A7-35T (Xilinx, Artix7)",
@@ -1237,7 +1242,6 @@
       "pid": "6010"
     }
   },
-
   // Artix-7 drop-in module for the Colorlight i5/i9 EVB (no onboard JTAG;
   // the EVB exposes a CMSIS-DAP USB debugger)
   // https://github.com/wuxx/Colorlight-FPGA-Projects
@@ -1253,7 +1257,6 @@
       "pid": "0204"
     }
   },
-
   // Onboard FT232H USB-JTAG; no openFPGALoader board id -> generic cable
   // https://github.com/microphase-tech/A7-Lite
   "microphase-a7-lite": {
@@ -1268,7 +1271,6 @@
       "pid": "6014"
     }
   },
-
   // https://numato.com/product/mimas-a7-fpga-development-board/
   "mimas-a7": {
     "description": "Mimas A7 (Xilinx, Artix7)",
@@ -1282,7 +1284,6 @@
       "pid": "1009"
     }
   },
-
   // https://digilent.com/reference/programmable-logic/nexys-a7/start
   "nexys-a7-50t": {
     "description": "Nexys A7-50T (Xilinx, Artix7)",
@@ -1296,7 +1297,6 @@
       "pid": "6010"
     }
   },
-
   // https://digilent.com/reference/programmable-logic/nexys-a7/start
   // Same fpga and pinout as the older Nexys 4 DDR
   "nexys-a7-100t": {
@@ -1311,7 +1311,6 @@
       "pid": "6010"
     }
   },
-
   // QMTECH XC7A100T core board: no onboard JTAG -> external FT2232H cable
   // https://github.com/ChinaQMTECH
   "qmtech-xc7a100t-ft2232h": {
@@ -1322,7 +1321,6 @@
       "extra-args": "-c ft2232 --fpga-part xc7a100tfgg676"
     }
   },
-
   // ZX Spectrum clone family; bare JTAG points (TMS/TDI/TDO/TCK/GND), the
   // official manual documents openFPGALoader with an Altera USB-Blaster
   // (alternative: -c ft232). All three variants share the PCB/pinout.
@@ -1339,7 +1337,6 @@
       "pid": "6001"
     }
   },
-
   // https://zxtres.github.io/wiki/manual_en.html
   "zxtres-plus": {
     "description": "ZXTRES+ (Xilinx, Artix7)",
@@ -1353,7 +1350,6 @@
       "pid": "6001"
     }
   },
-
   // The ++ mounts the lidless FBV484 package (Vivado name); prjxray/openXC7
   // use the footprint-identical xc7a200tfbg484
   // https://zxtres.github.io/wiki/manual_en.html
