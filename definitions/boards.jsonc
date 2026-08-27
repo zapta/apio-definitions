@@ -27,6 +27,20 @@
       "product-regex": "^Alchitry Cu"
     }
   },
+  // https://github.com/FPGAwars/Alhambra-II-FPGA
+  "alhambra-ii": {
+    "description": "Alhambra II",
+    "fpga-id": "ice40hx4k-tq144-8k",
+    "programmer": {
+      "id": "openfpgaloader",
+      "extra-args": "-b ice40_generic --vid ${VID} --pid ${PID} --busdev-num ${BUS}:${DEV}"
+    },
+    "usb": {
+      "vid": "0403",
+      "pid": "6010",
+      "product-regex": "^Alhambra II.*"
+    }
+  },
   // https://www.en.alinx.com/Product/FPGA-Development-Boards/Artix-7/AX7035B.html
   // Programming via Alinx Usb Cable AL321 (FT232) which presents itself as a
   // Digilent device.
@@ -42,20 +56,6 @@
       "vid": "0403",
       "pid": "6014",
       "product-regex": "Digilent USB Device"
-    }
-  },
-  // https://github.com/FPGAwars/Alhambra-II-FPGA
-  "alhambra-ii": {
-    "description": "Alhambra II",
-    "fpga-id": "ice40hx4k-tq144-8k",
-    "programmer": {
-      "id": "openfpgaloader",
-      "extra-args": "-b ice40_generic --vid ${VID} --pid ${PID} --busdev-num ${BUS}:${DEV}"
-    },
-    "usb": {
-      "vid": "0403",
-      "pid": "6010",
-      "product-regex": "^Alhambra II.*"
     }
   },
   "arice1": {
