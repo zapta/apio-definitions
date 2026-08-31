@@ -802,181 +802,181 @@
   // ============= XILINX ARCHITECTURE
   //
   //
-  "xc7a35tcpg236": {
-    "part-num": "XC7A35TCPG236",
+  "xc7a35tcpg236-1": {
+    "part-num": "XC7A35T-1CPG236",
     "arch": "xilinx",
     "size": "35k",
     "xilinx-params": {
-      "family": "artix7",
+      "yosys-family": "artix7",
       "yosys-arch": "xc7",
-      "package": "xc7a35tcpg236",
+      "yosys-part": "xc7a35tcpg236-1",
       "speed": "1"
     }
   },
-  "xc7a35tcsg324": {
-    "part-num": "XC7A35TCSG324",
+  "xc7a35tcsg324-1": {
+    "part-num": "XC7A35T-1CSG324",
     "arch": "xilinx",
     "size": "35k",
     "xilinx-params": {
-      "family": "artix7",
+      "yosys-family": "artix7",
       "yosys-arch": "xc7",
-      "package": "xc7a35tcsg324",
+      "yosys-part": "xc7a35tcsg324-1",
       "speed": "1"
     }
   },
-  "xc7a35tfgg484": {
-    "part-num": "XC7A35TFGG484",
+  "xc7a35tfgg484-2": {
+    "part-num": "XC7A35T-2FGG484",
     "arch": "xilinx",
     "size": "35k",
     "xilinx-params": {
-      "family": "artix7",
+      "yosys-family": "artix7",
       "yosys-arch": "xc7",
-      "package": "xc7a35tfgg484",
+      "yosys-part": "xc7a35tfgg484-2",
       "speed": "2"
     }
   },
-  "xc7a35tftg256": {
-    "part-num": "XC7A35TFTG256",
+  "xc7a35tftg256-1": {
+    "part-num": "XC7A35T-1FTG256",
     "arch": "xilinx",
     "size": "35k",
     "xilinx-params": {
-      "family": "artix7",
+      "yosys-family": "artix7",
       "yosys-arch": "xc7",
-      "package": "xc7a35tftg256",
+      "yosys-part": "xc7a35tftg256-1",
       "speed": "1"
     }
   },
-  "xc7a50tcsg324": {
-    "part-num": "XC7A50TCSG324",
+  "xc7a50tcsg324-1": {
+    "part-num": "XC7A50T-1CSG324",
     "arch": "xilinx",
     "size": "50k",
     "xilinx-params": {
-      "family": "artix7",
+      "yosys-family": "artix7",
       "yosys-arch": "xc7",
-      "package": "xc7a50tcsg324",
+      "yosys-part": "xc7a50tcsg324-1",
       "speed": "1"
     }
   },
-  "xc7a50tfgg484": {
-    "part-num": "XC7A50TFGG484",
+  "xc7a50tfgg484-1": {
+    "part-num": "XC7A50T-1FGG484",
     "arch": "xilinx",
     "size": "50k",
     "xilinx-params": {
-      "family": "artix7",
+      "yosys-family": "artix7",
       "yosys-arch": "xc7",
-      "package": "xc7a50tfgg484",
+      "yosys-part": "xc7a50tfgg484-1",
       "speed": "1"
     }
   },
-  "xc7a100tcsg324": {
-    "part-num": "XC7A100TCSG324",
+  "xc7a100tcsg324-1": {
+    "part-num": "XC7A100T-1CSG324",
     "arch": "xilinx",
     "size": "100k",
     "xilinx-params": {
-      "family": "artix7",
+      "yosys-family": "artix7",
       "yosys-arch": "xc7",
-      "package": "xc7a100tcsg324",
+      "yosys-part": "xc7a100tcsg324-1",
       "speed": "1"
     }
   },
-  "xc7a100tftg256": {
-    "part-num": "XC7A100TFTG256",
+  "xc7a100tftg256-1": {
+    "part-num": "XC7A100T-1FTG256",
     "arch": "xilinx",
     "size": "100k",
     "xilinx-params": {
-      "family": "artix7",
+      "yosys-family": "artix7",
       "yosys-arch": "xc7",
-      "package": "xc7a100tftg256",
+      "yosys-part": "xc7a100tftg256-1",
       "speed": "1"
     }
   },
-  "xc7a100tfgg484": {
-    "part-num": "XC7A100TFGG484",
+  "xc7a100tfgg484-2": {
+    "part-num": "XC7A100T-2FGG484",
     "arch": "xilinx",
     "size": "100k",
     "xilinx-params": {
-      "family": "artix7",
+      "yosys-family": "artix7",
       "yosys-arch": "xc7",
-      "package": "xc7a100tfgg484",
+      "yosys-part": "xc7a100tfgg484-2",
       "speed": "2"
     }
   },
-  "xc7a100tfgg676": {
-    "part-num": "XC7A100TFGG676",
+  "xc7a100tfgg676-1": {
+    "part-num": "XC7A100T-1FGG676",
     "arch": "xilinx",
     "size": "100k",
     "xilinx-params": {
-      "family": "artix7",
+      "yosys-family": "artix7",
       "yosys-arch": "xc7",
-      "package": "xc7a100tfgg676",
+      "yosys-part": "xc7a100tfgg676-1",
       "speed": "1"
     }
   },
-  "xc7a200tfbg484": {
-    "part-num": "XC7A200TFBG484",
+  "xc7a200tfbg484-3": {
+    "part-num": "XC7A200T-3FBG484",
     "arch": "xilinx",
     "size": "200k",
     "xilinx-params": {
-      "family": "artix7",
+      "yosys-family": "artix7",
       "yosys-arch": "xc7",
-      "package": "xc7a200tfbg484",
+      "yosys-part": "xc7a200tfbg484-3",
       "speed": "3"
     }
   },
   // Same package as above, -2 speed grade (ZXTres++); the chipdb .bin is
   // shared, only fasm2frames/xc7frames2bit use the speed
   "xc7a200tfbg484-2": {
-    "part-num": "XC7A200TFBG484",
+    "part-num": "XC7A200T-2FBG484",
     "arch": "xilinx",
     "size": "200k",
     "xilinx-params": {
-      "family": "artix7",
+      "yosys-family": "artix7",
       "yosys-arch": "xc7",
-      "package": "xc7a200tfbg484",
+      "yosys-part": "xc7a200tfbg484-2",
       "speed": "2"
     }
   },
-  "xc7s50csga324": {
-    "part-num": "XC7S50CSGA324",
+  "xc7s50csga324-1": {
+    "part-num": "XC7S50-1CSGA324",
     "arch": "xilinx",
     "size": "50k",
     "xilinx-params": {
-      "family": "spartan7",
+      "yosys-family": "spartan7",
       "yosys-arch": "xc7",
-      "package": "xc7s50csga324",
+      "yosys-part": "xc7s50csga324-1",
       "speed": "1"
     }
   },
-  "xc7z010clg400": {
-    "part-num": "XC7Z010CLG400",
+  "xc7z010clg400-1": {
+    "part-num": "XC7Z010-1CLG400",
     "arch": "xilinx",
     "size": "28k",
     "xilinx-params": {
-      "family": "zynq7",
+      "yosys-family": "zynq7",
       "yosys-arch": "xc7",
-      "package": "xc7z010clg400",
+      "yosys-part": "xc7z010clg400-1",
       "speed": "1"
     }
   },
-  "xc7z020clg484": {
-    "part-num": "XC7Z020CLG484",
+  "xc7z020clg484-1": {
+    "part-num": "XC7Z020-1CLG484",
     "arch": "xilinx",
     "size": "85k",
     "xilinx-params": {
-      "family": "zynq7",
+      "yosys-family": "zynq7",
       "yosys-arch": "xc7",
-      "package": "xc7z020clg484",
+      "yosys-part": "xc7z020clg484-1",
       "speed": "1"
     }
   },
-  "xc7z020clg400": {
-    "part-num": "XC7Z020CLG400",
+  "xc7z020clg400-1": {
+    "part-num": "XC7Z020-1CLG400",
     "arch": "xilinx",
     "size": "85k",
     "xilinx-params": {
-      "family": "zynq7",
+      "yosys-family": "zynq7",
       "yosys-arch": "xc7",
-      "package": "xc7z020clg400",
+      "yosys-part": "xc7z020clg400-1",
       "speed": "1"
     }
   }

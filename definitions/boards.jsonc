@@ -46,7 +46,7 @@
   // Digilent device.
   "alinx-ax7035": {
     "description": "Alinx ARTIX-7 AX7035",
-    "fpga-id": "xc7a35tfgg484",
+    "fpga-id": "xc7a35tfgg484-2",
     "programmer": {
       "id": "openfpgaloader",
       // Removing the '-f' program to RAM which is faster but volatile.
@@ -1086,7 +1086,7 @@
   // https://digilent.com/reference/programmable-logic/basys-3/start
   "basys3": {
     "description": "Basys3 (Xilinx, Artix7)",
-    "fpga-id": "xc7a35tcpg236",
+    "fpga-id": "xc7a35tcpg236-1",
     "programmer": {
       "id": "openfpgaloader",
       "extra-args": "--board basys3"
@@ -1100,7 +1100,7 @@
   // https://alchitry.com/boards/au/
   "alchitry-au": {
     "description": "Alchitry Au (Xilinx, Artix7)",
-    "fpga-id": "xc7a35tftg256",
+    "fpga-id": "xc7a35tftg256-1",
     "programmer": {
       "id": "openfpgaloader",
       "extra-args": "--board alchitry_au"
@@ -1113,7 +1113,7 @@
   // https://alchitry.com/boards/au/
   "alchitry-au-plus": {
     "description": "Alchitry Au+ (Xilinx, Artix7)",
-    "fpga-id": "xc7a100tftg256",
+    "fpga-id": "xc7a100tftg256-1",
     "programmer": {
       "id": "openfpgaloader",
       "extra-args": "--board alchitry_au_plus"
@@ -1126,7 +1126,7 @@
   // https://digilent.com/reference/programmable-logic/arty-a7/start
   "arty-a7-35t": {
     "description": "Arty A7-35T (Xilinx, Artix7)",
-    "fpga-id": "xc7a35tcsg324",
+    "fpga-id": "xc7a35tcsg324-1",
     "programmer": {
       "id": "openfpgaloader",
       "extra-args": "--board arty_a7_35t"
@@ -1139,7 +1139,7 @@
   // https://digilent.com/reference/programmable-logic/arty-a7/start
   "arty-a7-100t": {
     "description": "Arty A7-100T (Xilinx, Artix7)",
-    "fpga-id": "xc7a100tcsg324",
+    "fpga-id": "xc7a100tcsg324-1",
     "programmer": {
       "id": "openfpgaloader",
       "extra-args": "--board arty_a7_100t"
@@ -1152,7 +1152,7 @@
   // https://digilent.com/reference/programmable-logic/arty-s7/start
   "arty-s7-50": {
     "description": "Arty S7-50 (Xilinx, Spartan7)",
-    "fpga-id": "xc7s50csga324",
+    "fpga-id": "xc7s50csga324-1",
     "programmer": {
       "id": "openfpgaloader",
       "extra-args": "--board arty_s7_50"
@@ -1166,7 +1166,7 @@
   // Zynq PL-only flow: the bitstream configures the fabric over JTAG.
   "zybo-z7-10": {
     "description": "Zybo Z7-10 (Xilinx, Zynq7 PL)",
-    "fpga-id": "xc7z010clg400",
+    "fpga-id": "xc7z010clg400-1",
     "programmer": {
       "id": "openfpgaloader",
       "extra-args": "--board zybo_z7_10"
@@ -1179,7 +1179,7 @@
   // https://digilent.com/reference/programmable-logic/zybo-z7/start
   "zybo-z7-20": {
     "description": "Zybo Z7-20 (Xilinx, Zynq7 PL)",
-    "fpga-id": "xc7z020clg400",
+    "fpga-id": "xc7z020clg400-1",
     "programmer": {
       "id": "openfpgaloader",
       "extra-args": "--board zybo_z7_20"
@@ -1192,7 +1192,7 @@
   // https://digilent.com/reference/programmable-logic/pynq-z1/start
   "pynq-z1": {
     "description": "Pynq-Z1 (Xilinx, Zynq7 PL)",
-    "fpga-id": "xc7z020clg400",
+    "fpga-id": "xc7z020clg400-1",
     "programmer": {
       "id": "openfpgaloader",
       "extra-args": "--board pynq_z1"
@@ -1205,7 +1205,7 @@
   // https://www.tulembedded.com/FPGA/ProductsPYNQ-Z2.html
   "pynq-z2": {
     "description": "Pynq-Z2 (Xilinx, Zynq7 PL)",
-    "fpga-id": "xc7z020clg400",
+    "fpga-id": "xc7z020clg400-1",
     "programmer": {
       "id": "openfpgaloader",
       "extra-args": "--board pynq_z2"
@@ -1219,7 +1219,7 @@
   // Digilent JTAG-HS2 on board (FT232H)
   "zedboard": {
     "description": "ZedBoard (Xilinx, Zynq7 PL)",
-    "fpga-id": "xc7z020clg484",
+    "fpga-id": "xc7z020clg484-1",
     "programmer": {
       "id": "openfpgaloader",
       "extra-args": "--board zedboard"
@@ -1232,7 +1232,7 @@
   // https://digilent.com/reference/programmable-logic/cmod-a7/start
   "cmod-a7-35t": {
     "description": "Cmod A7-35T (Xilinx, Artix7)",
-    "fpga-id": "xc7a35tcpg236",
+    "fpga-id": "xc7a35tcpg236-1",
     "programmer": {
       "id": "openfpgaloader",
       "extra-args": "--board cmoda7_35t"
@@ -1247,7 +1247,7 @@
   // https://github.com/wuxx/Colorlight-FPGA-Projects
   "colorlight-i9plus": {
     "description": "Colorlight i9+ (Xilinx, Artix7)",
-    "fpga-id": "xc7a50tfgg484",
+    "fpga-id": "xc7a50tfgg484-1",
     "programmer": {
       "id": "openfpgaloader",
       "extra-args": "--board colorlight-i9+ -c cmsisdap"
@@ -1261,7 +1261,7 @@
   // https://github.com/microphase-tech/A7-Lite
   "microphase-a7-lite": {
     "description": "MicroPhase A7-Lite (Xilinx, Artix7)",
-    "fpga-id": "xc7a200tfbg484",
+    "fpga-id": "xc7a200tfbg484-3",
     "programmer": {
       "id": "openfpgaloader",
       "extra-args": "-c ft232 --fpga-part xc7a200tfbg484"
@@ -1274,7 +1274,7 @@
   // https://numato.com/product/mimas-a7-fpga-development-board/
   "mimas-a7": {
     "description": "Mimas A7 (Xilinx, Artix7)",
-    "fpga-id": "xc7a50tfgg484",
+    "fpga-id": "xc7a50tfgg484-1",
     "programmer": {
       "id": "openfpgaloader",
       "extra-args": "--board mimas_a7"
@@ -1287,7 +1287,7 @@
   // https://digilent.com/reference/programmable-logic/nexys-a7/start
   "nexys-a7-50t": {
     "description": "Nexys A7-50T (Xilinx, Artix7)",
-    "fpga-id": "xc7a50tcsg324",
+    "fpga-id": "xc7a50tcsg324-1",
     "programmer": {
       "id": "openfpgaloader",
       "extra-args": "--board nexys_a7_50"
@@ -1301,7 +1301,7 @@
   // Same fpga and pinout as the older Nexys 4 DDR
   "nexys-a7-100t": {
     "description": "Nexys A7-100T / Nexys 4 DDR (Xilinx, Artix7)",
-    "fpga-id": "xc7a100tcsg324",
+    "fpga-id": "xc7a100tcsg324-1",
     "programmer": {
       "id": "openfpgaloader",
       "extra-args": "--board nexys_a7_100"
@@ -1315,7 +1315,7 @@
   // https://github.com/ChinaQMTECH
   "qmtech-xc7a100t-ft2232h": {
     "description": "QMTECH XC7A100T core board (Xilinx, Artix7)",
-    "fpga-id": "xc7a100tfgg676",
+    "fpga-id": "xc7a100tfgg676-1",
     "programmer": {
       "id": "openfpgaloader",
       "extra-args": "-c ft2232 --fpga-part xc7a100tfgg676"
@@ -1327,7 +1327,7 @@
   // https://zxtres.github.io/wiki/manual_en.html
   "zxtres": {
     "description": "ZXTRES (Xilinx, Artix7)",
-    "fpga-id": "xc7a35tfgg484",
+    "fpga-id": "xc7a35tfgg484-2",
     "programmer": {
       "id": "openfpgaloader",
       "extra-args": "-c usb-blaster"
@@ -1340,7 +1340,7 @@
   // https://zxtres.github.io/wiki/manual_en.html
   "zxtres-plus": {
     "description": "ZXTRES+ (Xilinx, Artix7)",
-    "fpga-id": "xc7a100tfgg484",
+    "fpga-id": "xc7a100tfgg484-2",
     "programmer": {
       "id": "openfpgaloader",
       "extra-args": "-c usb-blaster"
