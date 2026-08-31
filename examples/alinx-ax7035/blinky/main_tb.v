@@ -32,7 +32,7 @@ module testbench;
       @(posedge CLK);
 
       // Check LED values before updating expected state
-      
+
       if (LEDS !== expected_leds) begin
         $display("ERROR at cycle %0d: LEDS = %b, expected = %b", i, LEDS, expected_leds);
         if (!`APIO_SIM) $fatal(1, "LED state mismatch");
@@ -40,8 +40,8 @@ module testbench;
 
       // Update expected LED every N=3 cycles
       if ((i + 1) % 3 == 0) begin
-        expected_led = ~expected_led;
-        expected_leds = { expected_led, ~expected_led, 2'b11 };
+        expected_led  = ~expected_led;
+        expected_leds = {expected_led, ~expected_led, 2'b11};
       end
     end
 
