@@ -936,6 +936,17 @@
       "speed": "2"
     }
   },
+  "xc7s25csga324-1": {
+    "part-num": "XC7S25-1CSGA324",
+    "arch": "xilinx",
+    "size": "25k",
+    "xilinx-params": {
+      "yosys-family": "spartan7",
+      "yosys-arch": "xc7",
+      "yosys-part": "xc7s25csga324-1",
+      "speed": "1"
+    }
+  },
   "xc7s50csga324-1": {
     "part-num": "XC7S50-1CSGA324",
     "arch": "xilinx",
