@@ -787,6 +787,16 @@
       "packer-device": "GW1N-9C"
     }
   },
+  "gw2a-lv18pg256c8-i7": {
+    "part-num": "GW2A-LV18PG256C8/I7",
+    "arch": "gowin",
+    "size": "20k",
+    "gowin-params": {
+      "yosys-family": "gw2a",
+      "nextpnr-family": "GW2A-18",
+      "packer-device": "GW2A-18"
+    }
+  },
   "gw2ar-lv18qn88c8-i7": {
     "part-num": "GW2AR-LV18QN88C8/I7",
     "arch": "gowin",

@@ -1,0 +1,20 @@
+// Sipeed Tang Primer 20K (GW2A-LV18PG256C8/I7), Lite carrier.
+// Board: https://wiki.sipeed.com/hardware/en/tang/tang-primer-20k/primer-20k.html
+// Lite blink: https://wiki.sipeed.com/hardware/en/tang/tang-primer-20k/examples/lite/blink.html
+// Examples: https://github.com/sipeed/TangPrimer-20K-example
+
+// 27 MHz oscillator on the core board.
+IO_LOC  "sys_clk" H11;
+IO_PORT "sys_clk" IO_TYPE=LVCMOS33;
+
+// Lite has no onboard user LED. The official Lite blink drives L14
+// (silkscreen on the Lite carrier; PMOD 3 in the Amaranth board map).
+// Plug a PMOD LED there. Active low, same as the Tang Nano 20k example.
+//
+// C13 is LED0 on the Dock carrier, not an LED on Lite (it is a GPIO
+// header pad there). Do not use C13 for the Lite kit.
+IO_LOC  "led" L14;
+IO_PORT "led" IO_TYPE=LVCMOS33;
+
+// Per https://github.com/YosysHQ/nextpnr/issues/1515
+CLOCK_LOC "sys_clk" BUFG;
