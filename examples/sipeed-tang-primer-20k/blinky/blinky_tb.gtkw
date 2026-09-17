@@ -34,7 +34,9 @@ blinky_tb.ticker.sys_reset
 blinky_tb.ticker.blink_counter[31:0]
 @29
 [color] 3
-blinky_tb.led
+blinky_tb.ticker.led
+@22
+blinky_tb.seven_seg[7:0]
 @200
 -
 [pattern_trace] 1
