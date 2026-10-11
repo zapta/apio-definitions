@@ -11,12 +11,12 @@ module leds (
 );
 
   // Intensity multiplier for all three channels.
-  localparam integer IntensityAll = 2;
+  localparam integer IntensityAll   = 2;
 
   // Intensity controls in the range [0, 512].
-  localparam integer IntensityRed = 4 * IntensityAll;
+  localparam integer IntensityRed   = 4 * IntensityAll;
   localparam integer IntensityGreen = 2 * IntensityAll;
-  localparam integer IntensityBlue = 24 * IntensityAll;
+  localparam integer IntensityBlue  = 24 * IntensityAll;
 
   // Frequency divider generate the PWM counter.
   reg  [15:0] divider;

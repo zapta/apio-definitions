@@ -14,14 +14,14 @@ module secnotas (
   //--Notas a tocar
   //--Definidas como parametros para las pruebas del testbench
 
-  parameter N0 = `DO_4;
-  parameter N1 = `RE_4;
-  parameter N2 = `MI_4;
-  parameter N3 = `FA_4;
-  parameter N4 = `SOL_4;
-  parameter N5 = `LA_4;
-  parameter N6 = `SI_4;
-  parameter N7 = `DO_5;
+  parameter N0  = `DO_4;
+  parameter N1  = `RE_4;
+  parameter N2  = `MI_4;
+  parameter N3  = `FA_4;
+  parameter N4  = `SOL_4;
+  parameter N5  = `LA_4;
+  parameter N6  = `SI_4;
+  parameter N7  = `DO_5;
 
 
   parameter DUR = `T_500ms;

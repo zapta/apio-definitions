@@ -16,7 +16,7 @@ module divider (
 
   //-- Valor por defecto del divisor
   //-- Lo ponemos a 1 Hz
-  parameter M = `F_2KHz;
+  parameter  M = `F_2KHz;
 
   //-- Numero de bits para almacenar el divisor
   //-- Se calculan con la funcion de verilog $clog2, que nos devuelve el 

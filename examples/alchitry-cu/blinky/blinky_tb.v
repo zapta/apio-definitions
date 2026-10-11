@@ -1,7 +1,8 @@
 
 // Testbench template
 
-`default_nettype none `timescale 10 ns / 1 ns
+`default_nettype none
+`timescale 10 ns / 1 ns
 
 
 module blinky_tb;
