@@ -1,21 +1,21 @@
 // Apio boards definitions.
-// These FPGAs are referred to from boards.jsonc.
+// These FPGAs are referred to from boards.jsonc and their values are structured
+// to match the FpgaDefinition protocol buffer in apio-definitions.proto.
 //
 // COMMON-FIELDS:
-//    'fpga_id': These are the entries keys. They equal to the part number
+//    'fpga_id': These are the entries keys. They equal to the vendor part
 //        converted to lower-case-0-9 with an optional suffix denoting a
 //        variant, e.g. '-8k' when oversizing a 4k device to act as a 8k
 //        device.
 //
-//    'part-num': The exact and complete part number, without the delivery
-//        information such as tape vs tray.
-//
 //    'arch': The architecture group of the FPGA, This determines the semantic
 //        of its fields and the toolchain commands that are used to process it.
+// 
+//    'vendor-part': The exact and complete part number, without the delivery
+//        information such as tape vs tray. This field is used for information 
+//        only.
 //
-//    'size': The device size class. As of Jan 2024, this field is for
-//        information only and doesn't affect the operation of the
-//        toolchain.
+//    'size': The device size. This field is used for information only
 //
 // The reset of the fields are architecture specific and are described in each
 // architecture section below.
@@ -24,8 +24,8 @@
 // ============= ICE40 ARCHITECTURE
 //
 // Architecture specific params:
-//    'type': TBD
-//    'pack': TBD
+//    'nextpnr-type': The type parameter that is passed to nextpnr.
+//    'nextpnr-package': The package parameter that is passed to nextpnr.
 //
 {
   "ice40lp1k-swg16tr": {
@@ -372,9 +372,9 @@
   // ============= ECP5 ARCHITECTURE
   //
   // Architecture specific params:
-  //    'type':     TBD
-  //    'package':  TBD
-  //    'speed':    TBD
+  //    'nextpnr-type': The type parameter that is passed to nextpnr.
+  //    'nextpnr-package': The package parameter that is passed to nextpnr.
+  //    'nextpnr-speed': The speed parameter that is passed to nextpnr.
   //
   "lfe5u-12f-6bg256c": {
     "arch": "ecp5",
@@ -743,9 +743,10 @@
   // See https://github.com/YosysHQ/apicula/issues/482
   //
   // Architecture specific params: 
-  //    'yosys-family':   The value to pass to yosys -family. Empty if none.
-  //    'nextpnr-family': The value to pass to nextpnr family, Empty if none.
-  //    'packer-device' : The value to pass to gowin_pack -d
+  //    'yosys-family':   The family parameter passed to yosys. Empty if none.
+  //    'nextpnr-device': The device parameter passed to nextpnr.
+  //    'nextpnr-family': The family parameter passed to nextpnr. Empty if none.
+  //    'packer-device' : The device parameter passed to the bitstream package.
   //
   "gw1n-lv1qn48c6-i5": {
     "arch": "gowin",
@@ -817,6 +818,10 @@
   //
   // ============= XILINX ARCHITECTURE
   //
+  // Architecture specific params:
+  //    'yosys-arch': The arch parameter that is passed to yosys.
+  //    'yosys-family': The family parameter that is passed to nextpnr.
+  //    'nextpnr-device': The device parameter that is passed to nextpnr.
   //
   "xc7a35tcpg236-1": {
     "arch": "xilinx",
