@@ -483,19 +483,6 @@
       "pid": "8036"
     }
   },
-  // https://www.latticesemi.com/products/developmentboardsandkits/ice40ultralitebreakoutboard
-  "ice40-ul1k-breakout": {
-    "description": "iCE40-UL1K UltraLite Breakout",
-    "fpga-id": "ice40ul1k-cm36a",
-    "programmer": {
-      "id": "iceprog"
-    },
-    "usb": {
-      "vid": "0403",
-      "pid": "6010",
-      "product-regex": "^(Dual RS2232H)|(Lattice HW-USBN-2B)"
-    }
-  },
   // https://www.latticesemi.com/Products/DevelopmentBoardsAndKits/iCE40UltraPlusBreakoutBoard
   "ice40-up5k": {
     "description": "iCE40 UltraPlus Breakout",
