@@ -6,7 +6,8 @@
 //-- Jesus Arroyo Torrens
 //-- GPL license
 //-------------------------------------------------------------------
-`default_nettype none `timescale 100 ns / 10 ns
+`default_nettype none
+`timescale 100 ns / 10 ns
 
 module leds_tb ();
 

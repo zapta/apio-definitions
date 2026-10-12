@@ -5,7 +5,8 @@
 //-- Juan Gonzalez (Obijuan)
 //-- GPL license
 //-------------------------------------------------------------------
-`default_nettype none `timescale 100 ns / 10 ns
+`default_nettype none
+`timescale 100 ns / 10 ns
 
 module ledon_tb ();
 

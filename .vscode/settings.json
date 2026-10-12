@@ -17,6 +17,7 @@
         "gtkwave",
         "iceprog",
         "icezum",
+        "localparam",
         "marcha",
         "nextpnr",
         "openfpgaloader",

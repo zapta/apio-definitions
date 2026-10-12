@@ -21,7 +21,7 @@ module dividerp1 (
 );
 
   //-- Valor por defecto de la velocidad en baudios
-  parameter M = `T_100ms;
+  parameter  M = `T_100ms;
 
   //-- Numero de bits para almacenar el divisor de baudios
   localparam N = $clog2(M);

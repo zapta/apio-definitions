@@ -1,4 +1,5 @@
-`default_nettype none `timescale 100 ns / 10 ns
+`default_nettype none
+`timescale 100 ns / 10 ns
 
 module and_gate_testbench ();
 
