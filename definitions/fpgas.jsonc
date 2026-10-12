@@ -55,15 +55,6 @@
       "nextpnr-package": "cm36"
     }
   },
-  "ice40ul1k-cm36a": {
-    "arch": "ice40",
-    "vendor-part": "ICE40UL1K-CM36A",
-    "size": "1k",
-    "ice40-params": {
-      "nextpnr-type": "ul1k",
-      "nextpnr-package": "cm36a"
-    }
-  },
   "ice40lp384-cm49": {
     "arch": "ice40",
     "vendor-part": "ICE40LP384-CM49",
