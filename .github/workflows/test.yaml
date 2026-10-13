@@ -22,7 +22,16 @@ defaults:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+
+    env:
+      # Windows python writes cp1252 to pipes and the scripts print
+      # non-ASCII characters.
+      PYTHONUTF8: "1"
 
     steps:
       - name: Checkout this repo
