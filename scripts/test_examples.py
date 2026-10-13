@@ -90,7 +90,7 @@ def get_apio_boards_definitions() -> Dict:
     result = result["boards"]
 
     # -- Dump for debugging.
-    print(json.dumps(result, indent=2))
+    # print(json.dumps(result, indent=2))
 
     # -- Sanity check
     assert 50 < len(result.keys()) < 500
