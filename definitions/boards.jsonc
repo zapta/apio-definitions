@@ -876,6 +876,18 @@
       "product-regex": "^Soan Papdi.*"
     }
   },
+  "soan-papdi-mini": {
+    "description": "Soan-Papdi-Mini",
+    "fpga-id": "ice40up5k-sg48",
+    "programmer": {
+      "id": "dfu"
+    },
+    "usb": {
+      "vid": "1d50",
+      "pid": "6146",
+      "product-regex": "^Soan Papdi Mini.*"
+    }
+  },
   "vsdsquadron-fm": {
     "description": "VSDSquadron FPGA Mini",
     "fpga-id": "ice40up5k-sg48",
