@@ -1,0 +1,7 @@
+# Check out the Verilog sources with LF line endings on every OS, Windows
+# included. Verible's formatter fails on CRLF files that use
+# '// verilog_format: off'.
+*.v   text eol=lf
+*.vh  text eol=lf
+*.sv  text eol=lf
+*.svh text eol=lf
