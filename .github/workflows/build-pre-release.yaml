@@ -146,7 +146,7 @@ jobs:
           cat -n RELEASE-BODY.txt
 
       - name: Append standard release text
-        uses: zapta/apio-workflows/.github/actions/append-std-release-text@main
+        uses: fpgawars/apio-workflows/.github/actions/append-std-release-text@main
         with:
           output-file: RELEASE-BODY.txt
 
