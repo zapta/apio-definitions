@@ -1,52 +1,86 @@
-// A testbench for testing the bcd_digit module.
+// Testbench for bcd_digit.v.
+// Run it in batch mode with 'apio test', or view the signals
+// in GTKWave with 'apio sim'.
 
-`include "testing/apio_testing.vh"
+// Checks that 'actual_val' equals 'expected_val'. On a mismatch, prints
+// the values and location, sets assertion_err, and stops the simulation.
+// Under 'apio sim' the simulation continues so the signals can be viewed.
+`define EXPECT_EQ(actual_val, expected_val) \
+  if ((actual_val) !== (expected_val)) begin \
+    $display("*** ASSERTION FAILED at %s:%0d: expected 'h%h, actual 'h%h", \
+             `__FILE__, `__LINE__, (expected_val), (actual_val)); \
+    assertion_err = 1; \
+    if (!`APIO_SIM) $fatal; \
+  end
 
-`timescale 10 ns / 1 ns
+`timescale 1ns / 1ps
 
-module bcd_digit_tb ();
+module bcd_digit_tb;
 
-  // This defines a managed signal called 'clk'.
-  `DEF_CLK
+  // Set to 1 when an assertion fails.
+  reg assertion_err = 0;
 
-  // Inputs.
-  reg reset = 1;
+  // Clock.
+  reg sys_clk = 0;
+  always #5 sys_clk = ~sys_clk;
+
+  // Number of sys_clk rising edges so far.
+  integer clk_num = 0;
+  always @(posedge sys_clk) clk_num <= clk_num + 1;
+
+  // Inputs, driven by the test sequence.
+  reg sys_rst = 1;
   reg tick_in = 0;
 
   // Outputs.
   wire tick_out;
   wire [3:0] count;
 
-  bcd_digit digit (
-      .sys_clk(clk),
-      .sys_reset(reset),
+  // The digit under test.
+  bcd_digit dut (
+      .sys_clk(sys_clk),
+      .sys_rst(sys_rst),
       .tick_in(tick_in),
       .tick_out(tick_out),
       .count(count)
   );
 
+  // Loop index, the number of ticks so far.
+  integer i;
+
+  // The test sequence.
   initial begin
-    // Start the test.
-    `TEST_BEGIN(bcd_digit_tb)
+    $dumpvars(0, bcd_digit_tb);
 
     // Reset for 2 clocks.
-    `CLKS(2)
-    reset = 0;
+    repeat (2) @(posedge sys_clk);
+    #1;
+    sys_rst = 0;
+    `EXPECT_EQ(count, 4'd0)
 
-    // Count 15 times
-    repeat (15) begin
-      `CLKS(2)
+    // Tick 25 times, to see the digit wrap around twice.
+    for (i = 1; i <= 25; i = i + 1) begin
+      // Raise tick_in. tick_out goes high only when the count is 9.
       tick_in = 1;
-      `CLK
+      #1;
+      `EXPECT_EQ(tick_out, (i - 1) % 10 == 9)
+
+      // The digit counts on the next clock.
+      @(posedge sys_clk);
+      #1;
       tick_in = 0;
-      `CLKS(3)
+      #1;
+      `EXPECT_EQ(count, i % 10)
+      `EXPECT_EQ(tick_out, 1'b0)
+
+      // Without a tick, the digit holds its value.
+      @(posedge sys_clk);
+      #1;
+      `EXPECT_EQ(count, i % 10)
     end
 
-    // Assert on ethe xpected digit value.
-    `EXPECT(count, 15 % 10)
-
-    // End of test.
-    `TEST_END
+    $display("End of simulation");
+    $finish;
   end
 
 endmodule

@@ -1,58 +1,52 @@
-// A design that controls the 8 leds with a two digit decimal counter.
+// A two digit decimal (BCD) counter that counts once per second
+// and shows the count on the 8 LEDs. leds[3:0] are the units digit
+// and leds[7:4] are the tens digit.
 
 module main #(
-    // The dividing factor to reach 1 hz from 12Mhz clock. By defining
-    // it as a parameter we can reduce it in testbench simulations.
+    // Clocks per count. 12000000 gives one count per second with the
+    // 12MHz clock. The testbench uses a small value to run quickly.
     parameter integer DIV = 12000000
 ) (
-    input        CLK,  // 12MHz clock
-    output [7:0] LEDS  // LED to blink
+    input        sys_clk,  // 12MHz clock
+    output [7:0] leds      // The two BCD digits.
 );
 
-  // Global reset from the reset generator.
-  wire sys_reset;
+  // Power-on reset: sys_rst is high for the first 3 clocks.
+  reg [1:0] rst_cnt = 0;
+  wire sys_rst = ~&rst_cnt;
+  always @(posedge sys_clk) if (sys_rst) rst_cnt <= rst_cnt + 1;
 
-  // Cascading count ticks. 
-  wire tick1;
-  wire tick2;
-  wire tick3;
+  // Count ticks. Each one is high for one clock and tells the next
+  // stage to count.
+  wire tick1;  // From the ticker to the units digit.
+  wire tick2;  // From the units digit to the tens digit.
+  wire tick3;  // From the tens digit. Not used.
 
-  // Global reset generator.
-  reset_gen reset_gen (
-      .sys_clk  (CLK),
-      .sys_reset(sys_reset)
-  );
-
-  // Timing generator. Tick is 
+  // Ticker. tick1 is high for one clock every DIV clocks.
   ticker #(
       .DIV(DIV)
   ) ticker (
-      .sys_clk(CLK),
-      .sys_reset(sys_reset),
+      .sys_clk(sys_clk),
+      .sys_rst(sys_rst),
       .tick(tick1)
   );
 
-  // The units digit counter.
+  // The units digit.
   bcd_digit digit1 (
-      .sys_clk(CLK),
-      .sys_reset(sys_reset),
+      .sys_clk(sys_clk),
+      .sys_rst(sys_rst),
       .tick_in(tick1),
       .tick_out(tick2),
-      .count(LEDS[3:0])
+      .count(leds[3:0])
   );
 
-  // The tens digit counter.
+  // The tens digit.
   bcd_digit digit2 (
-      .sys_clk(CLK),
-      .sys_reset(sys_reset),
+      .sys_clk(sys_clk),
+      .sys_rst(sys_rst),
       .tick_in(tick2),
       .tick_out(tick3),
-      .count(LEDS[7:4])
+      .count(leds[7:4])
   );
 
-
-
-
 endmodule
-
-
