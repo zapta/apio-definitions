@@ -200,6 +200,19 @@ def test_task(ctx: Context, examples_root: str | None = None):
     """Test the examples. In a board dir it tests that board's examples, in
     an example dir it tests that example, and anywhere else all of them."""
     announce_task("test")
+    # -- Make apio read boards.jsonc, fpgas.jsonc and programmers.jsonc
+    # -- from this repo instead of from the installed definitions package.
+    # -- The apio commands that the test script runs inherit this env var.
+    # -- If the var is already defined, it must match what we would set.
+    env_var = "APIO_DEFINITIONS"
+    current = os.environ.get(env_var)
+    definitions_dir = get_repo_root() / "definitions"
+    assert current is None or Path(current).resolve() == definitions_dir, (
+        f"{env_var} is already defined as [{current}], "
+        f"expected [{definitions_dir}]."
+    )
+    os.environ[env_var] = str(definitions_dir)
+    cout(f"{env_var}={definitions_dir}", style="cyan")
     cmd = [PYTHON, f"scripts{sep}test_examples.py"]
     examples_dir = get_repo_root() / "examples"
     if examples_root:

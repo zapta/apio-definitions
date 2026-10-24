@@ -98,4 +98,10 @@ Today the file holds no active entries, only commented-out templates, one per FP
 
 ## Testing definition changes
 
-`test_examples.py` checks the examples' boards against the definitions of the **installed** Apio package (`apio api get-boards`), not against the files in this repo. To test a change to the definitions locally, first copy `definitions/*` into the installed package's `definitions` dir, as CI does. To find that dir, run `apio api get-system` and look for the key `apio-packages-dir`.
+By default, Apio reads the three definition files from the installed `definitions` package, not from this repo. The env var `APIO_DEFINITIONS` makes Apio read them from another dir instead.
+
+- **`invoke test`** sets `APIO_DEFINITIONS` to this repo's `definitions/` dir, so it always tests the examples against the definitions in this repo.
+- **Running `test_examples.py` or `apio` directly** uses the installed package's definitions, unless you set the env var yourself, e.g. `APIO_DEFINITIONS=$PWD/definitions python scripts/test_examples.py`.
+- **CI** (`test.yaml`) still copies `definitions/*` into the installed package's `definitions` dir before testing. To find that dir, run `apio api get-system` and look for the key `apio-packages-dir`.
+
+`APIO_DEFINITIONS` affects only `boards.jsonc`, `fpgas.jsonc` and `programmers.jsonc`. Other content of the definitions package, such as the examples used by `apio examples`, still comes from the installed package. It needs an Apio version that supports the env var.

@@ -11,7 +11,7 @@ This repo has a few Python tools for testing and maintaining the examples: Invok
 | Task | Alias | What it does |
 |---|---|---|
 | `invoke lint` | `l` | Formats the Python code in `scripts/` and `tasks.py` with black, then checks it with pylint and mypy. |
-| `invoke test` | `t` | Runs `test_examples.py` on the examples picked by the current dir (see below). Option `--examples-root <dir>` tests the examples in another dir. |
+| `invoke test` | `t` | Runs `test_examples.py` on the examples picked by the current dir (see below), using this repo's definitions (see below). Option `--examples-root <dir>` tests the examples in another dir. |
 | `invoke format` | `f` | Runs `apio format` in every example, which formats the Verilog with Verible. |
 | `invoke copy-common` | `cc` | Runs `copy_common_examples_files.py`. Option `--dry-run` shows what would change without changing anything. |
 | `invoke clean` | `c` | Runs `apio clean` in every example, deletes the common files from the examples (`copy_common_examples_files.py --clean`), and deletes the `.mypy_cache` and `__pycache__` dirs. |
@@ -23,6 +23,8 @@ This repo has a few Python tools for testing and maintaining the examples: Invok
 | A board dir (`examples/<board>`) | That board's examples |
 | An example dir (`examples/<board>/<example>`) or a dir inside it | That example |
 | Anywhere else | All the examples |
+
+`invoke test` runs `test_examples.py` with the env var `APIO_DEFINITIONS` set to this repo's `definitions/` dir. Every `apio` command the script runs then reads `boards.jsonc`, `fpgas.jsonc` and `programmers.jsonc` from this repo instead of from the installed definitions package. Other content of the installed package, such as its examples, is still used from the package. This needs an Apio version that supports `APIO_DEFINITIONS`. If `APIO_DEFINITIONS` is already set to another dir, `invoke test` fails.
 
 ## Scripts (`scripts/`)
 
