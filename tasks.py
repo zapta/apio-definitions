@@ -206,7 +206,7 @@ def test_task(
 
 @task(name="format", aliases=["f"])
 def format_task(ctx: Context):
-    """Format the examples' Verilog files with 'apio format'."""
+    """Format the examples' Verilog code."""
     announce_task("format")
     for example_dir in get_example_dirs():
         run(ctx, ["apio", "format"], cwd=example_dir)
@@ -234,7 +234,7 @@ def copy_common_task(ctx: Context, dry_run=False):
 
 @task(name="clean", aliases=["c", "cl"])
 def clean_task(ctx: Context):
-    """Clean the examples' build output, common files and temporary files."""
+    """Clean artifacts and temporary files."""
     announce_task("clean")
     repo_root = get_repo_root()
     assert isinstance(repo_root, Path)
