@@ -1,40 +1,68 @@
-// A testbench for testing the ticker module.
+// Testbench for ticker.sv.
+// Run it in batch mode with 'apio test', or view the signals
+// in GTKWave with 'apio sim'.
 
-`include "testing/apio_testing.vh"
+// Checks that 'actual_val' equals 'expected_val'. On a mismatch, prints
+// the values and location, sets assertion_err, and stops the simulation.
+// Under 'apio sim' the simulation continues so the signals can be viewed.
+`define EXPECT_EQ(actual_val, expected_val) \
+  if ((actual_val) !== (expected_val)) begin \
+    $display("*** ASSERTION FAILED at %s:%0d: expected 'h%h, actual 'h%h", \
+             `__FILE__, `__LINE__, (expected_val), (actual_val)); \
+    assertion_err = 1; \
+    if (!`APIO_SIM) $fatal; \
+  end
 
-`timescale 10 ns / 1 ns
+`timescale 1ns / 1ps
 
-module ticker_tb ();
+module ticker_tb;
 
-  // This defines a managed signal called 'clk'.
-  `DEF_CLK
+  // Set to 1 when an assertion fails.
+  logic assertion_err = 0;
 
-  // Inputs.
-  reg  reset = 1;
+  // Clock.
+  logic sys_clk = 0;
+  always #5 sys_clk = ~sys_clk;
 
-  // Outputs.
-  wire tick;
+  // Number of sys_clk rising edges so far.
+  int clk_num = 0;
+  always @(posedge sys_clk) clk_num <= clk_num + 1;
 
-  // Instantiate a ticker that generates a tick every 5 clocks.
+  // Reset, driven by the test sequence.
+  logic sys_rst = 1;
+
+  // The ticker output.
+  logic tick;
+
+  // A ticker that ticks every 5 clocks.
   ticker #(
       .DIV(5)
-  ) ticker (
-      .sys_clk(clk),
-      .sys_reset(reset),
+  ) dut (
+      .sys_clk(sys_clk),
+      .sys_rst(sys_rst),
       .tick(tick)
   );
 
+  // The test sequence.
   initial begin
-    `TEST_BEGIN(ticker_tb)
+    $dumpvars(0, ticker_tb);
 
     // Reset for 2 clocks.
-    `CLKS(2)
-    reset = 0;
+    repeat (2) @(posedge sys_clk);
+    #1;
+    sys_rst = 0;
+    `EXPECT_EQ(tick, 1'b0)
 
-    // Free run for 30 clocks.
-    `CLKS(30)
+    // The counter counts 0 to 4 on clocks 3 to 7, and tick is high
+    // after clock 7. So tick is high after clocks 7, 12, 17, ...
+    repeat (30) begin
+      @(posedge sys_clk);
+      #1;
+      `EXPECT_EQ(tick, (clk_num - 2) % 5 == 0)
+    end
 
-    `TEST_END
+    $display("End of simulation");
+    $finish;
   end
 
 endmodule
