@@ -44,6 +44,12 @@ jobs:
         run: |
           python --version
 
+      # The tasks in tasks.py install their own python dependencies.
+      - name: Install invoke
+        run: |
+          pip install invoke==2.2.1
+          invoke --list
+
       - name: Install latest apio dev
         run: |
           pip install --force-reinstall -U \ git+https://github.com/fpgawars/apio.git
@@ -70,7 +76,7 @@ jobs:
       # Copy the common examples files to the examples.
       - name: Apply common example files
         run: |
-          python ./scripts/copy_common_examples_files.py
+          invoke copy-common
 
       # Overwrite the examples in the installed apio package with the ones
       # from this repo.
@@ -125,4 +131,4 @@ jobs:
 
       - name: Test the patched examples
         run: |
-          python ./scripts/test_examples.py --examples-root $APIO_DEFINITIONS_DIR/examples
+          invoke test --examples-root $APIO_DEFINITIONS_DIR/examples

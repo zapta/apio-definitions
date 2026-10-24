@@ -3,6 +3,9 @@
 """A python script to test the examples in the examples repo.
 Run it at the root directory of the repo. It exist with an
 error status code on the first error it detects.
+
+NOTE: Don't run this script directly. Run it via the invoke task
+'invoke test' (see tasks.py at the repo root).
 """
 
 import sys
@@ -23,6 +26,13 @@ parser.add_argument(
     type=Path,
     default=Path("./examples"),
     help="Path to the examples root directory (default ./examples)",
+)
+parser.add_argument(
+    "--example",
+    type=str,
+    default=None,
+    help="Test only this board (e.g. alhambra-ii) or this example "
+    "(e.g. alhambra-ii/blinky)",
 )
 args = parser.parse_args()
 
@@ -113,10 +123,12 @@ def test_example_info_file(info_file: Path):
     info_line = info_lines[0]
     assert len(info_line) >= 10, "Info line is too short"
     assert len(info_line) <= 100, "Info line is too long"
-    assert info_line == info_line.strip(), "Info line has leading or trailing spaces "
+    assert (
+        info_line == info_line.strip()
+    ), "Info line has leading or trailing spaces "
 
 
-def test_testbench_output(env_name: str, testbench: str) -> Path:
+def test_testbench_output(env_name: str, testbench: str) -> None:
     """Assert that the testbench output files exist.."""
     vcd = os.path.splitext(testbench)[0] + ".vcd"
     vcd_path = Path("_build") / env_name / vcd
@@ -136,7 +148,7 @@ def test_example_env(
 ) -> None:
     """Test the given env of an example."""
 
-    _ = source_files # Unused
+    _ = source_files  # Unused
 
     print(f"\nENV: {board_name}/{example_name}:{env_name}")
 
@@ -193,7 +205,9 @@ def test_example(board_name: str, example_name: str, board_defs: Dict) -> None:
 
     print(f"\nEXAMPLE: {board_name}/{example_name}")
 
-    assert re.match(NAME_REGEX, example_name), f"Invalid example name {example_name}"
+    assert re.match(
+        NAME_REGEX, example_name
+    ), f"Invalid example name {example_name}"
 
     example_dir = EXAMPLES_DIR / board_name / example_name
     os.chdir(example_dir)
@@ -227,12 +241,14 @@ def test_example(board_name: str, example_name: str, board_defs: Dict) -> None:
     assert board_matches > 0
 
     # -- Get list of testbenches, relative to project root.
-    testbenches = list(Path(".").rglob("*_tb.v")) + list(Path(".").rglob("*_tb.sv"))
-    testbenches = [str(t) for t in testbenches]
+    tb_paths = list(Path(".").rglob("*_tb.v")) + list(
+        Path(".").rglob("*_tb.sv")
+    )
+    testbenches = [str(t) for t in tb_paths]
 
     # -- Get a list of source files, relative to project root.
-    source_files = list(Path(".").rglob("*.v")) + list(Path(".").rglob("*.sv"))
-    source_files = [str(f) for f in source_files if f not in testbenches]
+    src_paths = list(Path(".").rglob("*.v")) + list(Path(".").rglob("*.sv"))
+    source_files = [str(f) for f in src_paths if str(f) not in testbenches]
     assert source_files
 
     # -- Check the testbenches files, without running them yet.
@@ -245,29 +261,45 @@ def test_example(board_name: str, example_name: str, board_defs: Dict) -> None:
 
         # -- Assert testbench has a GTKW signals save files.
         gtkw_file = Path(testbench).with_suffix(".gtkw")
-        assert gtkw_file.is_file(), f"Missing .gtkw file for testbench {testbench}"
+        assert (
+            gtkw_file.is_file()
+        ), f"Missing .gtkw file for testbench {testbench}"
 
     # -- Test each env
     for env_name in env_names:
-        test_example_env(board_name, example_name, env_name, source_files, testbenches)
+        test_example_env(
+            board_name, example_name, env_name, source_files, testbenches
+        )
 
     os.chdir(example_dir)
     run_cmd(["apio", "clean"])
 
 
-def test_board(board_name: str, apio_board_defs: Dict) -> None:
-    """Test board's examples."""
+def test_board(
+    board_name: str, apio_board_defs: Dict, only_example: str | None = None
+) -> None:
+    """Test board's examples. If only_example is set, test only that
+    example."""
 
     print("\n--------------------------")
     print(f"\nBOARD: {board_name}")
 
-    assert re.match(NAME_REGEX, board_name), f"Invalid example name {board_name}"
+    assert re.match(
+        NAME_REGEX, board_name
+    ), f"Invalid example name {board_name}"
 
     board_dir = EXAMPLES_DIR / board_name
 
     example_names = glob("*", root_dir=board_dir)
     example_names = sorted(example_names)
     assert len(example_names) > 0, f"Board dir '{board_name}' has no examples"
+
+    # -- If an example was selected, test only that one.
+    if only_example:
+        assert (
+            only_example in example_names
+        ), f"Example '{board_name}/{only_example}' not found"
+        example_names = [only_example]
 
     for example_name in example_names:
 
@@ -295,12 +327,23 @@ def main() -> None:
     board_names = sorted(board_names)
     assert len(board_names) > 20, f"Found too few boards: {board_names}"
 
+    # -- If --example was given, test only that board, or only that
+    # -- board/example.
+    only_example: str | None = None
+    if args.example:
+        parts = args.example.strip("/").split("/")
+        assert len(parts) in (1, 2), f"Invalid --example '{args.example}'"
+        assert parts[0] in board_names, f"Board '{parts[0]}' not found"
+        board_names = [parts[0]]
+        if len(parts) == 2:
+            only_example = parts[1]
+
     # -- Test each of the boards.
     for board_name in board_names:
         board_dir = EXAMPLES_DIR / board_name
         assert board_dir.is_dir(), f"Board dir is not a dir: {board_dir}"
         # -- This may call chdir().
-        test_board(board_name, apio_board_defs)
+        test_board(board_name, apio_board_defs, only_example)
 
     print()
     print("Test completed OK.")

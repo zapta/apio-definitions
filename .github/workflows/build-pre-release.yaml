@@ -30,6 +30,18 @@ jobs:
       - name: Checkout this repo
         uses: actions/checkout@v6
 
+      - name: Install python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      # The tasks in tasks.py install their own python dependencies.
+      - name: Install invoke
+        run: |
+          python --version
+          pip install invoke==2.2.1
+          invoke --list
+
       - name: Get release and package tags
         uses: fpgawars/apio-workflows/.github/actions/get-release-and-package-tags@main
         with:
@@ -84,9 +96,7 @@ jobs:
 
       - name: Copy common files to each example
         run: |
-          ls -al .
-          ls -al ./scripts
-          python ./scripts/copy_common_examples_files.py
+          invoke copy-common
 
       - name: Collect package files
         run: |
