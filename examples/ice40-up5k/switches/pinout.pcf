@@ -2,7 +2,7 @@
 # It assigns the design's signals to FPGA pins, and lists only
 # the pins that this example uses.
 
-# Switches. Their polarity isn't documented.
+# Switches, polarity unknown.
 set_io sws[0] 43  # input, sw0
 set_io sws[1] 34  # input, sw1
 set_io sws[2] 25  # input, sw2

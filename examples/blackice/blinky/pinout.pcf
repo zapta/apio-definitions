@@ -5,5 +5,5 @@
 # Clock (100MHz).
 set_io sys_clk 129  # input
 
-# Blue LED (LED1). Its polarity is unknown.
+# Blue LED (LED1), polarity unknown.
 set_io led 71  # output

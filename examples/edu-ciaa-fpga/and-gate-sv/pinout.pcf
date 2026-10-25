@@ -2,7 +2,7 @@
 # It assigns the design's signals to FPGA pins, and lists only
 # the pins that this example uses.
 
-# Push buttons. Their polarity is unknown.
+# Push buttons, polarity unknown.
 set_io btns[0] 31  # input, BTN1
 set_io btns[1] 32  # input, BTN2
 

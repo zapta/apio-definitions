@@ -1,6 +1,6 @@
 // Sets the colors of the RGB LED with three switches.
 module main (
-    input  [2:0] sws,       // Switches sw0 to sw2.
+    input  [2:0] sws,       // Switches sw0 to sw2, polarity unknown.
     output [2:0] rgb_led_n  // RGB LED, active low. [0]=red, [1]=green, [2]=blue.
 );
 

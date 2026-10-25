@@ -9,7 +9,7 @@ module main #(
     parameter integer N = 27
 ) (
     input  sys_clk,  // 100MHz clock
-    output led       // The blinking LED. Its polarity is unknown.
+    output led       // The blinking LED, polarity unknown.
 );
 
   // The blink counter. It starts at 0 when the FPGA is configured.
