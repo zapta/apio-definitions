@@ -1,50 +1,50 @@
 //-----------------------------------------------------------------------------
-//-- Reproductor de melodias almacenadas en memoria rom
-//-- Los 8 bits menos significativos de la nota se sacan por los leds
+//-- Plays a melody stored in a ROM.
+//-- The note's 8 least significant bits are shown on the LEDs.
 //-----------------------------------------------------------------------------
 //-- (C) BQ. October 2015. Written by Juan Gonzalez
 //-----------------------------------------------------------------------------
 //-- GPL license
 //-----------------------------------------------------------------------------
 
-//-- Incluir las constantes del modulo del divisor
+//-- Include the divider module's constants.
 `include "divider.vh"
 
 //-- Parameteros:
-//-- sys_clk: Reloj de entrada de la placa iCEstick
-//-- buzzer: Canal de salida
+//-- sys_clk: The board's input clock.
+//-- buzzer: The output channel.
 module main (
     input wire sys_clk,  // 12MHz clock
     output wire [7:0] leds,  // Active high.
     output wire buzzer
 );
 
-  //-- Parametros
-  //-- Duracion de las notas
+  //-- Parameters
+  //-- Note duration.
   parameter DUR = `T_150ms;
 
-  //-- Fichero con las notas para cargar en la rom
+  //-- File with the notes to load into the ROM.
   parameter ROMFILE = "imperial.list";
 
-  //-- Tamaño del bus de direcciones de la rom
+  //-- Width of the ROM's address bus.
   parameter AW = 8;
 
-  //-- Tamaño de las notas
+  //-- Width of the notes.
   parameter DW = 16;
 
-  //-- Cables de salida de los canales
+  //-- The channels' outputs.
   wire ch0, ch1, ch2;
 
-  //-- Selección del canal del multiplexor
+  //-- The multiplexer's channel select.
   reg [AW-1:0] addr = 0;
 
-  //-- Reloj con la duracion de la nota
+  //-- Pulses that mark each note's duration.
   wire clk_dur;
   reg rstn = 0;
 
   wire [DW-1:0] note;
 
-  //-- Instanciar la memoria rom
+  //-- The ROM.
   genrom #(
       .ROMFILE(ROMFILE),
       .AW(AW),
@@ -56,7 +56,7 @@ module main (
   );
 
 
-  //-- Generador de notas
+  //-- The note generator.
   notegen CH0 (
       .sys_clk(sys_clk),
       .rstn(rstn),
@@ -64,17 +64,17 @@ module main (
       .clk_out(buzzer)
   );
 
-  //-- Sacar los 8 bits de la nota por los leds
+  //-- Show the note's 8 low bits on the LEDs.
   assign leds = note[7:0];
 
   //-- Inicializador
   always @(posedge sys_clk) rstn <= 1;
 
 
-  //-- Contador para seleccion de nota
+  //-- Counter that selects the note.
   always @(posedge sys_clk) if (clk_dur) addr <= addr + 1;
 
-  //-- Divisor para marcar la duración de cada nota
+  //-- Divider that marks each note's duration.
   dividerp1 #(DUR) TIMER0 (
       .sys_clk(sys_clk),
       .clk_out(clk_dur)

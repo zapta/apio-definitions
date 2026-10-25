@@ -10,7 +10,7 @@ Each example is a standalone Apio project. Users fetch it with `apio examples fe
 
 `alhambra-ii/blinky/main.v` shows the style.
 
-**Language:** write everything in an example in English: comments, signal and module names, `info`, README files, and comments in `apio.ini` and constraint files. Translate non-English text when reworking an example. Names and quotes that are part of the content, such as a song title, can stay as they are.
+**Language:** write everything in an example in English: comments, signal and module names, `info`, README files, and comments in `apio.ini` and constraint files. Translate non-English text when reworking an example. Names and quotes that are part of the content, such as a song title, can stay as they are, and so can solfege note names (`DO_4`, `SOL_4`).
 
 ## Which rules apply
 

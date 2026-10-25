@@ -51,7 +51,7 @@ module main_tb;
     $dumpvars(0, main_tb);
 
     // The first voice moves to its next note every 4 clocks, the first
-    // time at clock 3. Its first notes are C, D, E, C and a rest, played
+    // time at clock 3. Its first notes are DO, RE, MI, DO and a rest, played
     // by channels 0, 1, 2, 0 and none.
     for (i = 0; i <= 40; i = i + 1) begin
       if (i > 0) @(posedge sys_clk);

@@ -1,17 +1,17 @@
 //-- Plays Frere Jacques in two voices, one on each buzzer.
 
-//-- Incluir las constantes del modulo del divisor
+//-- Include the divider module's constants.
 `include "divider.vh"
 
-//--Parametros
+//-- Parameters
 
 module main (
     input  wire       sys_clk,  // 12MHz clock
     output reg  [1:0] buzzers   // The two voices.
 );
 
-  //--Notas a tocar
-  //--Definidas como parametros para las pruebas del testbench
+  //-- Notes to play,
+  //-- defined as parameters so the testbench can change them.
 
   parameter N0  = `DO_4;
   parameter N1  = `RE_4;
@@ -25,66 +25,66 @@ module main (
 
   parameter DUR = `T_500ms;
 
-  //--Cables de salida de los canales
+  //-- The channels' outputs.
 
   wire ch0, ch1, ch2, ch3, ch4, ch5, ch6, ch7;
 
-  //--Seleccion del canal del multiplexor
+  //-- The multiplexers' channel selects.
   reg [5:0] sel = 0;
-  reg [5:0] sel2 = 60;  //Un compas retrasado
+  reg [5:0] sel2 = 60;  // One bar behind.
 
-  //-Reloj de duracion de la nota
+  //-- The note duration timer.
   wire clk_dur;
 
-  //--Canal 0
+  //-- Channel 0
   divider #(N0) CH0 (
       .clk_in (sys_clk),
       .clk_out(ch0)
   );
 
-  //-- Canal 1
+  //-- Channel 1
   divider #(N1) CH1 (
       .clk_in (sys_clk),
       .clk_out(ch1)
   );
 
-  //-- canal 2
+  //-- Channel 2
   divider #(N2) CH2 (
       .clk_in (sys_clk),
       .clk_out(ch2)
   );
 
-  //-- canal 3
+  //-- Channel 3
   divider #(N3) CH3 (
       .clk_in (sys_clk),
       .clk_out(ch3)
   );
 
-  //-- canal 4
+  //-- Channel 4
   divider #(N4) CH4 (
       .clk_in (sys_clk),
       .clk_out(ch4)
   );
 
-  //-- canal 5
+  //-- Channel 5
   divider #(N5) CH5 (
       .clk_in (sys_clk),
       .clk_out(ch5)
   );
 
-  //-- canal 6
+  //-- Channel 6
   divider #(N6) CH6 (
       .clk_in (sys_clk),
       .clk_out(ch6)
   );
 
-  //-- canal 7
+  //-- Channel 7
   divider #(N7) CH7 (
       .clk_in (sys_clk),
       .clk_out(ch7)
   );
 
-  //multiplexor de seleccion del canal de Salida
+  // Multiplexer that selects the output channel.
 
   always @*
     case (sel)
