@@ -1,8 +1,8 @@
 # -- Board: IceSugar Pro (On board USB programmer)
 
-# -- CLK
-LOCATE COMP "CLK" SITE "P6";
-IOBUF  PORT "CLK" PULLMODE=NONE IO_TYPE=LVCMOS33 DRIVE=4;
+# -- sys_clk
+LOCATE COMP "sys_clk" SITE "P6";
+IOBUF  PORT "sys_clk" PULLMODE=NONE IO_TYPE=LVCMOS33 DRIVE=4;
 
 # -- LED (active low)
 LOCATE COMP "led" SITE "A11";

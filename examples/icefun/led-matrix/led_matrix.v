@@ -2,7 +2,7 @@
 module led_matrix #(
     parameter integer N = 50_000
 ) (
-    input             clk,                 // 12MHz clock
+    input             sys_clk,             // 12MHz clock
     input      [31:0] data,                // 4x32 LEDs data, '1' is on
     input      [ 3:0] intensity,           // LEDs intensity, 0-15.
     output reg        frame_tick = 0,      // High for one clock per frame
@@ -22,7 +22,7 @@ module led_matrix #(
   reg col_tick = 0;
 
   // Column and frame timing generator.
-  always @(posedge clk) begin
+  always @(posedge sys_clk) begin
     if (timer >= N - 1) begin
       col_tick <= 1;
       timer <= 0;
@@ -45,7 +45,7 @@ module led_matrix #(
   reg  [11:0] pwm_counter = 0;
 
   // Update LEDs on each column tick.
-  always @(posedge clk) begin
+  always @(posedge sys_clk) begin
     pwm_counter <= pwm_counter + 1;
     if (pwm_counter[11:8] <= intensity) begin
       cols <= ~(4'b0001 << col);  // Active low

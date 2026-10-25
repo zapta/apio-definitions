@@ -3,7 +3,7 @@
 // https://blog.idorobots.org/entries/upduino-fpga-tutorial.html
 
 module leds (
-    input clk,
+    input sys_clk,
     input red_en,
     input green_en,
     input blue_en,
@@ -29,7 +29,7 @@ module leds (
   wire        pwm_blue = pwm_counter < IntensityBlue[8:0];
 
   // Behavior.
-  always @(posedge clk) begin
+  always @(posedge sys_clk) begin
     divider <= divider + 1'b1;
   end
 

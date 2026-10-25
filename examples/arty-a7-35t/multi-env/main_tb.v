@@ -15,7 +15,7 @@ module main_tb ();
   main #(
       .CLK_DIV(6)
   ) main (
-      .CLK (clk),
+      .sys_clk(clk),
       .LEDS(leds)
   );
 

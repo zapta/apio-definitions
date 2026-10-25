@@ -2,13 +2,13 @@
 // only if the external Upduino oscilator is not connected to the FPGA.
 
 module oscilator (
-    output clk
+    output sys_clk
 );
 
   SB_HFOSC interal_osc (
       .CLKHFPU(1'b1),
       .CLKHFEN(1'b1),
-      .CLKHF  (clk),
+      .CLKHF  (sys_clk),
 
       // Unused
       .TRIM0(),

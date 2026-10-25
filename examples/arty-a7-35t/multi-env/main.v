@@ -5,8 +5,8 @@
 module main #(
     parameter CLK_DIV = `CLK_DIV
 ) (
-    input        CLK,  // 100MHz clock
-    output [3:0] LEDS  // LED to blink, active high.
+    input        sys_clk,  // 100MHz clock
+    output [3:0] LEDS      // LED to blink, active high.
 );
 
   // The counter should count this number of clocks
@@ -17,7 +17,7 @@ module main #(
 
   reg [26:0] counter = 0;
 
-  always @(posedge CLK) begin
+  always @(posedge sys_clk) begin
     if (counter < limit) begin
       counter <= counter + 1;
     end else begin

@@ -4,9 +4,10 @@ module main (
     output [2:0] leds_out  // Active low.
 );
 
-  wire clk;
+  // The 48MHz clock from the internal oscillator.
+  wire sys_clk;
 
-  oscilator oscilator (.clk(clk));
+  oscilator oscilator (.sys_clk(sys_clk));
 
   // Frequency divider to generate the RGB patterns.
   reg  [25:0] divider;
@@ -15,15 +16,15 @@ module main (
   wire        blue_en = ~divider[25] & divider[24];
 
   leds leds (
-      .clk(clk),
-      .red_en(red_en),
+      .sys_clk (sys_clk),
+      .red_en  (red_en),
       .green_en(green_en),
-      .blue_en(blue_en),
+      .blue_en (blue_en),
       .leds_out(leds_out)
   );
 
   // Behavior.
-  always @(posedge clk) begin
+  always @(posedge sys_clk) begin
     divider <= divider + 1'b1;
   end
 

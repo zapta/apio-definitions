@@ -1,5 +1,5 @@
 module rand_gen (
-    input             clk,
+    input             sys_clk,
     output reg [31:0] rnd = ~0
 );
 
@@ -10,7 +10,7 @@ module rand_gen (
   // to stay forever in a zero loop.
   wire zero_loop = (rnd == 0);
 
-  always @(posedge clk) begin
+  always @(posedge sys_clk) begin
     if (zero_loop) begin
       rnd <= ~rnd;
     end else begin

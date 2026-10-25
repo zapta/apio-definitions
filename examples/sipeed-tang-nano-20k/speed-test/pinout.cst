@@ -3,7 +3,7 @@
 
 // See examples here https://github.com/sipeed/TangNano-20K-example
 
-IO_LOC "CLK"  4;
+IO_LOC "sys_clk"  4;
 IO_PORT "clk" PULL_MODE=UP IO_TYPE=LVCMOS33;
 
 // LED (active low)
@@ -11,5 +11,5 @@ IO_LOC "LED"  15; // Active low
 IO_PORT "led" PULL_MODE=UP DRIVE=8 IO_TYPE=LVCMOS33;
 
 // Per https://github.com/YosysHQ/nextpnr/issues/1515
-CLOCK_LOC "CLK" BUFG;
+CLOCK_LOC "sys_clk" BUFG;
 

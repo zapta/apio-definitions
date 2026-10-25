@@ -2,7 +2,7 @@
 
 module led_matrix_tb;
 
-  reg         clk = 0;
+  reg         sys_clk = 0;
   reg  [31:0] data;
   wire [ 7:0] rows;
   wire [ 3:0] cols;
@@ -12,7 +12,7 @@ module led_matrix_tb;
   led_matrix #(
       .N(5)
   ) led_matrix (
-      .clk(clk),
+      .sys_clk(sys_clk),
       .data(data),
       .intensity(15),
       .frame_tick(frame_tick),
@@ -21,7 +21,7 @@ module led_matrix_tb;
   );
 
   // Clock generation: 12MHz => 83.33ns period
-  always #42 clk = ~clk;
+  always #42 sys_clk = ~sys_clk;
 
   initial begin
     // Enable waveform dumping

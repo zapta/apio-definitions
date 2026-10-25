@@ -12,7 +12,7 @@
 [sst_expanded] 1
 [sst_vpaned_height] 181
 @28
-led_matrix_tb.clk
+led_matrix_tb.sys_clk
 @200
 -
 @24

@@ -5,7 +5,7 @@
 
 module main_tb;
 
-  reg clk = 0;
+  reg sys_clk = 0;
   wire [7:0] rows;
   wire [3:0] cols;
 
@@ -15,13 +15,13 @@ module main_tb;
       .N2       (40),  // Small value for fast sim
       .INTENSITY(15)   // Max intensity, no pwm
   ) main (
-      .CLK (clk),
+      .sys_clk(sys_clk),
       .ROWS(rows),
       .COLS(cols)
   );
 
   // Clock generation: 12MHz → ~83ns period
-  always #42 clk = ~clk;
+  always #42 sys_clk = ~sys_clk;
 
   initial begin
     // Enable waveform capture
@@ -31,7 +31,7 @@ module main_tb;
 
     // Run for a limited time
     repeat (150) begin
-      @(posedge clk);
+      @(posedge sys_clk);
       // $display("ROWS = %b, COLS = %b", rows, cols);
     end
 

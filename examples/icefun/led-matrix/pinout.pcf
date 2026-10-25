@@ -16,5 +16,5 @@ set_io COLS[1]  D10
 set_io COLS[2]  A6
 set_io COLS[3]  C5
 
-set_io CLK      P7
+set_io sys_clk      P7
 

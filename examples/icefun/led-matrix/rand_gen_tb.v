@@ -2,17 +2,17 @@
 
 module rand_gen_tb;
 
-  reg clk = 0;
+  reg sys_clk = 0;
   wire [31:0] rnd;
 
   // Instantiate the module under test
   rand_gen uut (
-      .clk(clk),
+      .sys_clk(sys_clk),
       .rnd(rnd)
   );
 
   // Generate clock
-  always #5 clk = ~clk;
+  always #5 sys_clk = ~sys_clk;
 
   initial begin
     // Enable waveform dumping
@@ -20,7 +20,7 @@ module rand_gen_tb;
 
     // Run for several cycles to observe randomness
     repeat (100) begin
-      @(posedge clk);
+      @(posedge sys_clk);
       //   $display("Random: 0x%08X", rnd);
     end
 
