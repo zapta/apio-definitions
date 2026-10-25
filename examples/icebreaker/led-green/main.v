@@ -1,25 +1,16 @@
-//-- Turn on the Green on board LED
-//-- Board: iCE40-UP5K
+// Turns on the green on-board LED. The other LEDs are off.
 module main (
-    output LEDG_N,  // Active low.
-    output LEDR_N,  // Active low.
-    output LED1,  // Active high.
-    output LED2,  // Active high.
-    output LED3,  // Active high.
-    output LED4,  // Active high.
-    output LED5  // Active high.
+    output [1:0] leds_n,    // On-board LEDs, active low. [0]=red, [1]=green.
+    output [4:0] pmod_leds  // LEDs on the snap-off PMOD, active high.
 );
 
-  //-- Turn on the green signal (inverse logic)
-  //-- Turn off the red and blue signals (inverse logic)
-  //-- On board leds are inverse logic, PMOD LEDs are positive logic.
+  // Turn on the green LED and turn off the red one.
+  wire [1:0] leds = 2'b10;
 
-  assign LEDR_N = 1;  //-- RED off
-  assign LEDG_N = 0;  //-- GREEN ON
-  assign LED1   = 0;  //-- LED1 off
-  assign LED2   = 0;  //-- LED1 off
-  assign LED3   = 0;  //-- LED1 off
-  assign LED4   = 0;  //-- LED1 off
-  assign LED5   = 0;  //-- LED1 off
+  // The on-board LEDs are active low, so invert them.
+  assign leds_n = ~leds;
+
+  // Turn off the PMOD LEDs.
+  assign pmod_leds = 5'b0;
 
 endmodule
