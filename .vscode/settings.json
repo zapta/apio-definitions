@@ -19,8 +19,10 @@
         "gtkw",
         "gtkwave",
         "iceprog",
+        "icesugar",
         "icezum",
         "localparam",
+        "LVCMOS",
         "marcha",
         "negedge",
         "nextpnr",
@@ -28,13 +30,17 @@
         "oversizing",
         "pinout",
         "popd",
+        "PULLMODE",
         "pushd",
         "realpath",
         "softprops",
         "testbench",
         "testbenches",
         "tfgg",
+        "timestart",
         "tinyprog",
+        "treeopen",
+        "vpaned",
         "yosys"
     ]
 }
