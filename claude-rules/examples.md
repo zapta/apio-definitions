@@ -41,7 +41,9 @@ Names:
 
 ### `info`
 
-Exactly one line, 10 to 100 characters, with no leading or trailing spaces.
+Every example must have an `info` file in its root dir. It holds exactly one line of text that describes the example, at most 40 characters long, with no leading or trailing spaces.
+
+`test_examples.py` checks for one line of 10 to 100 characters, so it doesn't catch lines of 41 to 100 characters. Today 8 of the 112 `info` files are longer than 40 characters.
 
 ### `apio.ini`
 
