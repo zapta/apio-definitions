@@ -29,7 +29,7 @@ Whenever possible, every board in `boards.jsonc` should have an example named `b
 | No usable clock pin, other iCE40 with `SB_HFOSC` | `odt-icyblue-feather/blinky` |
 | No usable clock pin, ECP5 | `ecp5-evaluation-board/blinky` (`OSCG`) |
 
-**Correctness:** add a `blinky` only when there is a good chance it's correct on the real board. Take the clock pin and frequency, the LED pin and the LED polarity from a reliable source: the board maker's schematic, user guide or constraint files, or a well-maintained platform file such as LiteX's `litex-boards`. Name the source in the constraint file when it isn't obvious. Don't guess. If a board can't be tested on hardware, end its `info` with `(untested)`, e.g. `Blinks an LED (untested).`
+**Correctness:** add a `blinky` only when there is a good chance it's correct on the real board. Take the clock pin and frequency, the LED pin and the LED polarity from a reliable source: the board maker's schematic, user guide or constraint files, or a well-maintained platform file such as LiteX's `litex-boards`. Name the source in the constraint file when it isn't obvious. Don't guess. If a board can't be tested on hardware, end its `info` with `(untested)`, e.g. `Blinks an LED (untested).` But don't mark an example `(untested)` when it reasonably follows an example that was tested on the same board (one whose `info` has no `(untested)`): the same clock pin and frequency, and the same LED pins and polarity.
 
 Boards with examples but no `blinky` yet:
 - `kefir`: its clock is a socketed oscillator whose frequency depends on the part fitted, and HX parts have no internal oscillator.
