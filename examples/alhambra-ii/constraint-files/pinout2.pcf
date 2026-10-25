@@ -1,3 +1,7 @@
+# Constraint file of the constraint-files example for the Alhambra II board.
+# It assigns the design's signals to FPGA pins, and lists only
+# the pins that this example uses.
+
 # The LEDs here are numbered in reversed order to demonstrate
 # the usage of two envs, each with its own constraint file.
 

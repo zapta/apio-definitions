@@ -1,4 +1,7 @@
-// Constraint file for the Sipeed Tang Nano 9K board.
+// Constraint file of the multi-board example for the Sipeed Tang
+// Nano 9K board. It assigns the design's signals to FPGA pins, and
+// lists only the pins that this example uses.
+
 // Board details at
 // https://wiki.sipeed.com/hardware/en/tang/Tang-Nano-9K/Nano-9K.html
 

@@ -1,10 +1,6 @@
-# -----------------------------------------------------------------------------
-#- Alhambra II constraint file (.pcf)
-#- By Juan Gonzalez (Obijuan) and Jesus Arroyo Torrens
-#- May - 2018
-#- GPL license
-#- Repo: https://github.com/FPGAwars/Alhambra-II-FPGA
-# -----------------------------------------------------------------------------
+# Constraint file of the prog-cmd example for the Alhambra II board.
+# It assigns the design's signals to FPGA pins, and lists only
+# the pins that this example uses.
 
 # ------------ System clock (12MHz) -------------------------------------------
 set_io sys_clk 49  # input
@@ -18,82 +14,3 @@ set_io leds[4] 41  # output
 set_io leds[5] 39  # output
 set_io leds[6] 38  # output
 set_io leds[7] 37  # output
-
-# The other board pins are listed below, commented out, for reference.
-
-# ------------ User push buttons ----------------------------------------------
-# set_io SW1 34  # input
-# set_io SW2 33  # input
-
-# ------------ 5v Digital I/O -------------------------------------------------
-
-# --- Top Female header
-#   ---------------------------------------   -------------------------------
-#  |  SCL SDA AR GND D13 D12 D11 D10 D9 D8 | | D7 D6  D5  D4  D3  D2  D1  D0 |
-#   ---------------------------------------   -------------------------------
-#
-#                     Male, 3 pin connectors
-#
-#               Gnd   *   *   *   *   *  *      *  *  *   *   *   *   *   * Gnd
-#               Vcc   *   *   *   *   *  *      *  *  *   *   *   *   *   * Vcc
-#               S     *   *   *   *   *  *      *  *  *   *   *   *   *   * S
-#
-#
-#                                                     Male, 3 pin connectors
-#                                                     *   *   *   *   *   *
-#                                                     *   *   *   *   *   *
-#                                                     *   *   *   *   *   *
-# --- Bottom female header
-#               -------------------------------     -------------------------
-#              |  x 5V  R 3v3 5vP  GND GND PWR |   | DD0 DD1 DD2 DD3 DD4 DD5 |
-#               -------------------------------     -------------------------
-
-# -- In top female header
-# set_io D13 64
-# set_io D12 63
-# set_io D11 21
-# set_io D10 22
-# set_io D9  19
-# set_io D8  20
-# set_io D7   9
-# set_io D6  10
-# set_io D5   7
-# set_io D4   8
-# set_io D3   3
-# set_io D2   4
-# set_io D1   1
-# set_io D0   2
-
-# -- In Bottom female header
-# set_io DD0 114
-# set_io DD1 115
-# set_io DD2 116
-# set_io DD3 117
-# set_io DD4 118
-# set_io DD5 119
-
-# set_io SDA 118
-# set_io SCL 119
-
-# -------------------------- I2C ADC ------------------------------------------
-# set_io ADC_SCL 84  # output
-# set_io ADC_SDA 83
-# set_io ADC_INT 90  # input
-
-# -------------------------- FTDI ---------------------------------------------
-# --- FTDI 0:
-# set_io RES  66  # input
-# set_io DONE 65  # output
-# set_io SS   71  # output
-# set_io MISO 68  # input
-# set_io MOSI 67  # output
-# set_io SCK  70  # output
-#
-# --- FTDI 1: (Serial port)
-# set_io DCD 47  # output
-# set_io DSR 48  # output
-# set_io DTR 52  # input
-# set_io CTS 56  # output
-# set_io RTS 60  # input
-# set_io TX  61  # output
-# set_io RX  62  # input

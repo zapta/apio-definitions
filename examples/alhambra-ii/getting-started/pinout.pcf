@@ -1,5 +1,6 @@
-# This file maps the signal names used in main.v to FPGA pin
-# numbers. It lists only the signals this example uses.
+# Constraint file of the getting-started example for the Alhambra II board.
+# It assigns the design's signals to FPGA pins, and lists only
+# the pins that this example uses.
 
 # ------------ System clock (12MHz) -------------------------------------------
 set_io sys_clk 49  # input
