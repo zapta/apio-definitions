@@ -1,65 +1,34 @@
-// Simple tri-colour LED blink example.
+// Cycles the RGB LED through all the combinations of its three colors.
 
-
-module main (
-    // 48MHz Clock input
-    // --------
-    input clki,
-    // LED outputs
-    // --------
-    // RGB LED pins, active low. [0]=blue (RGB0), [1]=red (RGB1), [2]=green (RGB2).
+// N is the counter width. The colors change every 2^(N-3) clocks.
+// With the default N = 26 and a 48MHz clock, they change about
+// every 0.17 seconds. The testbench uses a small N to run quickly.
+module main #(
+    parameter integer N = 26
+) (
+    input        sys_clk,  // 48MHz clock
+    // The RGB LED pins, active low. [0]=red, [1]=green, [2]=blue.
     output [2:0] rgb_led,
-    // USB Pins (which should be statically driven if not being used).
-    // --------
-    output usb_dp,
-    output usb_dn,
-    output usb_dp_pu
+    output       usb_dp,   // USB D+, held low.
+    output       usb_dn,   // USB D-, held low.
+    output       usb_pu    // USB D+ pull-up, active high, held off.
 );
 
-  // Assign USB pins to "0" so as to disconnect Fomu from
-  // the host system.  Otherwise it would try to talk to
-  // us over USB, which wouldn't work since we have no stack.
+  // Keep the USB lines low, so the host doesn't try to talk to the board.
   assign usb_dp = 1'b0;
   assign usb_dn = 1'b0;
-  assign usb_dp_pu = 1'b0;
+  assign usb_pu = 1'b0;
 
-  // Connect to system clock (with buffering)
-  wire sys_clk;
-  SB_GB clk_gb (
-      .USER_SIGNAL_TO_GLOBAL_BUFFER(clki),
-      .GLOBAL_BUFFER_OUTPUT(sys_clk)
-  );
+  // The counter. It starts at 0 when the FPGA is configured.
+  reg [N-1:0] counter = 0;
 
-  // Use counter logic to divide system clock.  The clock is 48 MHz,
-  // so we divide it down by 2^28.
-  reg [28:0] counter = 0;
-  always @(posedge sys_clk) begin
-    counter <= counter + 1;
-  end
+  // Count up on every clock.
+  always @(posedge sys_clk) counter <= counter + 1;
 
-  // Instantiate iCE40 LED driver hard logic, connecting up
-  // counter state and LEDs.
-  //
-  // Note that it's possible to drive the LEDs directly,
-  // however that is not current-limited and results in
-  // overvolting the red LED.
-  //
-  // See also:
-  // https://www.latticesemi.com/-/media/LatticeSemi/Documents/ApplicationNotes/IK/ICE40LEDDriverUsageGuide.ashx?document_id=50668
-  SB_RGBA_DRV #(
-      .CURRENT_MODE("0b1"),       // half current
-      .RGB0_CURRENT("0b000011"),  // 4 mA
-      .RGB1_CURRENT("0b000011"),  // 4 mA
-      .RGB2_CURRENT("0b000011")   // 4 mA
-  ) RGBA_DRIVER (
-      .CURREN  (1'b1),
-      .RGBLEDEN(1'b1),
-      .RGB0PWM (counter[25]),  // Blue
-      .RGB1PWM (counter[24]),  // Red
-      .RGB2PWM (counter[23]),  // Green
-      .RGB0    (rgb_led[0]),
-      .RGB1    (rgb_led[1]),
-      .RGB2    (rgb_led[2])
+  // The counter's top 3 bits turn the colors on: blue, red and green.
+  rgb_driver rgb_driver (
+      .on  ({counter[N-1], counter[N-3], counter[N-2]}),
+      .pins(rgb_led)
   );
 
 endmodule

@@ -1,30 +1,16 @@
-# RGB LED (active low)
-set_io -nowarn rgb_led[0] A5
-set_io -nowarn rgb_led[1] B5
-set_io -nowarn rgb_led[2] C5
-set_io -nowarn pmod_1 E4
-set_io -nowarn pmod_2 D5
-set_io -nowarn pmod_3 E5
-set_io -nowarn pmod_4 F5
-set_io -nowarn pmoda_1 E4
-set_io -nowarn pmoda_2 D5
-set_io -nowarn pmoda_3 E5
-set_io -nowarn pmoda_4 F5
-set_io -nowarn clki F4
-set_io -nowarn user_1 E4
-set_io -nowarn user_2 D5
-set_io -nowarn user_3 E5
-set_io -nowarn user_4 F5
-set_io -nowarn touch_1 E4
-set_io -nowarn touch_2 D5
-set_io -nowarn touch_3 E5
-set_io -nowarn touch_4 F5
-set_io -nowarn spi_mosi F1
-set_io -nowarn spi_miso E1
-set_io -nowarn spi_clk D1
-set_io -nowarn spi_io2 F2
-set_io -nowarn spi_io3 B1
-set_io -nowarn spi_cs C1
-set_io -nowarn usb_dn A2
-set_io -nowarn usb_dp A1
-set_io -nowarn usb_dp_pu A4
+# Constraint file of the rgb-led example for the Fomu board.
+# It assigns the design's signals to FPGA pins, and lists only
+# the pins that this example uses.
+
+# Clock (48MHz).
+set_io sys_clk F4  # input
+
+# RGB LED, active low. These are the iCE40UP5K's dedicated RGB LED pins.
+set_io rgb_led[0] B5  # Red, RGB1.
+set_io rgb_led[1] C5  # Green, RGB2.
+set_io rgb_led[2] A5  # Blue, RGB0.
+
+# USB pins, held low.
+set_io usb_dp    A1  # output
+set_io usb_dn    A2  # output
+set_io usb_pu A4  # output, active high

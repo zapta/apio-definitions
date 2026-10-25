@@ -1,28 +1,33 @@
+// The LEDs show a counter and a button: leds[5:0] show the counter's top
+// bits, leds[6] shows button FIRE1, and leds[7] is always on.
 
-module main (
-    input sys_clk,  // 25MHz clock
-    input [6:0] btn,  // Push buttons. btn[0] is active low, the rest active high.
-    output [7:0] led,  // Active high.
-    output wifi_gpio0
+// N is the counter width. leds[5:0] show its top 6 bits, so leds[0]
+// toggles every 2^(N-6) clocks. With the default N = 24 and a 25MHz
+// clock, that's about every 0.01 seconds. The testbench uses a small N to
+// run quickly.
+module main #(
+    parameter integer N = 24
+) (
+    input        sys_clk,    // 25MHz clock
+    input        btn,        // Button FIRE1, active high.
+    output [7:0] leds,       // Active high.
+    output       wifi_gpio0  // Held high, see below.
 );
 
-  localparam ctr_width = 32;
-
-  wire i_clk;
-
-  // Tie GPIO0, keep board from rebooting
+  // Hold the ESP32's GPIO0 high, so it doesn't reset the board.
   assign wifi_gpio0 = 1'b1;
-  assign i_clk = sys_clk;
-  reg [7:0] o_led;
-  assign led = o_led;
 
-  reg [ctr_width-1:0] ctr = 0;
+  // Pass the button through a two flip-flop synchronizer.
+  reg [1:0] btn_sync = 2'b00;
+  always @(posedge sys_clk) btn_sync <= {btn_sync[0], btn};
 
-  always @(posedge i_clk) begin
-    ctr <= ctr + 1;
-    o_led[7] <= 1;
-    o_led[6] <= btn[1];
-    o_led[5:0] <= ctr[23:18];
-  end
+  // The counter. It starts at 0 when the FPGA is configured.
+  reg [N-1:0] counter = 0;
+
+  // Count up on every clock.
+  always @(posedge sys_clk) counter <= counter + 1;
+
+  // Show the counter's top bits, the button, and an always-on LED.
+  assign leds = {1'b1, btn_sync[1], counter[N-1:N-6]};
 
 endmodule

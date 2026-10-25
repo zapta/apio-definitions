@@ -1,1 +1,1 @@
-RGB LED patterns using SB_RGBA_DRV.
+Cycles the RGB LED through its colors.
