@@ -14,7 +14,7 @@ Each example is a standalone Apio project. Users fetch it with `apio examples fe
 
 ## Which rules apply
 
-The rules in this file are a mix of what `test_examples.py` enforces and repo conventions. As of 2026-10-25 all the examples follow these rules, except where a rule says otherwise (see "Long numbers"). Apply the rules to new examples and to examples you change.
+The rules in this file are a mix of what `test_examples.py` enforces and repo conventions. As of 2026-10-25 all the examples follow these rules. Apply the rules to new examples and to examples you change.
 
 ## The `blinky` example
 
@@ -182,7 +182,7 @@ Name the top module's ports, the signals connected to board pins, after their fu
 - **One module per file**, with the file named after the module (`ticker` in `ticker.v`).
 - **Timing constants are parameters:** make clock dividers, counter widths and delays module parameters. The default is the value for the real board, and testbenches override it with a small value so simulations run quickly. Examples: `DIV` in `alhambra-ii/bcd-counter`, `N` in `alhambra-ii/blinky`.
 - **Assignments:** in clocked `always @(posedge sys_clk)` blocks, use non-blocking `<=`. In combinational `always @(*)` blocks, use blocking `=`, and assign every output in every branch so no latches are inferred.
-- **Long numbers:** use `_` to group digits from the right: every 3 digits in decimal numbers of 5 or more digits (`12_000_000`, not `12000000`), and every 4 digits in hex and binary numbers longer than 4 digits (`32'hDEAD_BEEF`, `8'b1010_0101`). Short numbers such as `1000`, `8'hFF` and `4'b1010` stay as they are. As of 2026-10-25 about 200 numbers in the examples don't follow this yet.
+- **Long numbers:** use `_` to group digits from the right: every 3 digits in decimal numbers of 5 or more digits (`12_000_000`, not `12000000`), and every 4 digits in hex and binary numbers longer than 4 digits (`32'hDEAD_BEEF`, `8'b1010_0101`). Short numbers such as `1000`, `8'hFF` and `4'b1010` stay as they are. Generated tables, such as the note tables in `icezum/marcha-imperial/notegen.vh`, may keep the generator's format.
 - **Inputs:** pass button and switch inputs through a two flip-flop synchronizer clocked by `sys_clk` before using them. Debounce them when the design reacts to presses.
 - **Comments:** start each Verilog file with a one-to-three-line comment saying what the module does. In the top module, give the clock input's frequency in its port comment (`input sys_clk,  // 12MHz clock`). With an internal oscillator, give it in the comment above the `sys_clk` wire.
 

@@ -50,7 +50,7 @@ module main (
       .AW(AW),
       .DW(DW)
   ) ROM (
-      .sys_clk (sys_clk),
+      .sys_clk(sys_clk),
       .addr(addr),
       .data(note)
   );

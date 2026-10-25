@@ -11,9 +11,9 @@
 //-----------------------------------------------------------------------------
 
 module notegen (
-    input  wire        sys_clk,     //-- The global clock.
-    input  wire        rstn,    //-- Reset
-    input  wire [15:0] note,    //-- Divider.
+    input  wire        sys_clk,  //-- The global clock.
+    input  wire        rstn,     //-- Reset
+    input  wire [15:0] note,     //-- Divider.
     output reg         clk_out
 );  //-- Output signal.
 

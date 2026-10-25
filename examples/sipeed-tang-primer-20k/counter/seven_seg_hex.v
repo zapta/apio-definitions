@@ -5,17 +5,17 @@ module seven_seg_hex (
 );
   always @* begin
     case (din)
-      4'h0: dout = 7'b0111111;
-      4'h1: dout = 7'b0000110;
-      4'h2: dout = 7'b1011011;
-      4'h3: dout = 7'b1001111;
-      4'h4: dout = 7'b1100110;
-      4'h5: dout = 7'b1101101;
-      4'h6: dout = 7'b1111101;
-      4'h7: dout = 7'b0000111;
-      4'h8: dout = 7'b1111111;
-      4'h9: dout = 7'b1101111;
-      default: dout = 7'b1000000;
+      4'h0: dout = 7'b011_1111;
+      4'h1: dout = 7'b000_0110;
+      4'h2: dout = 7'b101_1011;
+      4'h3: dout = 7'b100_1111;
+      4'h4: dout = 7'b110_0110;
+      4'h5: dout = 7'b110_1101;
+      4'h6: dout = 7'b111_1101;
+      4'h7: dout = 7'b000_0111;
+      4'h8: dout = 7'b111_1111;
+      4'h9: dout = 7'b110_1111;
+      default: dout = 7'b100_0000;
     endcase
   end
 endmodule

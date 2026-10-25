@@ -31,7 +31,7 @@
 //------------------------------------------------------------------
 
 module main #(
-    parameter integer CLK_HZ = 27000000
+    parameter integer CLK_HZ = 27_000_000
 ) (
     input        sys_clk,   // 27MHz clock
     output [6:0] segs_n,    // Segments a to g, active low.

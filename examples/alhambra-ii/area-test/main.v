@@ -37,12 +37,12 @@ module main (
 );
 
   // Pattern generation counters
-  reg [31:0] counter1 = 32'h12345678;
-  reg [31:0] counter2 = 32'h87654321;
-  reg [31:0] counter3 = 32'hABCDEF01;
-  reg [31:0] counter4 = 32'hFEDCBA10;
-  reg [31:0] counter5 = 32'h55AA55AA;
-  reg [31:0] counter6 = 32'hAA55AA55;
+  reg [31:0] counter1 = 32'h1234_5678;
+  reg [31:0] counter2 = 32'h8765_4321;
+  reg [31:0] counter3 = 32'hABCD_EF01;
+  reg [31:0] counter4 = 32'hFEDC_BA10;
+  reg [31:0] counter5 = 32'h55AA_55AA;
+  reg [31:0] counter6 = 32'hAA55_AA55;
 
   // BRAM address counters (reduced to 8 bits)
   reg [ 7:0] bram_addr1 = 8'h0;
@@ -52,12 +52,12 @@ module main (
 
   // Counter updates
   always @(posedge sys_clk) begin
-    counter1   <= counter1 + 32'h12345;
-    counter2   <= counter2 + 32'h54321;
-    counter3   <= counter3 + 32'hABCDE;
-    counter4   <= counter4 + 32'hEDCBA;
-    counter5   <= counter5 + 32'h13579;
-    counter6   <= counter6 + 32'h97531;
+    counter1   <= counter1 + 32'h1_2345;
+    counter2   <= counter2 + 32'h5_4321;
+    counter3   <= counter3 + 32'hA_BCDE;
+    counter4   <= counter4 + 32'hE_DCBA;
+    counter5   <= counter5 + 32'h1_3579;
+    counter6   <= counter6 + 32'h9_7531;
 
     // Update BRAM addresses
     bram_addr1 <= bram_addr1 + 1'b1;

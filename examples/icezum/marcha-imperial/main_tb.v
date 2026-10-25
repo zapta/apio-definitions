@@ -63,7 +63,7 @@ module main_tb;
       prev_note = dut.note;
       @(posedge sys_clk);
       #1;
-      `EXPECT_EQ(dut.addr, ((i - 1) / DUR + 1) % 256)
+      `EXPECT_EQ(dut.addr, ((i - 1) /DUR + 1) % 256)
       `EXPECT_EQ(dut.note, dut.ROM.rom[prev_addr])
       `EXPECT_EQ(leds, dut.note[7:0])
       if (i > 1 && prev_note == 0) `EXPECT_EQ(buzzer, 1'b0)

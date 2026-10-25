@@ -12,7 +12,7 @@ module main #(
   reg toggle = 0;
 
   // Rows and columns are active low.
-  assign rows_n = {6'b111111, toggle, ~toggle};
+  assign rows_n = {6'b11_1111, toggle, ~toggle};
   assign cols_n = 4'b1110;
 
   always @(posedge sys_clk) begin

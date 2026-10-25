@@ -20,8 +20,8 @@ module genrom #(  //-- Parameters
 )  //-- Data bits (data width).
 
 (  //-- Puertos
-    input                sys_clk,   //-- The global clock.
-    input  wire [AW-1:0] addr,  //-- Address.
+    input                sys_clk,  //-- The global clock.
+    input  wire [AW-1:0] addr,     //-- Address.
     output reg  [DW-1:0] data
 );  //-- Output data.
 
