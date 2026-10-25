@@ -8,16 +8,9 @@ module area_test_tb;
 
   assign leds = {led7, led6, led5, led4, led3, led2, led1, led0};
 
-  area_test dut (
-      .CLK (clk),
-      .LED0(led0),
-      .LED1(led1),
-      .LED2(led2),
-      .LED3(led3),
-      .LED4(led4),
-      .LED5(led5),
-      .LED6(led6),
-      .LED7(led7)
+  main dut (
+      .sys_clk(clk),
+      .leds({led7, led6, led5, led4, led3, led2, led1, led0})
   );
 
   initial begin

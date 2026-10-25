@@ -1,7 +1,7 @@
 # RGB LED (active low)
-set_io -nowarn rgb0 A5
-set_io -nowarn rgb1 B5
-set_io -nowarn rgb2 C5
+set_io -nowarn rgb_led[0] A5
+set_io -nowarn rgb_led[1] B5
+set_io -nowarn rgb_led[2] C5
 set_io -nowarn pmod_1 E4
 set_io -nowarn pmod_2 D5
 set_io -nowarn pmod_3 E5

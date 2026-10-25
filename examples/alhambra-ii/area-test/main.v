@@ -31,16 +31,9 @@
  * rights to this work worldwide. No rights are reserved.
  * Full text: https://creativecommons.org/publicdomain/zero/1.0/
  */
-module area_test (
-    input  wire CLK,
-    output wire LED0,  // Active high.
-    output wire LED1,  // Active high.
-    output wire LED2,  // Active high.
-    output wire LED3,  // Active high.
-    output wire LED4,  // Active high.
-    output wire LED5,  // Active high.
-    output wire LED6,  // Active high.
-    output wire LED7   // Active high.
+module main (
+    input  wire       sys_clk,  // 12MHz clock
+    output wire [7:0] leds      // Active high.
 );
 
   // Pattern generation counters
@@ -58,7 +51,7 @@ module area_test (
   reg [ 7:0] bram_addr4 = 8'h0;
 
   // Counter updates
-  always @(posedge CLK) begin
+  always @(posedge sys_clk) begin
     counter1   <= counter1 + 32'h12345;
     counter2   <= counter2 + 32'h54321;
     counter3   <= counter3 + 32'hABCDE;
@@ -85,7 +78,7 @@ module area_test (
 
   // Initialize and increment all BRAM addresses continuously
   integer m;
-  always @(posedge CLK) begin
+  always @(posedge sys_clk) begin
     for (m = 0; m < 32; m = m + 1) begin
       bram_continuous_addr[m] <= bram_continuous_addr[m] + 1'b1;
     end
@@ -106,7 +99,7 @@ module area_test (
           .BRAM_ADDR_WIDTH(8),
           .BRAM_DATA_WIDTH(16)
       ) bram_inst (
-          .clk(CLK),
+          .clk(sys_clk),
           .addr(bram_continuous_addr[k]),
           .cs_n(bram_cs_n[k]),
           .wr_n(bram_wr_n[k]),
@@ -198,7 +191,7 @@ module area_test (
   reg [15:0] mult_shift_reg = 16'h0;
   reg [3:0] mult_bit_selector = 4'h0;
 
-  always @(posedge CLK) begin
+  always @(posedge sys_clk) begin
     // Rotate BRAM data through shift register
     bram_shift_reg <= {bram_shift_reg[14:0], bram_shift_reg[15]} ^ all_bram_combined[15:0];
     // Rotate multiplication data through shift register  
@@ -224,7 +217,7 @@ module area_test (
   reg [15:0] reg_array6[0:63];
 
   integer j;
-  always @(posedge CLK) begin
+  always @(posedge sys_clk) begin
     // Update first array with multiplier results
     for (j = 0; j < 64; j = j + 1) begin
       if (j < 8) reg_array1[j] <= mult_result[j][15:0] ^ reg_array1[j];
@@ -334,7 +327,7 @@ module area_test (
   reg [31:0] accumulator7 = 32'h0;
   reg [31:0] accumulator8 = 32'h0;
 
-  always @(posedge CLK) begin
+  always @(posedge sys_clk) begin
     accumulator1 <= accumulator1 ^ complex_combo[0] ^ complex_combo[1];
     accumulator2 <= accumulator2 ^ complex_combo[2] ^ complex_combo[3];
     accumulator3 <= accumulator3 ^ complex_combo[4] ^ complex_combo[5];
@@ -362,56 +355,13 @@ module area_test (
 
   // LED assignment with rotating outputs
   // 4 MSB LEDs show rotating BRAM data, 4 LSB LEDs show rotating multiplication data
-  assign LED7 = bram_shift_reg[15];  // MSB from BRAM data
-  assign LED6 = bram_shift_reg[14];
-  assign LED5 = bram_shift_reg[13];
-  assign LED4 = bram_shift_reg[12];
-  assign LED3 = mult_rotating_bits[3];  // Rotating bits from all 18 multipliers
-  assign LED2 = mult_rotating_bits[2];
-  assign LED1 = mult_rotating_bits[1];
-  assign LED0 = mult_rotating_bits[0];
-
-endmodule
-
-
-/*
- * Copyright 2020 Brian O'Dell
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
-module bram #(
-    parameter BRAM_ADDR_WIDTH = 9,
-    parameter BRAM_DATA_WIDTH = 8
-) (
-    input clk,
-    input [BRAM_ADDR_WIDTH-1:0] addr,
-    input cs_n,
-    input wr_n,
-    input rd_n,
-    input [BRAM_DATA_WIDTH-1:0] bram_data_in,
-    output reg [BRAM_DATA_WIDTH-1:0] bram_data_out
-);
-
-  reg [BRAM_DATA_WIDTH-1:0] mem[(1<<BRAM_ADDR_WIDTH)-1:0];
-
-  always @(posedge clk)
-    if (cs_n == 1'b0) begin
-      begin
-        if (wr_n == 1'b0) mem[addr] <= bram_data_in;
-        if (rd_n == 1'b0) bram_data_out <= mem[addr];
-      end
-    end
+  assign leds[7] = bram_shift_reg[15];  // MSB from BRAM data
+  assign leds[6] = bram_shift_reg[14];
+  assign leds[5] = bram_shift_reg[13];
+  assign leds[4] = bram_shift_reg[12];
+  assign leds[3] = mult_rotating_bits[3];  // Rotating bits from all 18 multipliers
+  assign leds[2] = mult_rotating_bits[2];
+  assign leds[1] = mult_rotating_bits[1];
+  assign leds[0] = mult_rotating_bits[0];
 
 endmodule

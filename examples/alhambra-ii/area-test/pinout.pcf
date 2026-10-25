@@ -8,14 +8,14 @@
 
 
 # ------------ User Leds (active high) ----------------------------------------
-set_io -nowarn LED0 45  # output
-set_io -nowarn LED1 44  # output
-set_io -nowarn LED2 43  # output
-set_io -nowarn LED3 42  # output
-set_io -nowarn LED4 41  # output
-set_io -nowarn LED5 39  # output
-set_io -nowarn LED6 38  # output
-set_io -nowarn LED7 37  # output
+set_io -nowarn leds[0] 45  # output
+set_io -nowarn leds[1] 44  # output
+set_io -nowarn leds[2] 43  # output
+set_io -nowarn leds[3] 42  # output
+set_io -nowarn leds[4] 41  # output
+set_io -nowarn leds[5] 39  # output
+set_io -nowarn leds[6] 38  # output
+set_io -nowarn leds[7] 37  # output
 
 # ------------ User push buttons ----------------------------------------------
 set_io -nowarn SW1 34  # input
@@ -77,7 +77,7 @@ set_io -nowarn ADC_SDA 83
 set_io -nowarn ADC_INT 90  # input
 
 # -------------------------- SYSTEM CLOCK -------------------------------------
-set_io -nowarn CLK 49  # input
+set_io -nowarn sys_clk 49  # input
 
 # -------------------------- FTDI ---------------------------------------------
 # --- FTDI 0:

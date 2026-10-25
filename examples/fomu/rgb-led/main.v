@@ -7,9 +7,8 @@ module main (
     input clki,
     // LED outputs
     // --------
-    output rgb0,  // Active low.
-    output rgb1,  // Active low.
-    output rgb2,  // Active low.
+    // RGB LED pins, active low. [0]=blue (RGB0), [1]=red (RGB1), [2]=green (RGB2).
+    output [2:0] rgb_led,
     // USB Pins (which should be statically driven if not being used).
     // --------
     output usb_dp,
@@ -58,9 +57,9 @@ module main (
       .RGB0PWM (counter[25]),  // Blue
       .RGB1PWM (counter[24]),  // Red
       .RGB2PWM (counter[23]),  // Green
-      .RGB0    (rgb0),
-      .RGB1    (rgb1),
-      .RGB2    (rgb2)
+      .RGB0    (rgb_led[0]),
+      .RGB1    (rgb_led[1]),
+      .RGB2    (rgb_led[2])
   );
 
 endmodule
