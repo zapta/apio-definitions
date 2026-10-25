@@ -1,5 +1,6 @@
 //------------------------------------------------------------------
-// Blink the top bar (segment A) of the right-hand digit.
+// Blinks the top bar (segment A) of the right-hand digit. The board has no
+// user LEDs, so this is its blinky.
 //
 // Board : Sipeed Tang Primer 20K Lite (GW2A-LV18PG256C8/I7)
 // PMOD  : icebreaker 7-seg display v1.1a, top-right connector
@@ -27,59 +28,30 @@
 // Segments are active-low. CAT=1 selects the right-hand digit.
 //------------------------------------------------------------------
 
+// N is the counter width. The segment toggles every 2^(N-1) clocks.
+// With the default N = 25 and a 27MHz clock, it toggles about
+// every 0.6 seconds. The testbench uses a small N to run quickly.
 module main #(
-    // Num of click cycle per led toggle.
-    parameter integer DIV = (27000000 / 2)
+    parameter integer N = 25
 ) (
-    input        sys_clk,
+    input        sys_clk,   // 27MHz clock
     output [6:0] segs_n,    // Segments a to g, active low.
-    output       digit_sel  // Digit select. 1 shows the units digit, 0 the tens.
+    output       digit_sel  // Digit select. 1 shows the right-hand digit.
 );
 
-  // The display bus, {CAT, AG, AF, AE, AD, AC, AB, AA}.
-  wire [7:0] seven_seg;
-  assign {digit_sel, segs_n} = seven_seg;
+  // The blink counter. It starts at 0 when the FPGA is configured.
+  reg [N-1:0] counter = 0;
 
-  // icebreaker 7-seg PMOD v1.1a: segments are active low. CAT=1 selects
-  // the right-hand digit (workshop mapping). Other segments stay off.
-  // seven_seg[0] (AA, top bar) blinks.
+  // Count up on every clock.
+  always @(posedge sys_clk) counter <= counter + 1;
 
-  reg led = 1;
+  // Segment a follows the counter's top bit. The others are off.
+  wire [6:0] segs = {6'b00_0000, counter[N-1]};
 
-  assign seven_seg[0]   = led;
-  assign seven_seg[6:1] = 6'b111111;
-  assign seven_seg[7]   = 1'b1;
+  // The segments are active low, so invert them.
+  assign segs_n = ~segs;
 
-  // ---- Reset generator.
-
-  reg [3:0] reset_counter = 0;
-  reg sys_reset = 1;
-
-  always @(posedge sys_clk) begin
-    if (reset_counter < 3) begin
-      sys_reset <= 1;
-      reset_counter <= reset_counter + 1;
-    end else begin
-      sys_reset <= 0;
-    end
-  end
-
-  // ---- Blinker
-
-  reg [31:0] blink_counter;
-
-  always @(posedge sys_clk) begin
-    if (sys_reset) begin
-      blink_counter <= 0;
-      led <= 1;
-    end else begin
-      if (blink_counter < (DIV - 1)) begin
-        blink_counter <= blink_counter + 1;
-      end else begin
-        blink_counter <= 0;
-        led <= ~led;
-      end
-    end
-  end
+  // Show the right-hand digit.
+  assign digit_sel = 1'b1;
 
 endmodule

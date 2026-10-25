@@ -1,7 +1,7 @@
 // Multiplex the two digits. Patterns are active-high internally, then
 // inverted for the PMOD (active-low segments). CAT=1 shows units.
 module seven_seg_ctrl (
-    input            clk,
+    input            sys_clk,
     input      [7:0] din,
     output reg [7:0] dout
 );
@@ -21,7 +21,7 @@ module seven_seg_ctrl (
   reg mux_tick = 0;
   reg show_tens = 0;
 
-  always @(posedge clk) begin
+  always @(posedge sys_clk) begin
     mux_div   <= mux_div + 1;
     mux_tick  <= &mux_div;
     show_tens <= show_tens ^ mux_tick;

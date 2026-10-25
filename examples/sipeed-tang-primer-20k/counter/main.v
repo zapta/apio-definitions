@@ -63,8 +63,8 @@ module main #(
   end
 
   seven_seg_ctrl display (
-      .clk (sys_clk),
-      .din (value),
+      .sys_clk(sys_clk),
+      .din(value),
       .dout(seven_seg)
   );
 
