@@ -16,13 +16,29 @@ The rules in this file are a mix of what `test_examples.py` enforces and repo co
 
 ## The `blinky` example
 
-Every board should have an example named `blinky` that blinks an LED at about 1 Hz. It is the board's "hello world", so keep it as simple as possible: a clock divider driving one LED, plus its testbench. `alhambra-ii/blinky` is the reference.
+Whenever possible, every board in `boards.jsonc` should have an example named `blinky` that blinks an LED at about 1 Hz. It is the board's "hello world", so keep it as simple as possible: a clock divider driving one LED, plus its testbench. `alhambra-ii/blinky` is the reference.
 
-Boards without a `blinky` yet:
+**Consistency:** keep each `blinky` as close as possible to the other boards' `blinky` examples. Start from the closest existing one and change only what the board needs: the board ID, the pins, the clock frequency, the counter width `N` (pick it so the LED toggles about every 0.5 to 1 second) and the LED polarity comments. Keep the file names, module and signal names, comments, testbench and `.gtkw` file the same. The templates:
+
+| Board has | Start from |
+|---|---|
+| One LED and a clock pin | `colorlight-5a-75e-v71-ft232h/blinky` |
+| Several LEDs and a clock pin | `alhambra-ii/blinky` |
+| No usable clock pin, iCE40UP5K RGB LED | `upduino3/blinky` (`SB_HFOSC`, `SB_RGBA_DRV`) |
+| No usable clock pin, other iCE40 with `SB_HFOSC` | `odt-icyblue-feather/blinky` |
+| No usable clock pin, ECP5 | `ecp5-evaluation-board/blinky` (`OSCG`) |
+
+**Correctness:** add a `blinky` only when there is a good chance it's correct on the real board. Take the clock pin and frequency, the LED pin and the LED polarity from a reliable source: the board maker's schematic, user guide or constraint files, or a well-maintained platform file such as LiteX's `litex-boards`. Name the source in the constraint file when it isn't obvious. Don't guess. If a board can't be tested on hardware, end its `info` with `(untested)`, e.g. `Blinks an LED (untested).`
+
+Boards with examples but no `blinky` yet:
 - `fomu` (it has `blink` instead)
 - `ice40-hx1k-evb`, `ice40-hx8k-evb`, `ice40-hx8k`
 - `icestick`, `icezum`, `kefir`
-- `soan-papdi-mini`, which has no examples at all yet
+
+Boards with no examples at all, as of 2026-10-25, because no reliable pinout or schematic was found:
+- `arice1`, `icenode`, `pi-sicle`, `soan-papdi-mini`, `thetamachines-eth4k`, `ecp5-mini-12`, `ecp5-mini-25`
+- `blackice-mx`: the only schematic found shows just the carrier board's connectors.
+- `tinyfpga-ex-rev1`, `tinyfpga-ex-rev2`: the netlist doesn't show the user LED connected to an FPGA ball.
 
 ## Files in an example
 
