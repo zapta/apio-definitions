@@ -24,6 +24,7 @@ Whenever possible, every board in `boards.jsonc` should have an example named `b
 |---|---|
 | One LED and a clock pin | `colorlight-5a-75e-v71-ft232h/blinky` |
 | Several LEDs and a clock pin | `alhambra-ii/blinky` |
+| Several active-low LEDs and a clock pin | `cynthion-r1-4/blinky` (`leds_n`, inverted once) |
 | No usable clock pin, iCE40UP5K RGB LED | `upduino3/blinky` (`SB_HFOSC`, `SB_RGBA_DRV`) |
 | No usable clock pin, other iCE40 with `SB_HFOSC` | `odt-icyblue-feather/blinky` |
 | No usable clock pin, ECP5 | `ecp5-evaluation-board/blinky` (`OSCG`) |
