@@ -139,7 +139,7 @@ always @(posedge sys_clk) if (sys_rst) rst_cnt <= rst_cnt + 1;
 
 ### Vendor primitives that can't be simulated
 
-Some primitives can't be simulated: the PLLs `SB_PLL40_CORE` and `PLLE2_BASE`, and iCE40UP5K's internal oscillator `SB_HFOSC` and RGB LED driver `SB_RGBA_DRV`. Yosys's simulation library has only empty shells for them. Wrap the primitive in `` `ifdef SYNTHESIS`` (Yosys defines `SYNTHESIS` during synthesis), and put a simple simulation model in the `` `else`` branch, so the same module works in testbenches. Give each wrapper its own file. The models:
+Some primitives can't be simulated: the PLLs `SB_PLL40_CORE` and `PLLE2_BASE`, the internal oscillators `SB_HFOSC` (iCE40UP5K) and `OSCG` (ECP5), and iCE40UP5K's RGB LED driver `SB_RGBA_DRV`. Yosys's simulation library has only empty shells for them. Wrap the primitive in `` `ifdef SYNTHESIS`` (Yosys defines `SYNTHESIS` during synthesis), and put a simple simulation model in the `` `else`` branch, so the same module works in testbenches. Give each wrapper its own file. The models:
 - **PLL:** passes the input clock through and ties `locked` high.
 - **Internal oscillator:** generates a 10 ns clock (see below).
 - **RGB LED driver:** `assign pins = ~on;`, since its pins are active low.
@@ -154,7 +154,7 @@ Use the FPGA's internal oscillator (e.g. `SB_HFOSC`) only when the board has no 
 - **`` `timescale``:** the model's `#5` needs a time unit, so put `` `timescale 1ns / 1ps`` in the oscillator wrapper's file too, not only in the testbench. The other design files don't need it. Apio runs Verilator with `-Wno-TIMESCALEMOD`, and Icarus doesn't warn either, so having it in only some files is fine.
 - **Testbench:** the design makes its own clock, so the testbench reads it instead of driving it: `wire sys_clk = dut.sys_clk;`. `clk_num` and the `.gtkw` file use this `sys_clk` as usual.
 
-`upduino3/blinky` and the other UP5K RGB LED blinky examples (`upduino`, `upduino2`, `upduino21`, `pico-ice`, `vsdsquadron-fm`, `fpga101`) use this pattern. It was checked with `invoke test`.
+`upduino3/blinky` and the other UP5K RGB LED blinky examples (`upduino`, `upduino2`, `upduino21`, `pico-ice`, `vsdsquadron-fm`, `fpga101`) use this pattern, and so does `ecp5-evaluation-board/blinky` with the ECP5 `OSCG` (in `osc.v`). They were checked with `invoke test`.
 
 ## Lint and formatting
 
