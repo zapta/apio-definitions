@@ -10,14 +10,14 @@ module blinky_tb ();
   parameter DURATION = 10 * 3;
 
   //-- System clock
-  reg  clk;
+  reg  sys_clk;
 
   //-- Led port
   wire led;
 
   //-- Instantiate the unit to test
   main UUT (
-      .clk(clk),
+      .sys_clk(sys_clk),
       .led(led)
   );
 
@@ -32,10 +32,10 @@ module blinky_tb ();
 
   // System clock
   initial begin
-    clk = 1;
+    sys_clk = 1;
     forever begin
       #1;
-      clk = ~clk;
+      sys_clk = ~sys_clk;
     end
   end
 

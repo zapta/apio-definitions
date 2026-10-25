@@ -2,7 +2,7 @@
 #-- Placa Mimas A7
 
 #-- Reloj del sistema (100 MHz)
-set_property -dict { PACKAGE_PIN H4    IOSTANDARD LVCMOS33 } [get_ports {clk}]
+set_property -dict { PACKAGE_PIN H4    IOSTANDARD LVCMOS33 } [get_ports {sys_clk}]
 
 #-- LEDs (active high)
 set_property -dict { PACKAGE_PIN K17   IOSTANDARD LVCMOS33 } [get_ports {leds[0]}]

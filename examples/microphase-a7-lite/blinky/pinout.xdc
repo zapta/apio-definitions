@@ -2,7 +2,7 @@
 #-- Placa MicroPhase A7-Lite
 
 #-- Reloj del sistema (50 MHz)
-set_property -dict { PACKAGE_PIN J19   IOSTANDARD LVCMOS33 } [get_ports {clk}]
+set_property -dict { PACKAGE_PIN J19   IOSTANDARD LVCMOS33 } [get_ports {sys_clk}]
 
 #-- LEDs (activos a nivel bajo) (active low)
 set_property -dict { PACKAGE_PIN M18   IOSTANDARD LVCMOS33 } [get_ports {leds[0]}]

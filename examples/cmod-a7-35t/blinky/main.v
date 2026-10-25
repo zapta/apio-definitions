@@ -2,13 +2,13 @@
 
 //-- Blinking led (12 MHz clock -> ~1 Hz on LED0)
 module main (
-    input clk,
+    input sys_clk,  // 12MHz clock
     output wire [1:0] leds  // Active high.
 );
 
   //-- Contador de 24 bits
   reg [23:0] counter;
-  always @(posedge clk) begin
+  always @(posedge sys_clk) begin
     counter <= counter + 1;
   end
 

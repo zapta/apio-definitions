@@ -2,7 +2,7 @@
 #-- Placa ZXTRES+
 
 #-- Reloj del sistema (50 MHz)
-set_property -dict { PACKAGE_PIN Y18   IOSTANDARD LVCMOS33 } [get_ports {clk}]
+set_property -dict { PACKAGE_PIN Y18   IOSTANDARD LVCMOS33 } [get_ports {sys_clk}]
 
 #-- LEDs
 set_property -dict { PACKAGE_PIN H13   IOSTANDARD LVCMOS33 } [get_ports {leds[0]}]

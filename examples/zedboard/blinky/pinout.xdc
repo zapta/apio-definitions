@@ -2,7 +2,7 @@
 #-- zedboard board
 
 #-- System clock (100 MHz)
-set_property -dict { PACKAGE_PIN Y9    IOSTANDARD LVCMOS33 } [get_ports {clk}]
+set_property -dict { PACKAGE_PIN Y9    IOSTANDARD LVCMOS33 } [get_ports {sys_clk}]
 
 #-- LEDs (active high)
 set_property -dict { PACKAGE_PIN T22   IOSTANDARD LVCMOS33 } [get_ports {leds[0]}]

@@ -2,7 +2,7 @@
 #-- Placa Nexys A7-100T / Nexys 4 DDR
 
 #-- Reloj del sistema (100 MHz)
-set_property -dict { PACKAGE_PIN E3    IOSTANDARD LVCMOS33 } [get_ports {clk}]
+set_property -dict { PACKAGE_PIN E3    IOSTANDARD LVCMOS33 } [get_ports {sys_clk}]
 
 #-- LEDs (active high)
 set_property -dict { PACKAGE_PIN H17   IOSTANDARD LVCMOS33 } [get_ports {leds[0]}]

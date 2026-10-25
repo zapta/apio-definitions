@@ -9,7 +9,7 @@
 [signals_width] 180
 [sst_expanded] 1
 @28
-blinky_tb.clk
+blinky_tb.sys_clk
 blinky_tb.led0
 [color] 3
 blinky_tb.led_sim

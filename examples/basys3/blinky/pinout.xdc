@@ -2,7 +2,7 @@
 #-- Placa Basys3
 
 #-- Reloj del sistema
-set_property -dict { PACKAGE_PIN W5    IOSTANDARD LVCMOS33 } [get_ports {clk}]
+set_property -dict { PACKAGE_PIN W5    IOSTANDARD LVCMOS33 } [get_ports {sys_clk}]
 
 #-- LEDs (active high)
 set_property -dict { PACKAGE_PIN U16   IOSTANDARD LVCMOS33 } [get_ports {leds[0]}]

@@ -2,7 +2,7 @@
 #-- pynq-z1 board
 
 #-- System clock (125 MHz)
-set_property -dict { PACKAGE_PIN H16   IOSTANDARD LVCMOS33 } [get_ports {clk}]
+set_property -dict { PACKAGE_PIN H16   IOSTANDARD LVCMOS33 } [get_ports {sys_clk}]
 
 #-- LEDs (active high)
 set_property -dict { PACKAGE_PIN R14   IOSTANDARD LVCMOS33 } [get_ports {leds[0]}]

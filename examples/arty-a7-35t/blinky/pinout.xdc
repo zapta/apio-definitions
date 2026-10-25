@@ -2,7 +2,7 @@
 #-- Placa Arty A7-35T
 
 #-- Reloj del sistema (100 MHz)
-set_property -dict { PACKAGE_PIN E3    IOSTANDARD LVCMOS33 } [get_ports {clk}]
+set_property -dict { PACKAGE_PIN E3    IOSTANDARD LVCMOS33 } [get_ports {sys_clk}]
 
 #-- LEDs (active high)
 set_property -dict { PACKAGE_PIN H5    IOSTANDARD LVCMOS33 } [get_ports {leds[0]}]
