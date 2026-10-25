@@ -1,35 +1,32 @@
 [*]
-[*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
-[*] Thu Jul  2 19:28:48 2026
+[*] GTKWave save file for main_tb.v, used by 'apio sim'.
 [*]
 [timestart] 0
-[size] 1296 600
+[size] 1000 600
 [pos] -1 -1
-*-10.521719 1900 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-16.538 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] main_tb.
 [sst_width] 253
-[signals_width] 185
+[signals_width] 160
 [sst_expanded] 1
 [sst_vpaned_height] 158
+@28
+[color] 1
+main_tb.assertion_err
 @420
 main_tb.clk_num
 @28
-main_tb.clk
+main_tb.sys_clk
 @200
 -
--Reset Button
+-Button and reset
 @28
-main_tb.rst_n
+main_tb.btn_n
+main_tb.dut.sys_rst
 @200
 -
--
--RGB Led Rotator
-@22
-main_tb.rotator.counter[31:0]
-@23
-[color] 3
-main_tb.led[2:0]
-@200
--
+-RGB LED
+@28
+main_tb.rgb_led_n[2:0]
 [pattern_trace] 1
 [pattern_trace] 0

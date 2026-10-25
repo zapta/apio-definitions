@@ -9,7 +9,8 @@ module main (
   wire clock_div4_90;
 
   // drive USB pull-up resistor to '0' to disable USB
-  assign usb_pu = 0;
+  // Keep the USB pull-up off, since this design doesn't use USB.
+  assign usb_pu = 1'b0;
 
   clock_divider cdiv (
       .clock_in(sys_clk),

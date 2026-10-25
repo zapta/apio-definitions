@@ -1,27 +1,30 @@
-// look in pins.pcf for all the pin names on the TinyFPGA BX board
-module main (
-    input sys_clk,  // 16MHz clock
-    output led,  // User/boot LED next to the power LED, active high.
-    output usb_pu  // USB pull-up resistor, active high.
+// Flashes SOS in Morse code on the LED, over and over.
+
+// N is the counter width. The pattern has 32 steps, and each step
+// lasts 2^(N-5) clocks. With the default N = 26 and a 16MHz clock, a
+// step lasts about 0.13 seconds. The testbench uses a small N to run
+// quickly.
+module main #(
+    parameter integer N = 26
+) (
+    input  sys_clk,  // 16MHz clock
+    output led,      // User/boot LED next to the power LED, active high.
+    output usb_pu    // USB pull-up resistor, active high.
 );
-  // drive USB pull-up resistor to '0' to disable USB
-  assign usb_pu = 0;
 
-  ////////
-  // make a simple blink circuit
-  ////////
+  // Keep the USB pull-up off, since this design doesn't use USB.
+  assign usb_pu = 1'b0;
 
-  // keep track of time and location in blink_pattern
-  reg  [25:0] blink_counter;
+  // SOS in Morse code, one bit per step, read from bit 0 up. 1 is on.
+  localparam [31:0] PATTERN = 32'b0000_0101_0100_0111_0111_0111_0001_0101;
 
-  // pattern that will be flashed over the LED over time
-  wire [31:0] blink_pattern = 32'b101010001110111011100010101;
+  // The step counter. It starts at 0 when the FPGA is configured.
+  reg [N-1:0] counter = 0;
 
-  // increment the blink_counter every clock
-  always @(posedge sys_clk) begin
-    blink_counter <= blink_counter + 1;
-  end
+  // Count up on every clock.
+  always @(posedge sys_clk) counter <= counter + 1;
 
-  // light up the LED according to the pattern
-  assign led = blink_pattern[blink_counter[25:21]];
+  // The counter's top 5 bits select the step in the pattern.
+  assign led = PATTERN[counter[N-1:N-5]];
+
 endmodule
