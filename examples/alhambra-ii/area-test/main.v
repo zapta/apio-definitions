@@ -22,7 +22,7 @@
  * The design demonstrates high FPGA resource utilization while staying within
  * the available limits of the ice40hx8k device.
  *
- * Copyright (c) 2025 Carlos Venegas <carlos@magnitude.es>More actions
+ * Copyright (c) 2025 Carlos Venegas <carlos@magnitude.es>
  * X: @cavearr | FPGAwars: charliva@gmail.com
  *
  * -- License:
@@ -215,6 +215,23 @@ module main (
   reg [15:0] reg_array4[0:63];
   reg [15:0] reg_array5[0:63];
   reg [15:0] reg_array6[0:63];
+
+`ifndef SYNTHESIS
+  // Simulation only: start the register arrays and BRAM addresses at 0, as
+  // they are on the FPGA. Without this they stay X in simulation, since
+  // they feed back into themselves.
+  integer init_i;
+  initial
+    for (init_i = 0; init_i < 64; init_i = init_i + 1) begin
+      reg_array1[init_i] = 0;
+      reg_array2[init_i] = 0;
+      reg_array3[init_i] = 0;
+      reg_array4[init_i] = 0;
+      reg_array5[init_i] = 0;
+      reg_array6[init_i] = 0;
+      if (init_i < 32) bram_continuous_addr[init_i] = 0;
+    end
+`endif
 
   integer j;
   always @(posedge sys_clk) begin

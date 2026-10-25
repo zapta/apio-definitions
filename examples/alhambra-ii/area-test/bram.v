@@ -30,6 +30,17 @@ module bram #(
 
   reg [BRAM_DATA_WIDTH-1:0] mem[(1<<BRAM_ADDR_WIDTH)-1:0];
 
+`ifndef SYNTHESIS
+  // Simulation only: start the memory and its output at 0, as the FPGA's
+  // block RAM does. Without this the X values would spread through the
+  // design's feedback loops.
+  integer init_i;
+  initial begin
+    bram_data_out = 0;
+    for (init_i = 0; init_i < (1 << BRAM_ADDR_WIDTH); init_i = init_i + 1) mem[init_i] = 0;
+  end
+`endif
+
   always @(posedge clk)
     if (cs_n == 1'b0) begin
       begin
