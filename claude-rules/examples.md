@@ -95,8 +95,9 @@ Every Apio project needs an `apio.ini` at the top of its dir, and all the exampl
 Name the design's main clock `sys_clk`:
 - **Without a PLL**, or with a PLL that keeps the same frequency, `sys_clk` is the external clock: name the top module's input `sys_clk` and use that name in the constraint file.
 - **With a PLL that changes the frequency**, `sys_clk` is the PLL's output clock, and the external clock input gets another name.
+- **With the FPGA's internal oscillator** and no clock pin, `sys_clk` is the oscillator's output, a wire in the top module. See "Internal oscillators" below.
 
-Testbenches drive `sys_clk` too. Many Gowin examples already do this (e.g. `sipeed-tang-nano-9k/blinky`). Others still use `CLK`, `clk`, etc.
+Testbenches drive `sys_clk` too, except with an internal oscillator. Many Gowin examples already do this (e.g. `sipeed-tang-nano-9k/blinky`). Others still use `CLK`, `clk`, etc.
 
 ### Reset
 
@@ -133,13 +134,26 @@ always @(posedge sys_clk) if (sys_rst) rst_cnt <= rst_cnt + 1;
 - **Assignments:** in clocked `always @(posedge sys_clk)` blocks, use non-blocking `<=`. In combinational `always @(*)` blocks, use blocking `=`, and assign every output in every branch so no latches are inferred.
 - **Long numbers:** use `_` to group digits from the right: every 3 digits in decimal numbers of 5 or more digits (`12_000_000`, not `12000000`), and every 4 digits in hex and binary numbers longer than 4 digits (`32'hDEAD_BEEF`, `8'b1010_0101`). Short numbers such as `1000`, `8'hFF` and `4'b1010` stay as they are. Today most examples don't follow this.
 - **Inputs:** pass button and switch inputs through a two flip-flop synchronizer clocked by `sys_clk` before using them. Debounce them when the design reacts to presses.
-- **Comments:** start each Verilog file with a one-to-three-line comment saying what the module does. In the top module, give the clock input's frequency in its port comment (`input sys_clk,  // 12MHz clock`).
+- **Comments:** start each Verilog file with a one-to-three-line comment saying what the module does. In the top module, give the clock input's frequency in its port comment (`input sys_clk,  // 12MHz clock`). With an internal oscillator, give it in the comment above the `sys_clk` wire.
 
 ### Vendor primitives that can't be simulated
 
-Some primitives, such as the PLLs `SB_PLL40_CORE` and `PLLE2_BASE`, can't be simulated. Wrap the primitive in `` `ifdef SYNTHESIS`` (Yosys defines `SYNTHESIS` during synthesis), and put a simple simulation model in the `` `else`` branch, so the same module works in testbenches. For a PLL, the model passes the input clock through and ties `locked` high.
+Some primitives can't be simulated: the PLLs `SB_PLL40_CORE` and `PLLE2_BASE`, and iCE40UP5K's internal oscillator `SB_HFOSC` and RGB LED driver `SB_RGBA_DRV`. Yosys's simulation library has only empty shells for them. Wrap the primitive in `` `ifdef SYNTHESIS`` (Yosys defines `SYNTHESIS` during synthesis), and put a simple simulation model in the `` `else`` branch, so the same module works in testbenches. Give each wrapper its own file. The models:
+- **PLL:** passes the input clock through and ties `locked` high.
+- **Internal oscillator:** generates a 10 ns clock (see below).
+- **RGB LED driver:** `assign pins = ~on;`, since its pins are active low.
 
-See `pll.v` in `examples/alhambra-ii/pll` or `examples/arty-a7-35t/pll`. The PLL examples for `colorlight-5a-75b-v8`, `sipeed-tang-nano-9k` and `sipeed-tang-nano-20k` don't have this yet.
+See `pll.v` in `examples/alhambra-ii/pll` or `examples/arty-a7-35t/pll`, and `hf_osc.v` and `rgb_driver.v` in `examples/upduino3/blinky`. The PLL examples for `colorlight-5a-75b-v8`, `sipeed-tang-nano-9k` and `sipeed-tang-nano-20k` don't have this yet.
+
+### Internal oscillators
+
+Use the FPGA's internal oscillator (e.g. `SB_HFOSC`) only when the board has no clock pin that works without extra setup, e.g. when the clock needs a jumper, or comes from another chip whose firmware must output it.
+
+- **Simulation model:** the `` `else`` branch generates the clock itself with a 10 ns period: `reg sim_clk = 0; always #5 sim_clk = ~sim_clk; assign clk = sim_clk;`. This matches the testbench clock in the other examples, so timings and `.gtkw` zoom values stay comparable.
+- **`` `timescale``:** the model's `#5` needs a time unit, so put `` `timescale 1ns / 1ps`` in the oscillator wrapper's file too, not only in the testbench. The other design files don't need it. Apio runs Verilator with `-Wno-TIMESCALEMOD`, and Icarus doesn't warn either, so having it in only some files is fine.
+- **Testbench:** the design makes its own clock, so the testbench reads it instead of driving it: `wire sys_clk = dut.sys_clk;`. `clk_num` and the `.gtkw` file use this `sys_clk` as usual.
+
+`upduino3/blinky` and the other UP5K RGB LED blinky examples (`upduino`, `upduino2`, `upduino21`, `pico-ice`, `vsdsquadron-fm`, `fpga101`) use this pattern. It was checked with `invoke test`.
 
 ## Lint and formatting
 
@@ -170,7 +184,7 @@ Write new testbenches, and testbenches you rewrite, to these rules.
 
 **Clock and timing**
 
-8. Use `` `timescale 1ns / 1ps`` and a 10 ns clock (`always #5 sys_clk = ~sys_clk;`), so timings and `.gtkw` zoom values are comparable across examples.
+8. Use `` `timescale 1ns / 1ps`` and a 10 ns clock (`always #5 sys_clk = ~sys_clk;`), so timings and `.gtkw` zoom values are comparable across examples. With an internal oscillator, the design's simulation model makes the 10 ns clock and the testbench reads it (see "Internal oscillators" above).
 9. Declare a clock counter `clk_num` that increments on each rising edge of `sys_clk`. It's an `integer`, or an `int` in SystemVerilog: `integer clk_num = 0; always @(posedge sys_clk) clk_num <= clk_num + 1;`.
 10. Change inputs and check outputs away from the clock edge, e.g. `@(posedge sys_clk); #1;` before setting inputs or calling `EXPECT_EQ`. This avoids races between the testbench and the design.
 
