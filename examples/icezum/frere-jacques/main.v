@@ -226,10 +226,17 @@ module main (
       default: buzzers[1] = 0;
     endcase
 
-  always @(posedge sys_clk)  //-- Fix-me! Before: clk_dur
-  begin
-    sel  <= sel + 1;
-    sel2 <= sel2 + 1;
+  // clk_dur from the previous clock, to find its rising edges.
+  reg clk_dur_prev = 0;
+
+  // Move both voices to their next note on each rising edge of clk_dur,
+  // once every DUR clocks.
+  always @(posedge sys_clk) begin
+    clk_dur_prev <= clk_dur;
+    if (clk_dur && !clk_dur_prev) begin
+      sel  <= sel + 1;
+      sel2 <= sel2 + 1;
+    end
   end
 
   divider #(DUR) TIMER0 (
