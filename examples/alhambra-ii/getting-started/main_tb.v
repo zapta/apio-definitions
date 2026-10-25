@@ -1,52 +1,69 @@
-// A testbench for automatic testing of the module verilog main.
-// To run the testbench in batch mode, use the Apio 'test' command.
-// To run the testbench with graphical view of the signals, run the 
-// Apio 'sim' (as in simulate) command.
+// Testbench for main.v.
+// Run it in batch mode with 'apio test', or view the signals
+// in GTKWave with 'apio sim'.
+
+// Checks that 'actual_val' equals 'expected_val'. On a mismatch, prints
+// the values and location, sets assertion_err, and stops the simulation.
+// Under 'apio sim' the simulation continues so the signals can be viewed.
+`define EXPECT_EQ(actual_val, expected_val) \
+  if ((actual_val) !== (expected_val)) begin \
+    $display("*** ASSERTION FAILED at %s:%0d: expected 'h%h, actual 'h%h", \
+             `__FILE__, `__LINE__, (expected_val), (actual_val)); \
+    assertion_err = 1; \
+    if (!`APIO_SIM) $fatal; \
+  end
 
 `timescale 1ns / 1ps
 
-module testbench;
+module main_tb;
 
-  // Clock and DUT signals
-  reg CLK = 0;
-  wire LED1, LED2;
+  // Set to 1 when an assertion fails.
+  reg assertion_err = 0;
 
-  // Instantiate DUT with N = 3 for quick testing
+  // Clock.
+  reg sys_clk = 0;
+  always #5 sys_clk = ~sys_clk;
+
+  // Number of sys_clk rising edges so far.
+  integer clk_num = 0;
+  always @(posedge sys_clk) clk_num <= clk_num + 1;
+
+  // Clocks between LED toggles, reduced to run quickly.
+  localparam integer N = 3;
+
+  // The LEDs driven by the design.
+  wire [1:0] leds;
+
+  // The design under test.
   main #(
-      .N(3)
+      .N(N)
   ) dut (
-      .CLK (CLK),
-      .LED1(LED1),
-      .LED2(LED2)
+      .sys_clk(sys_clk),
+      .leds(leds)
   );
 
-  // Generate 12 MHz-like clock (approx. 83 ns period)
-  always #42 CLK = ~CLK;
-
-  // Expected state tracker
-  reg expected_led = 0;
-
+  // Loop index for the checks.
   integer i;
 
+  // The test sequence.
   initial begin
-    $dumpvars(0, testbench);
+    $dumpvars(0, main_tb);
 
-    // Simulate 12 rising edges of CLK
-    for (i = 0; i < 12; i = i + 1) begin
-      @(posedge CLK);
+    // Before the first clock, the counter is 0 and leds[1] is on.
+    #1;
+    `EXPECT_EQ(dut.counter, 32'd0)
+    `EXPECT_EQ(leds, 2'b10)
 
-      // Check LED values before updating expected state
-      if (LED1 !== expected_led || LED2 !== ~expected_led) begin
-        $display("ERROR at cycle %0d: LED1 = %b, expected = %b", i, LED1, expected_led);
-        if (!`APIO_SIM) $fatal(1, "LED state mismatch");
-      end
-
-      // Update expected LED every N=3 cycles
-      if ((i + 1) % 3 == 0) begin
-        expected_led = ~expected_led;
-      end
+    // After i clocks the counter is i mod N, and the LEDs swapped
+    // every N clocks.
+    for (i = 1; i <= 24; i = i + 1) begin
+      @(posedge sys_clk);
+      #1;
+      `EXPECT_EQ(dut.counter, i % N)
+      `EXPECT_EQ(leds, ((i/N) % 2 == 0) ? 2'b10 : 2'b01)
     end
 
+    $display("End of simulation");
     $finish;
   end
 

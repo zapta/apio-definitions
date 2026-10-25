@@ -1,5 +1,9 @@
+# Constraint file of the speed-test example for the Alhambra II board.
+# It assigns the design's signals to FPGA pins, and lists only
+# the pins that this example uses.
 
-set_io LED 45  # output
+# ------------ System clock (12MHz) -------------------------------------------
+set_io sys_clk 49  # input
 
-set_io CLK 49  # input
-
+# ------------ User Led -------------------------------------------------------
+set_io led 45  # output, leds[0] on the board

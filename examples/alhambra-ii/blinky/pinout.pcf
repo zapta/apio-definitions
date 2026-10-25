@@ -1,3 +1,6 @@
+# Constraint file of the blinky example for the Alhambra II board.
+# It assigns the design's signals to FPGA pins, and lists only
+# the pins that this example uses.
 
 # ------------ System clock (12MHz) -------------------------------------------
 set_io sys_clk 49  # input

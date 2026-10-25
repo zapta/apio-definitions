@@ -1,10 +1,15 @@
+// Constraint file of the multi-board example for the Sipeed Tang
+// Nano 9K board. It assigns the design's signals to FPGA pins, and
+// lists only the pins that this example uses.
+
 // Board details at
 // https://wiki.sipeed.com/hardware/en/tang/Tang-Nano-9K/Nano-9K.html
 
 // See examples here https://github.com/sipeed/TangNano-9K-example/tree/main
 
-IO_LOC  "CLK"   52;
-IO_PORT "CLK"   IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+// System clock (27MHz).
+IO_LOC  "sys_clk" 52;
+IO_PORT "sys_clk" IO_TYPE=LVCMOS33 PULL_MODE=NONE;
 
-IO_LOC  "LED"   10; // Active low
-
+// User LED. It is active low, which doesn't matter for blinking.
+IO_LOC  "led" 10;

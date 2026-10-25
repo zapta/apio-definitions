@@ -18,7 +18,7 @@ module pll (
 
 `ifdef SYNTHESIS
 
-  // Real implemenation using a primitive cell for synthesis.
+  // Real implementation using a primitive cell for synthesis.
 
   SB_PLL40_CORE #(
       .FEEDBACK_PATH("SIMPLE"),

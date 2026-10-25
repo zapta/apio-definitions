@@ -41,7 +41,10 @@ Names:
 
 ### `info`
 
-Exactly one line, 10 to 100 characters, with no leading or trailing spaces.
+Every example must have an `info` file in its root dir. It holds exactly one line of text that describes the example, with no leading or trailing spaces.
+
+- **Hard limits:** 10 to 100 characters. `test_examples.py` fails outside them.
+- **Length goal:** 40 characters or less. A longer line isn't an error, but it is highly discouraged. Write a new or reworked `info` in 40 characters, and go over only when a shorter line can't describe the example. Today 4 of the 112 `info` files are longer than 40 characters.
 
 ### `apio.ini`
 
@@ -60,7 +63,7 @@ Every Apio project needs an `apio.ini` at the top of its dir, and all the exampl
 - **Which env runs:** the `--env` flag if given, else `[apio] default-env`, else the first env listed.
 - **Required in each env** (directly or through `[common]`):
   - `board`: must be a known board. In each example, at least one env's `board` must be the board of its parent dir. Examples for several boards are allowed.
-  - `top-module`: name the top module `main`, not an example-specific name like `blinky`. Today 65 of the 112 examples still use other names (`blinky`, `Test`, `top`, `leds`, ...).
+  - `top-module`: name the top module `main`, not an example-specific name like `blinky`. Today 61 of the 112 examples still use other names (`blinky`, `Test`, `top`, ...).
 - **Common optional options:**
   - `constraint-file`: needed only if the example doesn't have exactly one file with the FPGA family's constraint extension.
   - `default-testbench`: the testbench `apio sim` opens when run without arguments. Set it when the example has more than one testbench.
@@ -128,6 +131,7 @@ always @(posedge sys_clk) if (sys_rst) rst_cnt <= rst_cnt + 1;
 - **One module per file**, with the file named after the module (`ticker` in `ticker.v`).
 - **Timing constants are parameters:** make clock dividers, counter widths and delays module parameters. The default is the value for the real board, and testbenches override it with a small value so simulations run quickly. Examples: `DIV` in `alhambra-ii/bcd-counter`, `N` in `alhambra-ii/blinky`.
 - **Assignments:** in clocked `always @(posedge sys_clk)` blocks, use non-blocking `<=`. In combinational `always @(*)` blocks, use blocking `=`, and assign every output in every branch so no latches are inferred.
+- **Long numbers:** use `_` to group digits from the right: every 3 digits in decimal numbers of 5 or more digits (`12_000_000`, not `12000000`), and every 4 digits in hex and binary numbers longer than 4 digits (`32'hDEAD_BEEF`, `8'b1010_0101`). Short numbers such as `1000`, `8'hFF` and `4'b1010` stay as they are. Today most examples don't follow this.
 - **Inputs:** pass button and switch inputs through a two flip-flop synchronizer clocked by `sys_clk` before using them. Debounce them when the design reacts to presses.
 - **Comments:** start each Verilog file with a one-to-three-line comment saying what the module does. In the top module, give the clock input's frequency in its port comment (`input sys_clk,  // 12MHz clock`).
 
@@ -161,7 +165,7 @@ Write new testbenches, and testbenches you rewrite, to these rules.
 **Structure and names**
 
 5. Name the testbench module after its file (`bcd_digit_tb.v` holds `module bcd_digit_tb`). `$dumpvars` and the `.gtkw` signal paths use this name.
-6. Name the instance of the module under test `dut` (e.g. `main dut (...)`), so signal paths are always `<tb>.dut.<signal>`. Today 13 of the 77 testbenches do this.
+6. Name the instance of the module under test `dut` (e.g. `main dut (...)`), so signal paths are always `<tb>.dut.<signal>`. Today 25 of the 81 testbenches do this.
 7. Give each submodule with non-trivial logic its own testbench next to its source file (e.g. `bcd/bcd_digit_tb.v` and `util/ticker_tb.v` in `alhambra-ii/bcd-counter`).
 
 **Clock and timing**
@@ -217,7 +221,7 @@ endmodule
 
 ### Older testbenches
 
-Most existing testbenches predate these rules. 13 of them `` `include`` an `apio_testing.vh` or `apio_testing.svh` macro file and use its `` `EXPECT``, `` `TEST_BEGIN`` and `` `TEST_END`` macros. Don't copy that style into new testbenches.
+Most existing testbenches predate these rules. 11 of them `` `include`` an `apio_testing.vh` or `apio_testing.svh` macro file and use its `` `EXPECT``, `` `TEST_BEGIN`` and `` `TEST_END`` macros. Don't copy that style into new testbenches.
 
 ## GTKWave save files (`<testbench>.gtkw`)
 
@@ -261,7 +265,7 @@ The file should open zoomed out to show the whole simulation. Fitting the zoom b
   ```
 
   - Get `T` from the `$finish called at T` line in the `apio sim` output. It's in VCD units, usually ps.
-  - With `[size] 1000 600`, `[sst_width] 253` and `[signals_width] 160`, `W` ≈ 559. This was calibrated against `getting-started/main_tb.gtkw`, which was saved with Zoom Full.
+  - With `[size] 1000 600`, `[sst_width] 253` and `[signals_width] 160`, `W` ≈ 559. This was calibrated against an earlier `getting-started/main_tb.gtkw`, which was saved with Zoom Full. For other sizes, `W` ≈ `[size]` width − `[sst_width]` − `[signals_width]` − 28.
 - **When to recompute:** whenever the testbench's length changes.
 - **No scripting:** the GTKWave in oss-cad-suite has no Tcl `--script` support, so this can't be automated with a GTKWave script.
 - **macOS:** that GTKWave (4.0.0-prealpha) opens at full screen width and can't be made narrower, whatever `[size]` says. This happens with GTKWave-saved files too, so it can't be fixed in `.gtkw` files.

@@ -1,10 +1,6 @@
-# -----------------------------------------------------------------------------
-#- Alhambra II constraint file (.pcf)
-#- By Juan Gonzalez (Obijuan) and Jesus Arroyo Torrens
-#- May - 2018
-#- GPL license
-#- Repo: https://github.com/FPGAwars/Alhambra-II-FPGA
-# -----------------------------------------------------------------------------
+# Constraint file of the bcd-counter-sv example for the Alhambra II board.
+# It assigns the design's signals to FPGA pins, and lists only
+# the pins that this example uses.
 
 # -------------------------- System clock (12MHz) -----------------------------
 set_io sys_clk 49  # input

@@ -3,9 +3,9 @@
 // and leds[7:4] are the tens digit.
 
 module main #(
-    // Clocks per count. 12000000 gives one count per second with the
+    // Clocks per count. 12_000_000 gives one count per second with the
     // 12MHz clock. The testbench uses a small value to run quickly.
-    parameter integer DIV = 12000000
+    parameter integer DIV = 12_000_000
 ) (
     input        sys_clk,  // 12MHz clock
     output [7:0] leds      // The two BCD digits.

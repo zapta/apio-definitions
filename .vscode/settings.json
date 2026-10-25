@@ -26,6 +26,7 @@
         "nextpnr",
         "openfpgaloader",
         "oversizing",
+        "pinout",
         "popd",
         "pushd",
         "realpath",
