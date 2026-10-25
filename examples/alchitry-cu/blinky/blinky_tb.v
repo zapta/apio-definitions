@@ -8,16 +8,16 @@
 module blinky_tb;
 
   // Input.
-  reg clk = 0;
+  reg sys_clk = 0;
 
   // Output
   wire [7:0] led;
 
   // Module instance
-  blinky #(
+  main #(
       .DELAY(5)
   ) dut (
-      .clk(clk),
+      .sys_clk(sys_clk),
       .led(led)
   );
 
@@ -26,7 +26,7 @@ module blinky_tb;
     $dumpvars(0, blinky_tb);
 
     repeat (50) begin
-      #10 clk = ~clk;
+      #10 sys_clk = ~sys_clk;
     end
 
     $display("End of simulation");

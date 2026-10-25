@@ -13,7 +13,7 @@
 [sst_vpaned_height] 222
 @29
 [color] 2
-blinky_tb.clk
+blinky_tb.sys_clk
 @200
 -
 @800028

@@ -1,11 +1,11 @@
 //blink all 8 leds on Alchitry-Cu Board
 
-module blinky #(
+module main #(
     // Default blink 1Hz. Can override in a testbench.
     parameter integer DELAY = 100000000 / 2
 ) (
     //inputs
-    input clk,  //100MHz
+    input sys_clk,  // 100MHz clock
 
     //outputs
     output reg [7:0] led = 8'b11111111  // Active high. Starts with all on.
@@ -15,7 +15,7 @@ module blinky #(
   reg [26:0] count = 0;
 
   // Blink the leds
-  always @(posedge clk) begin
+  always @(posedge sys_clk) begin
     if (count >= DELAY[26:0]) begin
       if (led == 8'b0) begin  //if off
         led <= 8'b11111111;  //turn all leds on

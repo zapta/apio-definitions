@@ -9,8 +9,8 @@
 # --  Guide:
 
 
-# clk
-set_io  clk     P7  #81_gbin5
+# sys_clk
+set_io  sys_clk     P7  #81_gbin5
 
 # leds (active high)
 set_io  led[0]  J11 #D2
