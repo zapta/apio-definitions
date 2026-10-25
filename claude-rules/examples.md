@@ -14,7 +14,7 @@ Each example is a standalone Apio project. Users fetch it with `apio examples fe
 
 ## Which rules apply
 
-The rules in this file are a mix of what `test_examples.py` enforces and repo conventions. As of 2026-10-25 all the examples follow these rules, except testbench rules 15 to 17 (testbench lint), which so far only the `alhambra-ii` examples follow. Apply the rules to new examples and to examples you change.
+The rules in this file are a mix of what `test_examples.py` enforces and repo conventions. As of 2026-10-25 all the examples follow these rules. Apply the rules to new examples and to examples you change.
 
 ## The `blinky` example
 
