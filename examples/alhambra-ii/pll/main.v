@@ -1,54 +1,51 @@
-//------------------------------------------------------------------
-//-- Using PLL for 48Mhz clock.
-//------------------------------------------------------------------
+// Blinks an LED using a 48MHz clock that the PLL generates from
+// the board's 12MHz clock.
 
 module main #(
+    // Clocks between LED toggles. 8_000_000 toggles the LED 6 times
+    // per second with the 48MHz clock. The testbench uses a small
+    // value to run quickly.
     parameter integer DIV = 8_000_000
 ) (
     input      ext_clk,  // 12MHz clock
-    output reg LED       // LED to blink
+    output reg led       // The blinking LED.
 );
 
-  // PLL 12Mhz -> 48Mhz
-  //
-  // Generated with:
-  //   apio raw -- icepll -i 12 -o 48 -q -m -f pll.v
-  //   apio format pll.v
-  //
-  // (See pll.v for additional args that were added manually)
-
-  // 48 Mhz clock from the pll.
+  // The 48MHz main clock, and a flag that is high once the PLL
+  // output is stable.
   wire sys_clk;
+  wire pll_locked;
 
-  // Generates the main clock .
+  // PLL 12MHz -> 48MHz. pll.v was generated with
+  //   apio raw -- icepll -i 12 -o 48 -q -m -f pll.v
+  // and then edited by hand (see pll.v).
   pll pll (
-      .clock_in(ext_clk),  // In 12 Mhz
-      .clock_out(sys_clk),  // Out 48 Mhz
-      .locked()
+      .clock_in(ext_clk),
+      .clock_out(sys_clk),
+      .locked(pll_locked)
   );
 
-  reg initialized = 1'b0;
+  // Power-on reset: sys_rst is high until the PLL is locked and
+  // for 3 more clocks.
+  reg [1:0] rst_cnt = 0;
+  wire sys_rst = ~&rst_cnt;
+  always @(posedge sys_clk)
+    if (!pll_locked) rst_cnt <= 2'd0;
+    else if (sys_rst) rst_cnt <= rst_cnt + 1;
 
+  // Counts clocks from 0 to DIV-1.
   reg [31:0] counter;
 
-  always @(posedge sys_clk) begin
-    if (!initialized) begin
-      // One time initialization.
-      initialized <= 1'b1;
-      LED <= 1'b1;
-      counter <= 0;
-    end else if (counter >= (DIV - 1)) begin
-      // Delay reached, flip LED and and reset counter.
-      LED <= !LED;
-      counter <= 0;
+  // Toggle the LED every DIV clocks. The LED is on after reset.
+  always @(posedge sys_clk)
+    if (sys_rst) begin
+      counter <= 32'd0;
+      led <= 1'b1;
+    end else if (counter == DIV - 1) begin
+      counter <= 32'd0;
+      led <= ~led;
     end else begin
-      // Incrementing the delay counter.
       counter <= counter + 1;
     end
-  end
-
-
 
 endmodule
-
-

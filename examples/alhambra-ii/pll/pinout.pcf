@@ -1,6 +1,5 @@
+# ------------ External clock (12MHz) -----------------------------------------
+set_io ext_clk 49  # input
 
-set_io ext_clk 49   # 12Mhz clock input
-
-set_io LED 45       # LED output
-
-
+# ------------ User Led -------------------------------------------------------
+set_io led 45  # output, leds[0] on the board
