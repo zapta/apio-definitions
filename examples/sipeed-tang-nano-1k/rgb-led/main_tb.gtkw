@@ -6,29 +6,29 @@
 [size] 1296 600
 [pos] -1 -1
 *-10.521719 1900 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
-[treeopen] blinky_tb.
+[treeopen] main_tb.
 [sst_width] 253
 [signals_width] 185
 [sst_expanded] 1
 [sst_vpaned_height] 158
 @420
-blinky_tb.clk_num
+main_tb.clk_num
 @28
-blinky_tb.clk
+main_tb.clk
 @200
 -
 -Reset Button
 @28
-blinky_tb.rst_n
+main_tb.rst_n
 @200
 -
 -
 -RGB Led Rotator
 @22
-blinky_tb.rotator.counter[31:0]
+main_tb.rotator.counter[31:0]
 @23
 [color] 3
-blinky_tb.led[2:0]
+main_tb.led[2:0]
 @200
 -
 [pattern_trace] 1

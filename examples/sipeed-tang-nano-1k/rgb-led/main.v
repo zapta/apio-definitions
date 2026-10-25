@@ -2,7 +2,7 @@
 // official Sipeed example at
 // https://github.com/sipeed/TangNano-1K-examples/tree/main/example_led
 
-module blinky #(
+module main #(
     // Num of clock cycles per led color change. With the board's 27 MHz
     // system clock, the default value changes the color every 0.5 sec.
     parameter integer DIV = (27000000 / 2)

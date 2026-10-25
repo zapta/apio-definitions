@@ -6,7 +6,7 @@
 [size] 1280 600
 [pos] -1 -1
 *-12.255525 1900 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
-[treeopen] blinky_tb.
+[treeopen] main_tb.
 [sst_width] 253
 [signals_width] 185
 [sst_expanded] 1
@@ -14,28 +14,33 @@
 @200
 -Clock
 @420
-blinky_tb.clk_num
+main_tb.clk_num
 @28
-blinky_tb.sys_clk
+main_tb.sys_clk
 @200
 -
 -Reset Generator
 @22
-blinky_tb.ticker.reset_counter[3:0]
+main_tb.ticker.reset_counter[3:0]
 @28
-blinky_tb.ticker.sys_reset
+main_tb.ticker.sys_reset
 @200
 -
 -
 -LED Blinker
 @22
-blinky_tb.ticker.blink_counter[31:0]
+main_tb.ticker.blink_counter[31:0]
 @200
 -
 @800022
-blinky_tb.led
+main_tb.leds[5:0]
 @28
-(0)blinky_tb.led
+(0)main_tb.leds[5:0]
+(1)main_tb.leds[5:0]
+(2)main_tb.leds[5:0]
+(3)main_tb.leds[5:0]
+(4)main_tb.leds[5:0]
+(5)main_tb.leds[5:0]
 @1001200
 -group_end
 [pattern_trace] 1

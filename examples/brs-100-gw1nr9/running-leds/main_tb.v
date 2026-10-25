@@ -1,8 +1,8 @@
-// A testbench for testing the blinky module.
+// A testbench for testing the main module.
 
 `timescale 10 ns / 1 ns
 
-module blinky_tb ();
+module main_tb ();
 
   // Clock.
   reg     sys_clk = 0;
@@ -17,7 +17,7 @@ module blinky_tb ();
   wire [5:0] leds;
 
   // Tested module. Transition the leds every 5 clocks.
-  blinky #(
+  main #(
       .DIV(5)
   ) ticker (
       .sys_clk(sys_clk),
@@ -26,7 +26,7 @@ module blinky_tb ();
 
   // Test main
   initial begin
-    $dumpvars(0, blinky_tb);
+    $dumpvars(0, main_tb);
 
     // Wait 100 clocks.
     repeat (100) @(posedge sys_clk);

@@ -1,10 +1,10 @@
-// A testbench for testing the blinky module.
+// A testbench for testing the main module.
 
 `include "apio_testing.vh"
 
 `timescale 10 ns / 1 ns
 
-module blinky_tb ();
+module main_tb ();
 
   // This defines a managed signal called 'clk'.
   `DEF_CLK
@@ -15,8 +15,8 @@ module blinky_tb ();
   // Outputs.
   wire [2:0] led;
 
-  // Instantiate a blinky that changes the led color every 5 clocks.
-  blinky #(
+  // Instantiate the design so that it changes the led color every 5 clocks.
+  main #(
       .DIV(5)
   ) rotator (
       .sys_clk(clk),
@@ -25,7 +25,7 @@ module blinky_tb ();
   );
 
   initial begin
-    `TEST_BEGIN(blinky_tb)
+    `TEST_BEGIN(main_tb)
 
     // Simulate a press of the reset button.
     `CLKS(3)
