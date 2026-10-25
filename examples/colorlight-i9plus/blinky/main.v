@@ -1,24 +1,24 @@
-`default_nettype none
+//------------------------------------------------------------------
+//-- Blinking LED
+//------------------------------------------------------------------
 
-//-- Blinking led (25 MHz clock -> ~0.75 Hz)
-module main (
-    input sys_clk,  // 25MHz clock
-    output wire led  // Active high.
+// N is the counter width. led toggles every 2^(N-1) clocks.
+// With the default N = 25 and a 25MHz clock, it toggles about
+// every 0.7 seconds. The testbench uses a small N to run quickly.
+module main #(
+    parameter integer N = 25
+) (
+    input  sys_clk,  // 25MHz clock
+    output led       // The blinking LED, active high.
 );
 
-  //-- Contador de 25 bits
-  reg [24:0] counter;
-  always @(posedge sys_clk) begin
-    counter <= counter + 1;
-  end
+  // The blink counter. It starts at 0 when the FPGA is configured.
+  reg [N-1:0] counter = 0;
 
-  //-- Mostrar en el LED el bit de mayor peso del contador
-  assign led = counter[24];
+  // Count up on every clock.
+  always @(posedge sys_clk) counter <= counter + 1;
 
-  //-- This is for simulation
-  //-- the counter should start in 0
-  initial begin
-    counter = 0;
-  end
+  // The LED follows the counter's top bit.
+  assign led = counter[N-1];
 
 endmodule

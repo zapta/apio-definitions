@@ -1,10 +1,11 @@
+# Constraint file of the blinky example for the Basys3 board.
+# It assigns the design's signals to FPGA pins, and lists only
+# the pins that this example uses.
 
-#-- Placa Basys3
-
-#-- Reloj del sistema
+# Clock (100MHz).
 set_property -dict { PACKAGE_PIN W5    IOSTANDARD LVCMOS33 } [get_ports {sys_clk}]
 
-#-- LEDs (active high)
+# LEDs, active high.
 set_property -dict { PACKAGE_PIN U16   IOSTANDARD LVCMOS33 } [get_ports {leds[0]}]
 set_property -dict { PACKAGE_PIN E19   IOSTANDARD LVCMOS33 } [get_ports {leds[1]}]
 set_property -dict { PACKAGE_PIN U19   IOSTANDARD LVCMOS33 } [get_ports {leds[2]}]
@@ -21,4 +22,3 @@ set_property -dict { PACKAGE_PIN P3    IOSTANDARD LVCMOS33 } [get_ports {leds[12
 set_property -dict { PACKAGE_PIN N3    IOSTANDARD LVCMOS33 } [get_ports {leds[13]}]
 set_property -dict { PACKAGE_PIN P1    IOSTANDARD LVCMOS33 } [get_ports {leds[14]}]
 set_property -dict { PACKAGE_PIN L1    IOSTANDARD LVCMOS33 } [get_ports {leds[15]}]
-

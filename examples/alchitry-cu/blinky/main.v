@@ -1,31 +1,24 @@
-//blink all 8 leds on Alchitry-Cu Board
+//------------------------------------------------------------------
+//-- Blinking LED
+//------------------------------------------------------------------
 
+// N is the counter width. leds[7] toggles every 2^(N-1) clocks.
+// With the default N = 27 and a 100MHz clock, it toggles about
+// every 0.7 seconds. The testbench uses a small N to run quickly.
 module main #(
-    // Default blink 1Hz. Can override in a testbench.
-    parameter integer DELAY = 100000000 / 2
+    parameter integer N = 27
 ) (
-    //inputs
-    input sys_clk,  // 100MHz clock
-
-    //outputs
-    output reg [7:0] led = 8'b11111111  // Active high. Starts with all on.
+    input        sys_clk,  // 100MHz clock
+    output [7:0] leds      // leds[7] blinks, the rest are off. Active high.
 );
 
-  // Blink counter.
-  reg [26:0] count = 0;
+  // The blink counter. It starts at 0 when the FPGA is configured.
+  reg [N-1:0] counter = 0;
 
-  // Blink the leds
-  always @(posedge sys_clk) begin
-    if (count >= DELAY[26:0]) begin
-      if (led == 8'b0) begin  //if off
-        led <= 8'b11111111;  //turn all leds on
-      end else begin
-        led <= 8'b0;  // turn all leds off
-      end
-      count = 27'b0;  //reset count
-    end else begin
-      count = count + 1'b1;
-    end
-  end
+  // Count up on every clock.
+  always @(posedge sys_clk) counter <= counter + 1;
+
+  // leds[7] follows the counter's top bit. The other LEDs are off.
+  assign leds = {counter[N-1], 7'b0};
 
 endmodule

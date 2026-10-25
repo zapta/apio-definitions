@@ -1,26 +1,24 @@
-`default_nettype none
+//------------------------------------------------------------------
+//-- Blinking LED
+//------------------------------------------------------------------
 
-//-- Blinking led (12 MHz clock -> ~1 Hz on LED0)
-module main (
-    input sys_clk,  // 12MHz clock
-    output wire [3:0] leds  // Active high.
+// N is the counter width. leds[3] toggles every 2^(N-1) clocks.
+// With the default N = 24 and a 12MHz clock, it toggles about
+// every 0.7 seconds. The testbench uses a small N to run quickly.
+module main #(
+    parameter integer N = 24
+) (
+    input        sys_clk,  // 12MHz clock
+    output [3:0] leds      // leds[3] blinks, the rest are off. Active high.
 );
 
-  //-- 24-bit counter
-  reg [23:0] counter;
-  always @(posedge sys_clk) begin
-    counter <= counter + 1;
-  end
+  // The blink counter. It starts at 0 when the FPGA is configured.
+  reg [N-1:0] counter = 0;
 
-  //-- Show the counter MSB on LED0
-  assign leds[0]   = counter[23];
+  // Count up on every clock.
+  always @(posedge sys_clk) counter <= counter + 1;
 
-  assign leds[3:1] = 0;
-
-  //-- This is for simulation
-  //-- the counter should start in 0
-  initial begin
-    counter = 0;
-  end
+  // leds[3] follows the counter's top bit. The other LEDs are off.
+  assign leds = {counter[N-1], 3'b0};
 
 endmodule

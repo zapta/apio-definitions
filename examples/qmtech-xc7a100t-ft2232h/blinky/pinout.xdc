@@ -1,11 +1,11 @@
+# Constraint file of the blinky example for the QMTECH XC7A100T core board board.
+# It assigns the design's signals to FPGA pins, and lists only
+# the pins that this example uses.
+# Pin source: ChinaQMTECH XC7A75T-100T-200T Core Board V01 (Test01_led_key)
 
-#-- Placa QMTECH XC7A100T core board
-
-#-- Reloj del sistema (50 MHz)
+# Clock (50MHz).
 set_property -dict { PACKAGE_PIN U22   IOSTANDARD LVCMOS33 } [get_ports {sys_clk}]
 
-#-- LEDs (activos a nivel bajo) (active low)
-set_property -dict { PACKAGE_PIN T23   IOSTANDARD LVCMOS33 } [get_ports {leds[0]}]
-set_property -dict { PACKAGE_PIN R23   IOSTANDARD LVCMOS33 } [get_ports {leds[1]}]
-
-#-- Fuente de los pines: ChinaQMTECH XC7A75T-100T-200T Core Board V01 (Test01_led_key)
+# LEDs, active low.
+set_property -dict { PACKAGE_PIN T23   IOSTANDARD LVCMOS33 } [get_ports {leds_n[0]}]
+set_property -dict { PACKAGE_PIN R23   IOSTANDARD LVCMOS33 } [get_ports {leds_n[1]}]
