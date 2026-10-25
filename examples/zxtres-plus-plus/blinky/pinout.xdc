@@ -1,12 +1,10 @@
+# Constraint file of the blinky example for the ZXTRES++ board.
+# It assigns the design's signals to FPGA pins, and lists only
+# the pins that this example uses.
+# Pin source: zxtres/test_carta_ajuste pines_zxtres.xdc
 
-#-- Placa ZXTRES++
-
-#-- Reloj del sistema (50 MHz)
+# Clock (50MHz).
 set_property -dict { PACKAGE_PIN Y18   IOSTANDARD LVCMOS33 } [get_ports {sys_clk}]
 
-#-- LEDs
-set_property -dict { PACKAGE_PIN H13   IOSTANDARD LVCMOS33 } [get_ports {leds[0]}]
-set_property -dict { PACKAGE_PIN G15   IOSTANDARD LVCMOS33 } [get_ports {leds[1]}]
-
-#-- Fuente de los pines: zxtres/test_carta_ajuste pines_zxtres.xdc
-#-- (pinout comun a ZXTRES / ZXTRES+ / ZXTRES++)
+# LED. Its polarity is unknown.
+set_property -dict { PACKAGE_PIN H13   IOSTANDARD LVCMOS33 } [get_ports {led}]

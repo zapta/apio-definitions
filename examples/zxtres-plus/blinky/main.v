@@ -1,26 +1,24 @@
-`default_nettype none
+//------------------------------------------------------------------
+//-- Blinking LED
+//------------------------------------------------------------------
 
-//-- Blinking led (50 MHz clock -> ~0.75 Hz on LED0)
-module main (
-    input sys_clk,  // 50MHz clock
-    output wire [1:0] leds
+// N is the counter width. led toggles every 2^(N-1) clocks.
+// With the default N = 26 and a 50MHz clock, it toggles about
+// every 0.7 seconds. The testbench uses a small N to run quickly.
+module main #(
+    parameter integer N = 26
+) (
+    input  sys_clk,  // 50MHz clock
+    output led       // The blinking LED. Its polarity is unknown.
 );
 
-  //-- Contador de 26 bits
-  reg [25:0] counter;
-  always @(posedge sys_clk) begin
-    counter <= counter + 1;
-  end
+  // The blink counter. It starts at 0 when the FPGA is configured.
+  reg [N-1:0] counter = 0;
 
-  //-- Mostrar en el LED0 el bit de mayor peso del contador
-  assign leds[0] = counter[25];
+  // Count up on every clock.
+  always @(posedge sys_clk) counter <= counter + 1;
 
-  assign leds[1] = 0;
-
-  //-- This is for simulation
-  //-- the counter should start in 0
-  initial begin
-    counter = 0;
-  end
+  // The LED follows the counter's top bit.
+  assign led = counter[N-1];
 
 endmodule
