@@ -3,7 +3,7 @@
 # the pins that this example uses. The design uses the internal
 # oscillator, so there is no clock pin.
 
-# RGB LED. These are the iCE40UP5K's dedicated RGB LED pins.
+# RGB LED, active low. These are the iCE40UP5K's dedicated RGB LED pins.
 # They drive the RGB LED of the UPduino v2.0 that plugs into the badge.
 set_io rgb_led[0] 41  # Red.
 set_io rgb_led[1] 39  # Green.

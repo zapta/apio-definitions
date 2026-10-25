@@ -126,6 +126,7 @@ always @(posedge sys_clk) if (sys_rst) rst_cnt <= rst_cnt + 1;
 - For groups of LEDs, buttons, switches, etc., use one vector port (`output [7:0] leds`) rather than separate signals (`LED0` ... `LED7`). The constraint file then names each bit, e.g. `leds[0]` (see the table above).
 - Name modules, instances, signals and files in lowercase `snake_case`, and parameters in `UPPER_CASE` (`DIV`).
 - Name active-low signals with an `_n` suffix (`btn_n`). Invert active-low board signals once, in the top module, so the rest of the design is active-high.
+- **Polarity comments:** for each board input such as a push button or switch, and each board output such as an LED, say in its comments whether it's active high or active low. Do this both in the top module's port comment (`output led,  // The blinking LED, active low.`) and in the constraint file. Signals without an on/off meaning, such as an external clock, don't need it.
 
 ### Code structure
 
