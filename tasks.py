@@ -6,7 +6,7 @@
 #   invoke --list         # Show available tasks
 #   invoke -l             # Show available tasks
 #   invoke lint           # Format and lint the python code.
-#   invoke test           # Test all the examples.
+#   invoke test           # Test the examples of the current dir, or all.
 #   invoke format         # Format the examples' Verilog files.
 #   invoke copy-common    # Copy the common files into every example.
 #   invoke clean          # Clean the examples and other temporary files.
@@ -174,34 +174,60 @@ def lint_task(ctx: Context):
         cout("Lint passed.", style="green bold")
 
 
+def examples_selection(examples_dir: Path) -> str | None:
+    """Select the examples to test from the current dir. Returns
+    '<board>' in a board dir, '<board>/<example>' in an example dir or
+    below it, and None (test all) anywhere else."""
+    cwd = Path.cwd().resolve()
+    examples_dir = examples_dir.resolve()
+    if not cwd.is_relative_to(examples_dir):
+        return None
+    parts = cwd.relative_to(examples_dir).parts
+    if not parts:
+        return None
+    return "/".join(parts[:2])
+
+
 @task(
     name="test",
     aliases=["t"],
     help={
         "examples_root": "Test the examples in this dir instead of the "
         "repo's examples dir.",
-        "example": "Test only this board (e.g. alhambra-ii) or this "
-        "example (e.g. alhambra-ii/blinky).",
     },
 )
-def test_task(
-    ctx: Context,
-    examples_root: str | None = None,
-    example: str | None = None,
-):
-    """Test all the examples."""
+def test_task(ctx: Context, examples_root: str | None = None):
+    """Test the examples. In a board dir it tests that board's examples, in
+    an example dir it tests that example, and anywhere else all of them."""
     announce_task("test")
+    # -- Make apio read boards.jsonc, fpgas.jsonc and programmers.jsonc
+    # -- from this repo instead of from the installed definitions package.
+    # -- The apio commands that the test script runs inherit this env var.
+    # -- If the var is already defined, it must match what we would set.
+    env_var = "APIO_DEFINITIONS"
+    current = os.environ.get(env_var)
+    definitions_dir = get_repo_root() / "definitions"
+    assert current is None or Path(current).resolve() == definitions_dir, (
+        f"{env_var} is already defined as [{current}], "
+        f"expected [{definitions_dir}]."
+    )
+    os.environ[env_var] = str(definitions_dir)
+    cout(f"{env_var}={definitions_dir}", style="cyan")
     cmd = [PYTHON, f"scripts{sep}test_examples.py"]
+    examples_dir = get_repo_root() / "examples"
     if examples_root:
         # -- Make it absolute before we change the current dir.
-        cmd += ["--examples-root", str(Path(examples_root).absolute())]
-    if example:
-        cmd += ["--example", example]
+        examples_dir = Path(examples_root).resolve()
+        cmd += ["--examples-root", str(examples_dir)]
+    # -- Pick the examples from the current dir, before we change it.
+    selection = examples_selection(examples_dir)
+    if selection:
+        cmd += ["--example", selection]
     # -- The scripts use paths relative to the repo root.
     os.chdir(get_repo_root())
     run(ctx, cmd)
     if not ctx.config.run.dry:
-        cout("All examples passed.", style="green bold")
+        cout(f"Passed: {selection or 'all examples'}.", style="green bold")
 
 
 @task(name="format", aliases=["f"])

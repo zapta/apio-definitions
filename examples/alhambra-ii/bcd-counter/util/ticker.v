@@ -1,37 +1,29 @@
-// A module that provide the counter tick signal.
-// The tick output is high for one clock every one second.
+// Generates a tick that is high for one clock every DIV clocks.
 
 module ticker #(
-    // The number of clocks per tick. Controls the tick speed.
-    // Verilog require that we will specify here a value even though we
-    // override it in main.v.
+    // Clocks per tick. main.v overrides this value.
     parameter integer DIV = 12000000
 ) (
-    input  wire sys_clk,    // 12MHz clock
-    input  wire sys_reset,  // Syncrhonous global reset
-    output reg  tick        // High for one clock every DIF clocks.
+    input  wire sys_clk,  // System clock.
+    input  wire sys_rst,  // Synchronous reset, active high.
+    output reg  tick      // High for one clock every DIV clocks.
 );
 
-  // Clock divider counter.
-  reg [31:0] counter = 0;
+  // Clock counter, 0 to DIV-1.
+  reg [31:0] counter;
 
-  // Sequential logic.
+  // Count clocks and pulse tick when the counter wraps around.
   always @(posedge sys_clk) begin
-    if (sys_reset) begin
-      // Case 1: Reset.
+    if (sys_rst) begin
       counter <= 0;
       tick <= 0;
-    end else if (counter >= (DIV - 1)) begin
-      // Case 2: Cycle end.
+    end else if (counter == DIV - 1) begin
       counter <= 0;
       tick <= 1;
     end else begin
-      // Case 3: Normal increment.
       counter <= counter + 1;
       tick <= 0;
     end
   end
 
 endmodule
-
-

@@ -1,25 +1,23 @@
 [*]
-[*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
-[*] Sat Dec 28 03:24:05 2024
+[*] GTKWave save file for bcd_digit_tb.sv, used by 'apio sim'.
 [*]
-[dumpfile] "/Volumes/projects/apio-examples/repo/examples/alhambra-ii/bcd-counter/_build/bcd_digit_tb.vcd"
-[dumpfile_mtime] "Sat Dec 28 03:22:45 2024"
-[dumpfile_size] 4396
-[savefile] "/Volumes/projects/apio-examples/repo/examples/alhambra-ii/bcd-counter/bcd_digit_tb.gtkw"
 [timestart] 0
-[size] 1384 772
+[size] 1000 600
 [pos] -1 -1
-*-21.796194 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-17.494163 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] bcd_digit_tb.
 [sst_width] 253
-[signals_width] 111
+[signals_width] 160
 [sst_expanded] 1
 [sst_vpaned_height] 218
-@24
+@28
+[color] 1
+bcd_digit_tb.assertion_err
+@420
 bcd_digit_tb.clk_num
 @28
-bcd_digit_tb.clk
-bcd_digit_tb.reset
+bcd_digit_tb.sys_clk
+bcd_digit_tb.sys_rst
 bcd_digit_tb.tick_in
 @200
 -
