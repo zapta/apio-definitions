@@ -1,13 +1,14 @@
-
+// Shows 32 bits of data on the 4x8 LED matrix, one column at a time, with
+// a PWM intensity control.
 module led_matrix #(
     parameter integer N = 50_000
 ) (
-    input             sys_clk,             // 12MHz clock
-    input      [31:0] data,                // 4x32 LEDs data, '1' is on
-    input      [ 3:0] intensity,           // LEDs intensity, 0-15.
-    output reg        frame_tick = 0,      // High for one clock per frame
-    output reg [ 7:0] rows = 8'b11111111,  // LED rows, active low
-    output reg [ 3:0] cols = 4'b1111       // LED columns, active low
+    input             sys_clk,               // 12MHz clock
+    input      [31:0] data,                  // 4x32 LEDs data, '1' is on
+    input      [ 3:0] intensity,             // LEDs intensity, 0-15.
+    output reg        frame_tick = 0,        // High for one clock per frame
+    output reg [ 7:0] rows_n = 8'b11111111,  // LED rows_n, active low
+    output reg [ 3:0] cols_n = 4'b1111       // LED columns, active low
 );
 
   // Timer for column time.
@@ -48,11 +49,11 @@ module led_matrix #(
   always @(posedge sys_clk) begin
     pwm_counter <= pwm_counter + 1;
     if (pwm_counter[11:8] <= intensity) begin
-      cols <= ~(4'b0001 << col);  // Active low
-      rows <= ~(shifted_data[31:24]);  // Active low
+      cols_n <= ~(4'b0001 << col);  // Active low
+      rows_n <= ~(shifted_data[31:24]);  // Active low
     end else begin
-      cols <= 4'b1111;
-      rows <= 8'b11111111;
+      cols_n <= 4'b1111;
+      rows_n <= 8'b11111111;
     end
   end
 

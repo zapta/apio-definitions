@@ -1,3 +1,5 @@
+// A 32 bit pseudo-random number generator, made with a linear feedback
+// shift register.
 module rand_gen (
     input             sys_clk,
     output reg [31:0] rnd = ~0
