@@ -14,7 +14,7 @@ Each example is a standalone Apio project. Users fetch it with `apio examples fe
 
 ## Which rules apply
 
-The rules in this file are a mix of what `test_examples.py` enforces and repo conventions. Many existing examples predate the conventions. Apply the rules to new examples and to examples you rework. Don't fix other examples unless asked. Where a rule says how many examples follow it today, rename or rewrite the others only when asked or when already reworking that example.
+The rules in this file are a mix of what `test_examples.py` enforces and repo conventions. As of 2026-10-25 all the examples follow these rules, except where a rule says otherwise (see "Long numbers"). Apply the rules to new examples and to examples you change.
 
 ## The `blinky` example
 
@@ -63,7 +63,7 @@ Names:
 Every example must have an `info` file in its root dir. It holds exactly one line of text that describes the example, with no leading or trailing spaces.
 
 - **Hard limits:** 10 to 100 characters. `test_examples.py` fails outside them.
-- **Length goal:** 40 characters or less. A longer line isn't an error, but it is highly discouraged. Write a new or reworked `info` in 40 characters, and go over only when a shorter line can't describe the example. Today 4 of the 112 `info` files are longer than 40 characters.
+- **Length goal:** 40 characters or less. A longer line isn't an error, but it is highly discouraged. Write a new or reworked `info` in 40 characters, and go over only when a shorter line can't describe the example.
 
 ### `apio.ini`
 
@@ -82,7 +82,7 @@ Every Apio project needs an `apio.ini` at the top of its dir, and all the exampl
 - **Which env runs:** the `--env` flag if given, else `[apio] default-env`, else the first env listed.
 - **Required in each env** (directly or through `[common]`):
   - `board`: must be a known board. In each example, at least one env's `board` must be the board of its parent dir. Examples for several boards are allowed.
-  - `top-module`: name the top module `main`, not an example-specific name like `blinky`. Today 61 of the 112 examples still use other names (`blinky`, `Test`, `top`, ...).
+  - `top-module`: name the top module `main`, not an example-specific name like `blinky`.
 - **Common optional options:**
   - `constraint-file`: needed only if the example doesn't have exactly one file with the FPGA family's constraint extension.
   - `default-testbench`: the testbench `apio sim` opens when run without arguments. Set it when the example has more than one testbench.
@@ -103,9 +103,8 @@ Every Apio project needs an `apio.ini` at the top of its dir, and all the exampl
   | gowin | `.cst` | `IO_LOC "leds[0]" T6;` |
   | xilinx | `.xdc` | `[get_ports {leds[0]}]` |
 
-  Today 38 of the 114 constraint files are named `pinout.*`. The others use board or example names (`leds.pcf`, `blinky.cst`, `<board>.xdc`, ...).
 - **Several constraint files:** an example that needs more than one selects one per env with `constraint-file = ...` in `apio.ini`. See `alhambra-ii/constraint-files` and `alhambra-ii/multi-board`.
-- **Contents:** define only the pins the example uses. Other board pins may also be listed as a reference, as long as they're commented out and their definitions are correct. Many existing constraint files still define every board pin uncommented (e.g. with `set_io -nowarn`).
+- **Contents:** define only the pins the example uses. Other board pins may also be listed as a reference, as long as they're commented out and their definitions are correct.
 
 ## Verilog design rules
 
@@ -116,7 +115,7 @@ Name the design's main clock `sys_clk`:
 - **With a PLL that changes the frequency**, `sys_clk` is the PLL's output clock, and the external clock input gets another name.
 - **With the FPGA's internal oscillator** and no clock pin, `sys_clk` is the oscillator's output, a wire in the top module. See "Internal oscillators" below.
 
-Testbenches drive `sys_clk` too, except with an internal oscillator. Many Gowin examples already do this (e.g. `sipeed-tang-nano-9k/blinky`). Others still use `CLK`, `clk`, etc.
+Testbenches drive `sys_clk` too, except with an internal oscillator.
 
 ### Reset
 
@@ -183,7 +182,7 @@ Name the top module's ports, the signals connected to board pins, after their fu
 - **One module per file**, with the file named after the module (`ticker` in `ticker.v`).
 - **Timing constants are parameters:** make clock dividers, counter widths and delays module parameters. The default is the value for the real board, and testbenches override it with a small value so simulations run quickly. Examples: `DIV` in `alhambra-ii/bcd-counter`, `N` in `alhambra-ii/blinky`.
 - **Assignments:** in clocked `always @(posedge sys_clk)` blocks, use non-blocking `<=`. In combinational `always @(*)` blocks, use blocking `=`, and assign every output in every branch so no latches are inferred.
-- **Long numbers:** use `_` to group digits from the right: every 3 digits in decimal numbers of 5 or more digits (`12_000_000`, not `12000000`), and every 4 digits in hex and binary numbers longer than 4 digits (`32'hDEAD_BEEF`, `8'b1010_0101`). Short numbers such as `1000`, `8'hFF` and `4'b1010` stay as they are. Today most examples don't follow this.
+- **Long numbers:** use `_` to group digits from the right: every 3 digits in decimal numbers of 5 or more digits (`12_000_000`, not `12000000`), and every 4 digits in hex and binary numbers longer than 4 digits (`32'hDEAD_BEEF`, `8'b1010_0101`). Short numbers such as `1000`, `8'hFF` and `4'b1010` stay as they are. As of 2026-10-25 about 200 numbers in the examples don't follow this yet.
 - **Inputs:** pass button and switch inputs through a two flip-flop synchronizer clocked by `sys_clk` before using them. Debounce them when the design reacts to presses.
 - **Comments:** start each Verilog file with a one-to-three-line comment saying what the module does. In the top module, give the clock input's frequency in its port comment (`input sys_clk,  // 12MHz clock`). With an internal oscillator, give it in the comment above the `sys_clk` wire.
 
@@ -194,7 +193,7 @@ Some primitives can't be simulated: the PLLs `SB_PLL40_CORE` and `PLLE2_BASE`, t
 - **Internal oscillator:** generates a 10 ns clock (see below).
 - **RGB LED driver:** `assign pins = ~on;`, since its pins are active low.
 
-See `pll.v` in `examples/alhambra-ii/pll` or `examples/arty-a7-35t/pll`, and `hf_osc.v` and `rgb_driver.v` in `examples/upduino3/blinky`. The PLL examples for `colorlight-5a-75b-v8`, `sipeed-tang-nano-9k` and `sipeed-tang-nano-20k` don't have this yet.
+See `pll.v` in `examples/alhambra-ii/pll` or `examples/arty-a7-35t/pll`, and `hf_osc.v` and `rgb_driver.v` in `examples/upduino3/blinky`. All the PLL examples follow this.
 
 ### Internal oscillators
 
@@ -210,7 +209,7 @@ Use the FPGA's internal oscillator (e.g. `SB_HFOSC`) only when the board has no 
 
 - **Lint:** `apio lint` must report no warnings. It exits with an error on any Verilator warning, so `test_examples.py` already fails on them. Width-explicit constants (`4'd0` rather than `0` where widths differ) avoid most width warnings.
 - **Formatting:** all examples must be formatted with `apio format`, so that running it again changes no file. Run `apio format` in each example you add or edit, or `invoke format` from the repo root for all. `test_examples.py` runs `apio format` but doesn't check for a diff, so check with `git diff` afterwards. As of 2026-10-22, every example passes this check.
-- **`NO_FORMAT_EXAMPLES`** in `test_examples.py` lists examples the test skips formatting for (`fomu/blink`, `icezum/marcha-imperial`). Both now format cleanly, so the list may be stale.
+- **`NO_FORMAT_EXAMPLES`** in `test_examples.py` lists examples the test skips formatting for. It's empty, since all the examples format cleanly.
 
 ## Testbenches
 
@@ -230,7 +229,7 @@ Write new testbenches, and testbenches you rewrite, to these rules.
 **Structure and names**
 
 5. Name the testbench module after its file (`bcd_digit_tb.v` holds `module bcd_digit_tb`). `$dumpvars` and the `.gtkw` signal paths use this name.
-6. Name the instance of the module under test `dut` (e.g. `main dut (...)`), so signal paths are always `<tb>.dut.<signal>`. Today 25 of the 81 testbenches do this.
+6. Name the instance of the module under test `dut` (e.g. `main dut (...)`), so signal paths are always `<tb>.dut.<signal>`.
 7. Give each submodule with non-trivial logic its own testbench next to its source file (e.g. `bcd/bcd_digit_tb.v` and `util/ticker_tb.v` in `alhambra-ii/bcd-counter`).
 
 **Clock and timing**
@@ -286,7 +285,7 @@ endmodule
 
 ### Older testbenches
 
-Most existing testbenches predate these rules. 11 of them `` `include`` an `apio_testing.vh` or `apio_testing.svh` macro file and use its `` `EXPECT``, `` `TEST_BEGIN`` and `` `TEST_END`` macros. Don't copy that style into new testbenches.
+Older testbenches `` `include``d an `apio_testing.vh` or `apio_testing.svh` macro file and used its `` `EXPECT``, `` `TEST_BEGIN`` and `` `TEST_END`` macros. They were all rewritten to the rules above. Don't bring that style back.
 
 ## GTKWave save files (`<testbench>.gtkw`)
 

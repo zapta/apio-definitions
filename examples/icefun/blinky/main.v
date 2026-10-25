@@ -1,4 +1,4 @@
-
+// Blinks two LEDs of the 4x8 LED matrix, taking turns.
 module main #(
     parameter integer N = 3_000_000
 ) (
