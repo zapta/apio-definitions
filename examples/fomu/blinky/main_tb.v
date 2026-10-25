@@ -32,7 +32,7 @@ module main_tb;
   wire [2:0] rgb_led;
 
   // The USB pins driven by the design.
-  wire usb_dp, usb_dn, usb_dp_pu;
+  wire usb_dp, usb_dn, usb_pu;
 
   // A 4 bit counter, so the LED toggles every 8 clocks.
   main #(
@@ -40,9 +40,9 @@ module main_tb;
   ) dut (
       .sys_clk(sys_clk),
       .rgb_led(rgb_led),
-      .usb_dp(usb_dp),
-      .usb_dn(usb_dn),
-      .usb_dp_pu(usb_dp_pu)
+      .usb_dp (usb_dp),
+      .usb_dn (usb_dn),
+      .usb_pu (usb_pu)
   );
 
   // Loop index for the LED checks.
@@ -57,7 +57,7 @@ module main_tb;
     #1;
     `EXPECT_EQ(dut.counter, 4'd0)
     `EXPECT_EQ(rgb_led, 3'b111)
-    `EXPECT_EQ({usb_dp, usb_dn, usb_dp_pu}, 3'b000)
+    `EXPECT_EQ({usb_dp, usb_dn, usb_pu}, 3'b000)
 
     // After i clocks the counter equals i, so red shows bit 3 of i
     // (low is on). Green and blue stay off.

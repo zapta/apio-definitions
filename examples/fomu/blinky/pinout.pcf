@@ -13,4 +13,4 @@ set_io rgb_led[2] A5  # Blue, RGB0.
 # USB pins, held low.
 set_io usb_dp    A1  # output
 set_io usb_dn    A2  # output
-set_io usb_dp_pu A4  # output, active high
+set_io usb_pu A4  # output, active high

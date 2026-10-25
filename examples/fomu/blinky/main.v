@@ -6,18 +6,18 @@
 module main #(
     parameter integer N = 26
 ) (
-    input        sys_clk,   // 48MHz clock
+    input        sys_clk,  // 48MHz clock
     // The RGB LED pins, active low. [0]=red, [1]=green, [2]=blue.
     output [2:0] rgb_led,
-    output       usb_dp,    // USB D+, held low.
-    output       usb_dn,    // USB D-, held low.
-    output       usb_dp_pu  // USB D+ pull-up, active high, held off.
+    output       usb_dp,   // USB D+, held low.
+    output       usb_dn,   // USB D-, held low.
+    output       usb_pu    // USB D+ pull-up, active high, held off.
 );
 
   // Keep the USB lines low, so the host doesn't try to talk to the board.
   assign usb_dp = 1'b0;
   assign usb_dn = 1'b0;
-  assign usb_dp_pu = 1'b0;
+  assign usb_pu = 1'b0;
 
   // The blink counter. It starts at 0 when the FPGA is configured.
   reg [N-1:0] counter = 0;

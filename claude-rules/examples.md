@@ -143,6 +143,32 @@ always @(posedge sys_clk) if (sys_rst) rst_cnt <= rst_cnt + 1;
 - Name active-low signals with an `_n` suffix (`btn_n`). Invert active-low board signals once, in the top module, so the rest of the design is active-high.
 - **Polarity comments:** for each board input such as a push button or switch, and each board output such as an LED, say in its comments whether it's active high or active low. Do this both in the top module's port comment (`output led,  // The blinking LED, active low.`) and in the constraint file. Signals without an on/off meaning, such as an external clock, don't need it.
 
+### Signal names
+
+Name the top module's ports, the signals connected to board pins, after their function, using the names below.
+
+- **Function, not board label:** use `leds[0]`, not the silkscreen label `D1` or `LED0`. Give the board label in the constraint file's comment instead: `set_io leds[0] 99  # output, D1`.
+- **Singular or vector:** a design that uses one item uses the singular name (`led`, `btn`). A design that uses several uses the plural as a vector starting at `[0]` (`leds[3:0]`, `btns[2:0]`), with `[0]` the first item in the board's own numbering. This depends on how many the design uses, not how many the board has.
+- **Active low:** add `_n` at the end (`led_n`, `leds_n`, `btn_n`, `rgb_led_n`).
+- **Several groups of the same kind:** prefix where they are (`pmod_leds`, `pmod_btns`).
+
+| Signal | Name |
+|---|---|
+| Main clock | `sys_clk`. The external clock input is `ext_clk` when a PLL changes the frequency. |
+| Reset | `sys_rst`, generated inside the design. A reset button is a button (`btn_n`). |
+| LEDs | `led`, `leds[N-1:0]` |
+| RGB LED | `rgb_led[2:0]`, with `[0]` = red, `[1]` = green, `[2]` = blue |
+| Push buttons | `btn`, `btns[N-1:0]` |
+| Switches | `sw`, `sws[N-1:0]` |
+| 7-segment display | `segs[6:0]` (segments a to g), `seg_dp`, digit selects `digits[N-1:0]` |
+| UART | `uart_tx`, `uart_rx`, as seen from the FPGA |
+| SPI | `spi_sck`, `spi_mosi`, `spi_miso`, `spi_cs_n`. Use `flash_` instead of `spi_` for the configuration flash. |
+| I2C | `i2c_scl`, `i2c_sda` |
+| USB | `usb_dp`, `usb_dn`, and `usb_pu` for the D+ pull-up |
+| Buzzer or speaker | `buzzer` |
+| Header pins | `gpio[N-1:0]`, or per connector, e.g. `pmod1[7:0]` |
+| Other board-specific signals | the chip or block, then the signal, e.g. `wifi_gpio0` |
+
 ### Code structure
 
 - **One module per file**, with the file named after the module (`ticker` in `ticker.v`).
