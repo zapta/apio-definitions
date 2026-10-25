@@ -10,6 +10,7 @@
         "CSFBGA",
         "Digilent",
         "dumpfile",
+        "dumpvars",
         "elif",
         "endmodule",
         "fomu",
