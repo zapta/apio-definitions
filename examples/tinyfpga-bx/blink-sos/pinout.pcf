@@ -83,12 +83,12 @@ set_io -nowarn PIN_30 E8
 set_io -nowarn PIN_31 J2
 
 # LED (active high)
-set_io -nowarn LED B3
+set_io -nowarn led B3
 
 # USB
 set_io -nowarn USBP B4
 set_io -nowarn USBN A4
-set_io -nowarn USBPU A3
+set_io -nowarn usb_pu A3
 
 # 16MHz clock
-set_io -nowarn CLK B2 # input
+set_io -nowarn sys_clk B2 # input
