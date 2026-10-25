@@ -1,5 +1,5 @@
+# ------------ System clock (12MHz) -------------------------------------------
+set_io sys_clk 49  # input
 
-set_io LED 45  # output
-
-set_io CLK 49  # input
-
+# ------------ User Led -------------------------------------------------------
+set_io led 45  # output, leds[0] on the board

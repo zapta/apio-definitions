@@ -1,27 +1,23 @@
-// Tests the speed of N bits adder.
-// To run:
+// Tests the speed of a WIDTH bits adder. Each env in apio.ini
+// sets another width. To see the max clock speed, run e.g.
 //   apio report -e width-256
-//   apio report -e width-128
-//   apio report -e width-32
-//   apio report -e width-16
-//   apio report -e width-8
 
 module main #(
-    parameter WIDTH = `WIDTH
+    // The adder width. The default comes from the macro WIDTH that
+    // apio.ini defines for each env.
+    parameter integer WIDTH = `WIDTH
 ) (
-    input  CLK,  // System clock
-    output LED   // Output
+    input  sys_clk,  // 12MHz clock
+    output led       // The counter's top bit.
 );
 
+  // The counter. It starts at 0 when the FPGA is configured.
   reg [WIDTH-1:0] counter = 0;
 
-  assign LED = counter[WIDTH-1];
+  // Add 7 on every clock.
+  always @(posedge sys_clk) counter <= counter + 7;
 
-  always @(posedge CLK) begin
-    counter <= counter + 7;
-  end
-
+  // Output the top bit so the adder is not optimized away.
+  assign led = counter[WIDTH-1];
 
 endmodule
-
-

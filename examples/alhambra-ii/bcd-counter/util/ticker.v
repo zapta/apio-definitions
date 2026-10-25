@@ -2,7 +2,7 @@
 
 module ticker #(
     // Clocks per tick. main.v overrides this value.
-    parameter integer DIV = 12000000
+    parameter integer DIV = 12_000_000
 ) (
     input  wire sys_clk,  // System clock.
     input  wire sys_rst,  // Synchronous reset, active high.

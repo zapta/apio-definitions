@@ -2,10 +2,6 @@
 [*] GTKWave Analyzer v4.0.0-prealpha (f6d60e0) (w)1999-2022 BSI
 [*] Sat Oct 24 18:33:57 2026
 [*]
-[dumpfile] "/Volumes/projects/apio-definitions-dev/repo/examples/alhambra-ii/bcd-counter/_build/default/main_tb.vcd"
-[dumpfile_mtime] "Sat Oct 24 18:33:39 2026"
-[dumpfile_size] 19625
-[savefile] "/Volumes/projects/apio-definitions-dev/repo/examples/alhambra-ii/bcd-counter/main_tb.gtkw"
 [timestart] 0
 [size] 1333 600
 [pos] -1 -1

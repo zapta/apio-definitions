@@ -1,8 +1,7 @@
-# Pinout file for Alhambra-ii example..
+# Constraint file for the Alhambra II board.
 
-# -- 12Mhz clk
-set_io  CLK  49
+# ------------ System clock (12MHz) -------------------------------------------
+set_io sys_clk 49  # input
 
-# --  LED output
-set_io  LED  45
-
+# ------------ User Led -------------------------------------------------------
+set_io led 45  # output, leds[0] on the board

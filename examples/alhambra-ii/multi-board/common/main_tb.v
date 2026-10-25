@@ -1,34 +1,72 @@
-// A testbench of main.v.
+// Testbench for main.v.
+// Run it in batch mode with 'apio test', or view the signals
+// in GTKWave with 'apio sim'.
 
-`include "common/apio_testing.vh"
+// Checks that 'actual_val' equals 'expected_val'. On a mismatch, prints
+// the values and location, sets assertion_err, and stops the simulation.
+// Under 'apio sim' the simulation continues so the signals can be viewed.
+`define EXPECT_EQ(actual_val, expected_val) \
+  if ((actual_val) !== (expected_val)) begin \
+    $display("*** ASSERTION FAILED at %s:%0d: expected 'h%h, actual 'h%h", \
+             `__FILE__, `__LINE__, (expected_val), (actual_val)); \
+    assertion_err = 1; \
+    if (!`APIO_SIM) $fatal; \
+  end
 
-`timescale 10 ns / 1 ns
+`timescale 1ns / 1ps
 
-module main_tb ();
+module main_tb;
 
-  // This defines a managed signal called 'clk'.
-  `DEF_CLK
+  // Set to 1 when an assertion fails.
+  reg assertion_err = 0;
 
-  // Module's output.
+  // Clock.
+  reg sys_clk = 0;
+  always #5 sys_clk = ~sys_clk;
+
+  // Number of sys_clk rising edges so far.
+  integer clk_num = 0;
+  always @(posedge sys_clk) clk_num <= clk_num + 1;
+
+  // Clocks per blink cycle, reduced to run quickly. The LED toggles
+  // every HALF_CYCLE clocks.
+  localparam integer CLKS_PER_CYCLE = 6;
+  localparam integer HALF_CYCLE = CLKS_PER_CYCLE / 2;
+
+  // The LED driven by the design.
   wire led;
 
+  // The design under test.
   main #(
-      .CLKS_PER_CYCLE(6)
-  ) main (
-      .CLK(clk),
-      .LED(led)
+      .CLKS_PER_CYCLE(CLKS_PER_CYCLE)
+  ) dut (
+      .sys_clk(sys_clk),
+      .led(led)
   );
 
+  // Loop index for the checks.
+  integer i;
+
+  // The test sequence.
   initial begin
-    `TEST_BEGIN(main_tb)
+    $dumpvars(0, main_tb);
 
-    // Free run for 400 clocks.
-    `CLKS(16)
+    // Before the first clock, the counter is 0 and the LED is off.
+    #1;
+    `EXPECT_EQ(dut.counter, 32'd0)
+    `EXPECT_EQ(led, 1'b0)
 
-    // Assert on expected bcd value.
-    `EXPECT(led, 1'b1)
+    // After i clocks the counter is i mod HALF_CYCLE, and the LED
+    // toggled every HALF_CYCLE clocks.
+    for (i = 1; i <= 24; i = i + 1) begin
+      @(posedge sys_clk);
+      #1;
+      `EXPECT_EQ(dut.counter, i % HALF_CYCLE)
+      `EXPECT_EQ(led, (i/HALF_CYCLE) % 2 == 1)
+    end
 
-    `TEST_END
+    $display("End of simulation");
+    $finish;
   end
 
 endmodule
