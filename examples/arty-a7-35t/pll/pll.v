@@ -15,8 +15,8 @@
 // PLLE2_BASE primitive is not simulatable without vendor models).
 
 module pll (
-    input  wire clk_in,    // 100 MHz
-    output wire clk_out0,  // 200 MHz
+    input  wire clock_in,   // 100 MHz
+    output wire clock_out,  // 200 MHz
     output wire locked
 );
 
@@ -32,7 +32,7 @@ module pll (
       .CLKFBOUT_MULT (16),
       .CLKOUT0_DIVIDE(8)
   ) pll (
-      .CLKIN1(clk_in),
+      .CLKIN1(clock_in),
       .CLKFBOUT(clk_fb),
       .CLKFBIN(clk_fb),
       .CLKOUT0(clk_out0_unbuf),
@@ -48,15 +48,15 @@ module pll (
 
   BUFG bufg_out0 (
       .I(clk_out0_unbuf),
-      .O(clk_out0)
+      .O(clock_out)
   );
 
 `else
 
   // Fake implementation for simulation.
 
-  assign clk_out0 = clk_in;
-  assign locked   = 1'b1;
+  assign clock_out = clock_in;
+  assign locked = 1'b1;
 
 `endif
 

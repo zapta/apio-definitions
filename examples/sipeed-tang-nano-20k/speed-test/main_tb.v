@@ -36,7 +36,7 @@ module main_tb;
       .WIDTH(8)
   ) dut (
       .sys_clk(sys_clk),
-      .led_n(led_n)
+      .led_n  (led_n)
   );
 
   // Loop index for the checks.
