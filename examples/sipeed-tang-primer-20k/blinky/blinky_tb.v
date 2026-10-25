@@ -20,7 +20,7 @@ module blinky_tb ();
   wire [7:0] seven_seg;
 
   // Instantiate a blinky that toggles segment A every 5 clocks.
-  blinky #(
+  main #(
       .DIV(5)
   ) ticker (
       .sys_clk  (clk),

@@ -1,7 +1,7 @@
 // Simple tri-colour LED blink example.
 
 
-module top (
+module main (
     // 48MHz Clock input
     // --------
     input clki,
@@ -25,16 +25,16 @@ module top (
   assign usb_dp_pu = 1'b0;
 
   // Connect to system clock (with buffering)
-  wire clk;
+  wire sys_clk;
   SB_GB clk_gb (
       .USER_SIGNAL_TO_GLOBAL_BUFFER(clki),
-      .GLOBAL_BUFFER_OUTPUT(clk)
+      .GLOBAL_BUFFER_OUTPUT(sys_clk)
   );
 
   // Use counter logic to divide system clock.  The clock is 48 MHz,
   // so we divide it down by 2^28.
   reg [28:0] counter = 0;
-  always @(posedge clk) begin
+  always @(posedge sys_clk) begin
     counter <= counter + 1;
   end
 

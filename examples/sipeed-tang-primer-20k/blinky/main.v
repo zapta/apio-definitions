@@ -27,7 +27,7 @@
 // Segments are active-low. CAT=1 selects the right-hand digit.
 //------------------------------------------------------------------
 
-module blinky #(
+module main #(
     // Num of click cycle per led toggle.
     parameter integer DIV = (27000000 / 2)
 ) (

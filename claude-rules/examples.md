@@ -32,7 +32,6 @@ Whenever possible, every board in `boards.jsonc` should have an example named `b
 **Correctness:** add a `blinky` only when there is a good chance it's correct on the real board. Take the clock pin and frequency, the LED pin and the LED polarity from a reliable source: the board maker's schematic, user guide or constraint files, or a well-maintained platform file such as LiteX's `litex-boards`. Name the source in the constraint file when it isn't obvious. Don't guess. If a board can't be tested on hardware, end its `info` with `(untested)`, e.g. `Blinks an LED (untested).`
 
 Boards with examples but no `blinky` yet:
-- `fomu` (it has `blink` instead)
 - `ice40-hx1k-evb`, `ice40-hx8k-evb`, `ice40-hx8k`
 - `icestick`, `icezum`, `kefir`
 
