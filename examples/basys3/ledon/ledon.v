@@ -4,7 +4,7 @@
 module ledon (
 
     //-- LEDs de la BASYS3
-    output wire [15:0] leds
+    output wire [15:0] leds  // Active high.
 );
 
   //-- Encender led15!

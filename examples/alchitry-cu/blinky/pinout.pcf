@@ -12,7 +12,7 @@
 # clk
 set_io  clk     P7  #81_gbin5
 
-# leds
+# leds (active high)
 set_io  led[0]  J11 #D2
 set_io  led[1]  K11 #..
 set_io  led[2]  K12 #..

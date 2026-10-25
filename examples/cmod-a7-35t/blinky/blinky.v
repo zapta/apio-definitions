@@ -3,7 +3,7 @@
 //-- Blinking led (12 MHz clock -> ~1 Hz on LED0)
 module main (
     input clk,
-    output wire [1:0] leds
+    output wire [1:0] leds  // Active high.
 );
 
   //-- Contador de 24 bits

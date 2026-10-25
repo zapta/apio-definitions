@@ -3,7 +3,7 @@
 //-- Blinking led
 module main (
     input clk,
-    output wire [15:0] leds
+    output wire [15:0] leds  // Active high.
 );
 
   //-- Contador de 25 bits

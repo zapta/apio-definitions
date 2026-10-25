@@ -8,7 +8,7 @@ module blinky #(
     input clk,  //100MHz
 
     //outputs
-    output reg [7:0] led = 8'b11111111  //start with all on
+    output reg [7:0] led = 8'b11111111  // Active high. Starts with all on.
 );
 
   // Blink counter.

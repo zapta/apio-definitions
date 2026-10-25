@@ -8,7 +8,7 @@ module main #(
     parameter integer DIV = 100_000_000
 ) (
     input  wire ext_clk,  // 100 MHz board clock
-    output reg  LED       // LED to blink
+    output reg  LED       // LED to blink, active high.
 );
 
   // PLL 100 MHz -> 200 MHz

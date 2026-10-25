@@ -4,7 +4,7 @@
 #-- System clock (12 MHz)
 set_property -dict { PACKAGE_PIN F14   IOSTANDARD LVCMOS33 } [get_ports {clk}]
 
-#-- LEDs
+#-- LEDs (active high)
 set_property -dict { PACKAGE_PIN E18   IOSTANDARD LVCMOS33 } [get_ports {leds[0]}]
 set_property -dict { PACKAGE_PIN F13   IOSTANDARD LVCMOS33 } [get_ports {leds[1]}]
 set_property -dict { PACKAGE_PIN E13   IOSTANDARD LVCMOS33 } [get_ports {leds[2]}]

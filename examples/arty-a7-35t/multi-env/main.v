@@ -6,7 +6,7 @@ module main #(
     parameter CLK_DIV = `CLK_DIV
 ) (
     input        CLK,  // 100MHz clock
-    output [3:0] LEDS  // LED to blink
+    output [3:0] LEDS  // LED to blink, active high.
 );
 
   // The counter should count this number of clocks
