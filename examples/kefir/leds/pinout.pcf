@@ -1,11 +1,9 @@
-# -----------------------------------------------------------------------------
-#- Leds example for the Kéfir I board
-#- Constraint file (.pcf)
-# -----------------------------------------------------------------------------
+# Constraint file of the leds example for the Kéfir I board.
+# It assigns the design's signals to FPGA pins, and lists only
+# the pins that this example uses.
 
 # ------------ User Leds (active high) ----------------------------------------
-set_io  D1 137
-set_io  D2 135
-set_io  D3 129
-set_io  D4 121
-
+set_io leds[0] 137  # output
+set_io leds[1] 135  # output
+set_io leds[2] 129  # output
+set_io leds[3] 121  # output
