@@ -7,10 +7,10 @@
 
 
 # ------------ User Leds ------------------------------------------------------
-#-- Red LED
+#-- Red LED (active low)
 set_io -nowarn LEDR A5  # output
 
-#-- Green LED
+#-- Green LED (active low)
 set_io -nowarn LEDG M4  # output
 
 #-- 12 Mhz clock 

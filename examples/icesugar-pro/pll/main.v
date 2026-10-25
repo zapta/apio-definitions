@@ -4,7 +4,7 @@
 
 module main (
     input ext_clk,  // 25MHz clock
-    output led  // LED to blink
+    output led  // LED to blink, active low.
 );
 
   wire sys_clk;

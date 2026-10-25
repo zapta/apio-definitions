@@ -2,7 +2,7 @@
 //-- Turn on one LED
 //------------------------------------------------------------------
 module led_on (
-    output [7:0] led  //-- LEDs
+    output [7:0] led  //-- LEDs, active high.
 );
 
   //-- LED0 on

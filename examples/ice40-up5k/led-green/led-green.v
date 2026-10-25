@@ -1,9 +1,9 @@
 //-- Turning the RGB LED into Green
 //-- Board: iCE40-UP5K
 module rgb_test (
-    output led_blue,
-    output led_green,
-    output led_red
+    output led_blue,  // Active low.
+    output led_green,  // Active low.
+    output led_red  // Active low.
 );
 
   //-- Turn on the green signal (inverse logic)

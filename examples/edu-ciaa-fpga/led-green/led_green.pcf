@@ -6,7 +6,7 @@
 # -----------------------------------------------------------------------------
 
 #------ User LEDs
-#-- Green LED
+#-- Green LED (active high)
 set_io LEDG 4  #-- output 
 
 

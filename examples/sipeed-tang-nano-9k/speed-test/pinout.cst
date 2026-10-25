@@ -4,5 +4,6 @@
 IO_LOC "CLK"   52;
 IO_PORT "sys_clk" IO_TYPE=LVCMOS33 PULL_MODE=NONE;
 
+// LED (active low)
 IO_LOC "LED"   10;
 

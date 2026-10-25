@@ -1,5 +1,6 @@
 # For the iCESugar Board (iCE40UP5K-QFN48)
 
+# RGB LED (active low)
 set_io -nowarn LED_G 41
 set_io -nowarn LED_R 40
 set_io -nowarn LED_B 39

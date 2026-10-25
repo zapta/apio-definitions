@@ -1,3 +1,4 @@
+# LEDs (active high)
 set_io leds[0] 95
 set_io leds[1] 96
 set_io leds[2] 97

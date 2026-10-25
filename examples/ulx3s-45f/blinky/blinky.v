@@ -1,8 +1,8 @@
 
 module blinky (
     input clk_25mhz,
-    input [6:0] btn,
-    output [7:0] led,
+    input [6:0] btn,  // Push buttons. btn[0] is active low, the rest active high.
+    output [7:0] led,  // Active high.
     output wifi_gpio0
 );
 

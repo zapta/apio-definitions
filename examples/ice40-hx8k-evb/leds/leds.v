@@ -6,8 +6,8 @@
 //------------------------------------------------------------------
 
 module leds (
-    output wire [1:0] led,
-    input  wire [1:0] but
+    output wire [1:0] led,  // Active high.
+    input  wire [1:0] but   // Push buttons, active low.
 );
 
   assign led[0] = but[0];

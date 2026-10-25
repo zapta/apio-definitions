@@ -4,14 +4,14 @@
 //------------------------------------------------------------------
 
 module leds (
-    output wire D2,
-    output wire D3,
-    output wire D4,
-    output wire D5,
-    output wire D6,
-    output wire D7,
-    output wire D8,
-    output wire D9
+    output wire D2,  // Active high.
+    output wire D3,  // Active high.
+    output wire D4,  // Active high.
+    output wire D5,  // Active high.
+    output wire D6,  // Active high.
+    output wire D7,  // Active high.
+    output wire D8,  // Active high.
+    output wire D9   // Active high.
 );
 
   assign D2 = 1'b1;

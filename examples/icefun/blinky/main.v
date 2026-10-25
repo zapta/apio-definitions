@@ -3,8 +3,8 @@ module Main #(
     parameter integer N = 3_000_000
 ) (
     input        CLK,   // 12MHz clock
-    output [7:0] ROWS,  // LED rows
-    output [3:0] COLS   // LED columns
+    output [7:0] ROWS,  // LED rows, active low.
+    output [3:0] COLS   // LED columns, active low.
 );
 
   reg [31:0] counter = 0;

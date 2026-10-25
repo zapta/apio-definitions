@@ -4,7 +4,7 @@
 
 module Test (
     input  CLK,   // 16MHz clock
-    output LED,   // User/boot LED next to power LED
+    output LED,   // User/boot LED next to power LED, active high.
     output USBPU  // USB pull-up resistor
 );
 

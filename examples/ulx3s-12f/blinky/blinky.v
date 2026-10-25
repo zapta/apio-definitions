@@ -4,7 +4,7 @@
 
 module top (
     input clk_25mhz,  //-- 25Mhz clock
-    output [7:0] led,  //-- LEDs
+    output [7:0] led,  //-- LEDs, active high.
     output wifi_gpio0
 );
 

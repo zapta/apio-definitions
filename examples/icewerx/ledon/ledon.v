@@ -3,7 +3,7 @@
 //-- Turn on the Red LED
 //------------------------------------------------------------------
 module leds (
-    output wire LEDR
+    output wire LEDR  // Active low.
 );
 
   //-- Red LED on

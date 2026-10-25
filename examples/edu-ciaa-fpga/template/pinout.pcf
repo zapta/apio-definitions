@@ -6,7 +6,7 @@
 #- Pinout: https://github.com/ciaa/Hardware/blob/master/PCB/EDU-FPGA/Pinout/Pinout%20EDU%20FPGA.pdf
 # -----------------------------------------------------------------------------
 
-#------ User LEDs
+#------ User LEDs (active high)
 set_io -nowarn LED3 4  #-- output 
 set_io -nowarn LED2 3  #-- output
 set_io -nowarn LED1 2  #-- output 

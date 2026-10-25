@@ -7,5 +7,5 @@
 
 
 # ------------ User Leds ------------------------------------------------------
-#-- Red LED
+#-- Red LED (active low)
 set_io --warn-no-port LEDR A5  # output

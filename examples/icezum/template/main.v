@@ -7,7 +7,7 @@
 
 //-- Template for the top entity
 module top (
-    output wire LED0
+    output wire LED0  // Active high.
 );
 
   //-- Turn on the LED0 on the icezum

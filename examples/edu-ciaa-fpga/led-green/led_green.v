@@ -3,7 +3,7 @@
 //-- Turn on the green LED
 //------------------------------------------------------------------
 module leds (
-    output wire LEDG
+    output wire LEDG  // Active high.
 );
 
   assign LEDG = 1'b1;

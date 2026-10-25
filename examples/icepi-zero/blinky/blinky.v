@@ -1,7 +1,7 @@
 // Blink the on-board leds
 module blinky (
     input        clk,  // 50 MHZ
-    output [4:0] led   // LEDs
+    output [4:0] led   // LEDs, active high.
 );
 
   // Turn off all leds

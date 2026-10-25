@@ -1,13 +1,13 @@
 //-- Turn on the Green on board LED
 //-- Board: iCE40-UP5K
 module led_test (
-    output LEDG_N,
-    output LEDR_N,
-    output LED1,
-    output LED2,
-    output LED3,
-    output LED4,
-    output LED5
+    output LEDG_N,  // Active low.
+    output LEDR_N,  // Active low.
+    output LED1,  // Active high.
+    output LED2,  // Active high.
+    output LED3,  // Active high.
+    output LED4,  // Active high.
+    output LED5  // Active high.
 );
 
   //-- Turn on the green signal (inverse logic)

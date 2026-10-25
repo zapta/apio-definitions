@@ -15,7 +15,7 @@
 //-- ch_out: Canal de salida
 module romnotes (
     input wire clk,
-    output wire [7:0] leds,
+    output wire [7:0] leds,  // Active high.
     output wire ch_out
 );
 

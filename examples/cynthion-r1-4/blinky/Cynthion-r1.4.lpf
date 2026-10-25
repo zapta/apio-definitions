@@ -46,7 +46,7 @@ IOBUF  PORT "uart__tx" IO_TYPE=LVCMOS33 PULLMODE=UP;
 LOCATE COMP "int" SITE "T6";
 IOBUF  PORT "int" IO_TYPE=LVCMOS33;
 
-## USER button. "TODO" sheet
+## USER button. "TODO" sheet (active low)
 LOCATE COMP "button_user" SITE "M14";
 IOBUF  PORT "button_user" PULLMODE=NONE IO_TYPE=LVCMOS33;
 
@@ -55,7 +55,7 @@ IOBUF  PORT "button_user" PULLMODE=NONE IO_TYPE=LVCMOS33;
 LOCATE COMP "self_program" SITE "T13";
 IOBUF  PORT "self_program" IO_TYPE=LVCMOS33;
 
-## FPGA LEDs "TODO" sheet
+## FPGA LEDs "TODO" sheet (active low)
 LOCATE COMP "led[0]" SITE "E13";
 LOCATE COMP "led[1]" SITE "C13";
 LOCATE COMP "led[2]" SITE "B14";

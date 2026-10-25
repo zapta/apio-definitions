@@ -82,7 +82,7 @@ set_io -nowarn PIN_29 J9
 set_io -nowarn PIN_30 E8
 set_io -nowarn PIN_31 J2
 
-# LED
+# LED (active high)
 set_io -nowarn LED B3
 
 # USB

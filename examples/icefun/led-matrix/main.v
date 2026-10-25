@@ -5,8 +5,8 @@ module main #(
     parameter integer INTENSITY = 0           // Leds intensity, 0-15
 ) (
     input        CLK,   // 12MHz clock
-    output [7:0] ROWS,  // LED rows
-    output [3:0] COLS   // LED columns
+    output [7:0] ROWS,  // LED rows, active low.
+    output [3:0] COLS   // LED columns, active low.
 );
 
   // Running rand value.

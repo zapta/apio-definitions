@@ -10,7 +10,7 @@
 # --  Board info: https://www.nandland.com/goboard/introduction.html
 # --  Pinout: https://www.nandland.com/goboard/images/Go_Board_V1.pdf
 
-# ------------ User Leds ------------------------------------------------------
+# ------------ User Leds (active high) ----------------------------------------
 set_io -nowarn LED1  56
 set_io -nowarn LED2  57
 set_io -nowarn LED3  59

@@ -4,10 +4,10 @@
 //------------------------------------------------------------------
 
 module leds (
-    output wire LED1,
-    output wire LED2,
-    output wire LED3,
-    output wire LED4
+    output wire LED1,  // Active high.
+    output wire LED2,  // Active high.
+    output wire LED3,  // Active high.
+    output wire LED4   // Active high.
 );
 
   assign LED1 = 1'b1;

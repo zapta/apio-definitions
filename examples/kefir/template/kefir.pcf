@@ -10,7 +10,7 @@ set_io -nowarn BTN2 134
 set_io -nowarn BTN3 128
 set_io -nowarn BTN4 122
 
-# LED outputs
+# LED outputs (active high)
 set_io -nowarn LED1 137
 set_io -nowarn LED2 135
 set_io -nowarn LED3 129

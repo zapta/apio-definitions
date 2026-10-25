@@ -1,12 +1,12 @@
 // Example of using 3 switches for setting the color of the RGB led
 // Board: iCE40-UP5K
 module rgb_test (
-    input  sw2,
-    input  sw1,
-    input  sw0,
-    output led_blue,
-    output led_green,
-    output led_red
+    input sw2,
+    input sw1,
+    input sw0,
+    output led_blue,  // Active low.
+    output led_green,  // Active low.
+    output led_red  // Active low.
 );
 
 

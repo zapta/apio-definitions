@@ -4,11 +4,11 @@
 
 module Test (
     input  CLK,   // 25MHz clock
-    output LED1,  //-- LED to Blink
+    output LED1,  //-- LED to Blink, active high.
     //-- The other LEDs
-    output LED2,
-    output LED3,
-    output LED4
+    output LED2,  // Active high.
+    output LED3,  // Active high.
+    output LED4   // Active high.
 );
 
   reg [23:0] counter = 0;

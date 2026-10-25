@@ -1,9 +1,9 @@
 
 module rgb_test (
-    input  clk,
-    output led_blue,
-    output led_green,
-    output led_red
+    input clk,
+    output led_blue,  // Active low.
+    output led_green,  // Active low.
+    output led_red  // Active low.
 );
 
 

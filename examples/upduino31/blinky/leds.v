@@ -7,7 +7,7 @@ module leds (
     input red_en,
     input green_en,
     input blue_en,
-    output wire [2:0] leds_out  // [0]=red, [1]=green, [2]=blue
+    output wire [2:0] leds_out  // [0]=red, [1]=green, [2]=blue, active low.
 );
 
   // Intensity multiplier for all three channels.

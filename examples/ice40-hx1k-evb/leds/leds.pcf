@@ -3,8 +3,10 @@
 # compare to the schematic of the board and the datasheet of fpga
 
 set_io -nowarn clk_in 15
+# Push buttons (active low)
 set_io but[0] 41
 set_io but[1] 42
+# LEDs (active high)
 set_io led[0] 40
 set_io led[1] 51
 

@@ -5,12 +5,12 @@ set_io -nowarn CLK        35
 set_io -nowarn RX          6
 set_io -nowarn TX          9
 
-# LEDs and Button
+# LEDs and Button (active low)
 set_io -nowarn BTN_N      10
 set_io -nowarn LEDR_N     11
 set_io -nowarn LEDG_N     37
 
-# RGB LED Driver
+# RGB LED Driver (active low)
 set_io -nowarn LED_RED_N  39
 set_io -nowarn LED_GRN_N  40
 set_io -nowarn LED_BLU_N  41
@@ -53,7 +53,7 @@ set_io -nowarn P2_8       23
 set_io -nowarn P2_9       20
 set_io -nowarn P2_10      18
 
-# LEDs and Buttons (PMOD 2)
+# LEDs and Buttons (PMOD 2) (active high)
 set_io -nowarn LED1       26
 set_io -nowarn LED2       27
 set_io -nowarn LED3       25

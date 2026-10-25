@@ -3,7 +3,7 @@ module blinky #(
     parameter integer DIV = 27000000
 ) (
     input      sys_clk,
-    output reg led
+    output reg led       // Active low.
     // Active low
 );
 

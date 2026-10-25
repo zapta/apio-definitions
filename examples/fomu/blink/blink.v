@@ -4,12 +4,12 @@
 module top (
     // 48MHz Clock input
     // --------
-    input  clki,
+    input clki,
     // LED outputs
     // --------
-    output rgb0,
-    output rgb1,
-    output rgb2,
+    output rgb0,  // Active low.
+    output rgb1,  // Active low.
+    output rgb2,  // Active low.
     // USB Pins (which should be statically driven if not being used).
     // --------
     output usb_dp,

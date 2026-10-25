@@ -4,7 +4,7 @@
 #-- Reloj del sistema (100 MHz)
 set_property -dict { PACKAGE_PIN H4    IOSTANDARD LVCMOS33 } [get_ports {clk}]
 
-#-- LEDs
+#-- LEDs (active high)
 set_property -dict { PACKAGE_PIN K17   IOSTANDARD LVCMOS33 } [get_ports {leds[0]}]
 set_property -dict { PACKAGE_PIN J17   IOSTANDARD LVCMOS33 } [get_ports {leds[1]}]
 set_property -dict { PACKAGE_PIN L14   IOSTANDARD LVCMOS33 } [get_ports {leds[2]}]

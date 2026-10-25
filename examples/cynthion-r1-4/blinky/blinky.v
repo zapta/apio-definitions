@@ -4,7 +4,7 @@
 
 module top (
     input clk_60mhz,  //-- 60Mhz clock
-    output [5:0] led  //-- FPGA LEDs
+    output [5:0] led  // -- FPGA LEDs, active low.
 );
 
   //-- Turn off all the LEDs except LED0

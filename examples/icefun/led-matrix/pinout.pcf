@@ -1,6 +1,6 @@
 # Pinout for iceFUN board example
 
-# LED rows
+# LED rows (active low)
 set_io ROWS[0]  C10
 set_io ROWS[1]  A10
 set_io ROWS[2]  D7
@@ -10,7 +10,7 @@ set_io ROWS[5]  C7
 set_io ROWS[6]  A4
 set_io ROWS[7]  C4
 
-# LED columns
+# LED columns (active low)
 set_io COLS[0]  A12
 set_io COLS[1]  D10
 set_io COLS[2]  A6

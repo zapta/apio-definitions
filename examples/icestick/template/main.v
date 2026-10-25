@@ -7,7 +7,7 @@
 
 //-- Template for the top entity
 module top (
-    output wire D1
+    output wire D1  // Active high.
 );
 
   //-- Turn on the D1 (red led) on the icestick

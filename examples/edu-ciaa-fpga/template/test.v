@@ -4,7 +4,7 @@
 
 module Test (
     input  CLK,  // 12MHz clock
-    output LED0  // D6
+    output LED0  // D6, active high.
 );
 
   reg [23:0] counter = 0;

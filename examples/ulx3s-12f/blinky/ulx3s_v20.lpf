@@ -25,7 +25,7 @@ IOBUF  PORT "ftdi_nrts" PULLMODE=UP IO_TYPE=LVCMOS33;
 IOBUF  PORT "ftdi_ndtr" PULLMODE=UP IO_TYPE=LVCMOS33;
 IOBUF  PORT "ftdi_txden" PULLMODE=UP IO_TYPE=LVCMOS33;
 
-## LED indicators "blinkey" and "gpio" sheet
+## LED indicators "blinkey" and "gpio" sheet (active high)
 LOCATE COMP "led[7]" SITE "H3";
 LOCATE COMP "led[6]" SITE "E1";
 LOCATE COMP "led[5]" SITE "E2";
@@ -43,7 +43,7 @@ IOBUF  PORT "led[5]" PULLMODE=NONE IO_TYPE=LVCMOS33 DRIVE=4;
 IOBUF  PORT "led[6]" PULLMODE=NONE IO_TYPE=LVCMOS33 DRIVE=4;
 IOBUF  PORT "led[7]" PULLMODE=NONE IO_TYPE=LVCMOS33 DRIVE=4;
 
-## Pushbuttons "blinkey", "flash", "power", "gpdi" sheet
+## Pushbuttons "blinkey", "flash", "power", "gpdi" sheet (btn[0] active low, the rest active high)
 LOCATE COMP "btn[0]" SITE "D6";  # BTN_PWRn (inverted logic)
 LOCATE COMP "btn[1]" SITE "R1";  # FIRE1
 LOCATE COMP "btn[2]" SITE "T1";  # FIRE2

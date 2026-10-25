@@ -3,7 +3,7 @@
 //--------------------------------------
 
 module ledon (
-    output logic led  //-- LED
+    output logic led  // -- LED, active low.
 );
 
   // -- The LED on the ColorLight-5A-75E works

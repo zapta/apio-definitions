@@ -10,7 +10,7 @@ module main #(
     parameter WIDTH = `WIDTH
 ) (
     input  CLK,  // System clock
-    output LED   // Output
+    output LED   // Output, active low.
 );
 
   reg [WIDTH-1:0] counter = 0;

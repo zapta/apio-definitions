@@ -1,7 +1,7 @@
 // Generates a RGB blinking pattern. Uses the internal oscilator.
 module main (
     // [0]=red, [1]=green, [2]=blue. See pin definitions in main.pcf
-    output [2:0] leds_out
+    output [2:0] leds_out  // Active low.
 );
 
   wire clk;

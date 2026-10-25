@@ -1,9 +1,9 @@
 
 module blink_test (
     input  CLK,
-    output LED_G,
-    output LED_R,
-    output LED_B
+    output LED_G,  // Active low.
+    output LED_R,  // Active low.
+    output LED_B   // Active low.
 );
 
   //-- Modify this value for changing the blink frequency
