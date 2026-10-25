@@ -6,20 +6,19 @@
 [size] 1366 744
 [pos] 217 83
 *-5.773307 31 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
-[treeopen] secnotas_tb.
+[treeopen] main_tb.
 [sst_width] 225
 [signals_width] 117
 [sst_expanded] 1
 [sst_vpaned_height] 211
 @28
-secnotas_tb.clk
-secnotas_tb.dut.ch0
-secnotas_tb.dut.ch1
-secnotas_tb.dut.ch2
-secnotas_tb.ch_out
-secnotas_tb.dut.ch_out2
+main_tb.sys_clk
+main_tb.dut.ch0
+main_tb.dut.ch1
+main_tb.dut.ch2
+main_tb.buzzers[1:0]
 @24
-secnotas_tb.dut.sel[5:0]
-secnotas_tb.dut.sel2[5:0]
+main_tb.dut.sel[5:0]
+main_tb.dut.sel2[5:0]
 [pattern_trace] 1
 [pattern_trace] 0

@@ -11,7 +11,7 @@
 //-----------------------------------------------------------------------------
 
 module notegen (
-    input  wire        clk,     //-- Senal de reloj global
+    input  wire        sys_clk,     //-- Senal de reloj global
     input  wire        rstn,    //-- Reset
     input  wire [15:0] note,    //-- Divisor
     output reg         clk_out
@@ -23,7 +23,7 @@ module notegen (
   reg [15:0] divcounter = 0;
 
   //-- Contador módulo note
-  always @(posedge clk)
+  always @(posedge sys_clk)
 
     //-- Reset
     if (rstn == 0)
@@ -44,7 +44,7 @@ module notegen (
 
   //-- Divisor de frecuencia entre 2, para obtener como salida una señal
   //-- con un ciclo de trabajo del 50%
-  always @(posedge clk)
+  always @(posedge sys_clk)
     if (rstn == 0) clk_out <= 0;
 
     else if (note == 0) clk_out <= 0;

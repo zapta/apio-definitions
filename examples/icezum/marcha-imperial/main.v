@@ -11,12 +11,12 @@
 `include "divider.vh"
 
 //-- Parameteros:
-//-- clk: Reloj de entrada de la placa iCEstick
-//-- ch_out: Canal de salida
-module romnotes (
-    input wire clk,
+//-- sys_clk: Reloj de entrada de la placa iCEstick
+//-- buzzer: Canal de salida
+module main (
+    input wire sys_clk,  // 12MHz clock
     output wire [7:0] leds,  // Active high.
-    output wire ch_out
+    output wire buzzer
 );
 
   //-- Parametros
@@ -50,7 +50,7 @@ module romnotes (
       .AW(AW),
       .DW(DW)
   ) ROM (
-      .clk (clk),
+      .sys_clk (sys_clk),
       .addr(addr),
       .data(note)
   );
@@ -58,25 +58,25 @@ module romnotes (
 
   //-- Generador de notas
   notegen CH0 (
-      .clk(clk),
+      .sys_clk(sys_clk),
       .rstn(rstn),
       .note(note),
-      .clk_out(ch_out)
+      .clk_out(buzzer)
   );
 
   //-- Sacar los 8 bits de la nota por los leds
   assign leds = note[7:0];
 
   //-- Inicializador
-  always @(posedge clk) rstn <= 1;
+  always @(posedge sys_clk) rstn <= 1;
 
 
   //-- Contador para seleccion de nota
-  always @(posedge clk) if (clk_dur) addr <= addr + 1;
+  always @(posedge sys_clk) if (clk_dur) addr <= addr + 1;
 
   //-- Divisor para marcar la duración de cada nota
   dividerp1 #(DUR) TIMER0 (
-      .clk(clk),
+      .sys_clk(sys_clk),
       .clk_out(clk_dur)
   );
 

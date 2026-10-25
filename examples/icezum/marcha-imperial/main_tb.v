@@ -1,5 +1,5 @@
 //-------------------------------------------------------------------
-//-- romnotes_tb.v
+//-- main_tb.v
 //-- Banco de pruebas para el reproductor de melodias
 //-------------------------------------------------------------------
 //-- BQ October 2015. Written by Juan Gonzalez (Obijuan)
@@ -9,33 +9,33 @@
 
 `define DUMP_FILE_NAME(x) `"x.vcd`"
 
-module romnotes_tb ();
+module main_tb ();
 
   //-- Registro para generar la señal de reloj
-  reg  clk = 0;
+  reg  sys_clk = 0;
 
   //-- Salidas de los canales
-  wire ch_out;
+  wire buzzer;
 
 
   //-- Instanciar el componente y establecer el valor del divisor
   //-- Se pone un valor bajo para simular (de lo contrario tardaria mucho)
-  romnotes #(
+  main #(
       .DUR(2)
   ) dut (
-      .clk(clk),
-      .ch_out(ch_out)
+      .sys_clk(sys_clk),
+      .buzzer(buzzer)
   );
 
   //-- Generador de reloj. Periodo 2 unidades
-  always #1 clk <= ~clk;
+  always #1 sys_clk <= ~sys_clk;
 
 
   //-- Proceso al inicio
   initial begin
 
     //-- Dump vars to the .vcd output file
-    $dumpvars(0, romnotes_tb);
+    $dumpvars(0, main_tb);
 
     #200 $display("FIN de la simulacion");
     $finish;

@@ -9,4 +9,5 @@
 [*]
 counter_tb.clk
 counter_tb.clk_num[31:0]
-counter_tb.seven_seg[7:0]
+counter_tb.digit_sel
+counter_tb.segs_n[6:0]

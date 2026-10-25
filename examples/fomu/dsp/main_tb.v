@@ -16,12 +16,12 @@ module main_tb ();
 
 
   main tested (
-      .clki(clk),
-      .user_1(user_1),
-      .user_2(user_2),
-      .usb_dp(),
-      .usb_dn(),
-      .usb_dp_pu()
+      .sys_clk(clk),
+      .user_1 (user_1),
+      .user_2 (user_2),
+      .usb_dp (),
+      .usb_dn (),
+      .usb_pu ()
   );
 
 

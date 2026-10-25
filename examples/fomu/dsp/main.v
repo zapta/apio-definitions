@@ -5,20 +5,20 @@
 
 module main (
 
-    input  clki,
+    input  sys_clk,  // 48MHz clock
     input  user_1,  // serial data in.
     output reg    user_2,  // serial data out
 
     // USB Pins (which should be statically driven if not being used).
     output usb_dp,
     output usb_dn,
-    output usb_dp_pu
+    output usb_pu
 );
 
   // Prevent the host from trying to connect to this design.
   assign usb_dp = 1'b0;
   assign usb_dn = 1'b0;
-  assign usb_dp_pu = 1'b0;
+  assign usb_pu = 1'b0;
 
   // The size of each of the serial registers.
   // TODO: Why this fails with N = 40.
@@ -28,7 +28,7 @@ module main (
   reg [N-1:0] reg1;
   reg [N-1:0] reg2;
 
-  always @(posedge clki) begin
+  always @(posedge sys_clk) begin
     // Shift din into 2 x N words 
     reg1   <= {reg1[N-2:0], user_1};
     reg2   <= {reg1[N-2:0], reg1[N-1]};

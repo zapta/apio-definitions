@@ -15,13 +15,15 @@ module counter_tb ();
 
   `DEF_CLK
 
-  wire [7:0] seven_seg;
+  wire [6:0] segs_n;
+  wire digit_sel;
 
-  counter #(
+  main #(
       .CLK_HZ(20)
   ) dut (
-      .sys_clk  (clk),
-      .seven_seg(seven_seg)
+      .sys_clk(clk),
+      .segs_n(segs_n),
+      .digit_sel(digit_sel)
   );
 
   initial begin

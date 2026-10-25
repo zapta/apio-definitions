@@ -17,14 +17,16 @@ module blinky_tb ();
   `DEF_CLK
 
   // Outputs.
-  wire [7:0] seven_seg;
+  wire [6:0] segs_n;
+  wire digit_sel;
 
   // Instantiate a blinky that toggles segment A every 5 clocks.
   main #(
       .DIV(5)
   ) ticker (
-      .sys_clk  (clk),
-      .seven_seg(seven_seg)
+      .sys_clk(clk),
+      .segs_n(segs_n),
+      .digit_sel(digit_sel)
   );
 
   initial begin

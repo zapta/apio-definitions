@@ -9,36 +9,36 @@
 
 `define DUMP_FILE_NAME(x) `"x.vcd`"
 
-module secnotas_tb ();
+module main_tb ();
 
   //-- Registro para generar la señal de reloj
-  reg  clk = 0;
+  reg sys_clk = 0;
 
   //-- Salidas de los canales
-  wire ch_out;
+  wire [1:0] buzzers;
 
 
   //-- Instanciar el componente y establecer el valor del divisor
   //-- Se pone un valor bajo para simular (de lo contrario tardaria mucho)
-  secnotas #(
+  main #(
       .N0 (4),
       .N1 (3),
       .N2 (2),
       .DUR(10)
   ) dut (
-      .clk(clk),
-      .ch_out(ch_out)
+      .sys_clk(sys_clk),
+      .buzzers(buzzers)
   );
 
   //-- Generador de reloj. Periodo 2 unidades
-  always #1 clk <= ~clk;
+  always #1 sys_clk <= ~sys_clk;
 
 
   //-- Proceso al inicio
   initial begin
 
     //-- Dump vars to the .vcd output file
-    $dumpvars(0, secnotas_tb);
+    $dumpvars(0, main_tb);
 
     #200 $display("FIN de la simulacion");
     $finish;

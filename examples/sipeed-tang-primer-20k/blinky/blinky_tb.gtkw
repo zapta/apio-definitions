@@ -32,7 +32,7 @@ blinky_tb.ticker.blink_counter[31:0]
 [color] 3
 blinky_tb.ticker.led
 @22
-blinky_tb.seven_seg[7:0]
+blinky_tb.dut.seven_seg[7:0]
 @200
 -
 [pattern_trace] 1

@@ -32,8 +32,13 @@ module main #(
     parameter integer DIV = (27000000 / 2)
 ) (
     input        sys_clk,
-    output [7:0] seven_seg  // {CAT, AG, AF, AE, AD, AC, AB, AA}
+    output [6:0] segs_n,    // Segments a to g, active low.
+    output       digit_sel  // Digit select. 1 shows the units digit, 0 the tens.
 );
+
+  // The display bus, {CAT, AG, AF, AE, AD, AC, AB, AA}.
+  wire [7:0] seven_seg;
+  assign {digit_sel, segs_n} = seven_seg;
 
   // icebreaker 7-seg PMOD v1.1a: segments are active low. CAT=1 selects
   // the right-hand digit (workshop mapping). Other segments stay off.

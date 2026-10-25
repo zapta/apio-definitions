@@ -20,7 +20,7 @@ module genrom #(  //-- Parametros
 )  //-- Bits de los datos (Data witdh)
 
 (  //-- Puertos
-    input                clk,   //-- Señal de reloj global
+    input                sys_clk,   //-- Señal de reloj global
     input  wire [AW-1:0] addr,  //-- Direcciones
     output reg  [DW-1:0] data
 );  //-- Dato de salida
@@ -32,7 +32,7 @@ module genrom #(  //-- Parametros
   reg [DW-1:0] rom[0:NPOS-1];
 
   //-- Lectura de la memoria
-  always @(posedge clk) begin
+  always @(posedge sys_clk) begin
     data <= rom[addr];
   end
 

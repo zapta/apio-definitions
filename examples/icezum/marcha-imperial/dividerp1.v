@@ -10,13 +10,13 @@
 `include "divider.vh"
 
 //-- ENTRADAS:
-//--     -clk: Senal de reloj del sistema (12 MHZ en la iceStick)
+//--     -sys_clk: Senal de reloj del sistema (12 MHZ en la iceStick)
 //
 //-- SALIDAS:
 //--     - clk_out. Señal de salida para lograr la velocidad en baudios indicada
-//--                Anchura de 1 periodo de clk. SALIDA NO REGISTRADA
+//--                Anchura de 1 periodo de sys_clk. SALIDA NO REGISTRADA
 module dividerp1 (
-    input  wire clk,
+    input  wire sys_clk,
     output wire clk_out
 );
 
@@ -30,7 +30,7 @@ module dividerp1 (
   reg [N-1:0] divcounter = 0;
 
   //-- Contador módulo M
-  always @(posedge clk) divcounter <= (divcounter == M - 1) ? 0 : divcounter + 1;
+  always @(posedge sys_clk) divcounter <= (divcounter == M - 1) ? 0 : divcounter + 1;
 
   //-- Sacar un pulso de anchura 1 ciclo de reloj si el generador
   assign clk_out = (divcounter == 0) ? 1 : 0;

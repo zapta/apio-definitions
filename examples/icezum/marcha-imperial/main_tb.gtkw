@@ -6,32 +6,32 @@
 [size] 1240 699
 [pos] -1 -1
 *-5.647449 14 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
-[treeopen] romnotes_tb.
-[treeopen] romnotes_tb.dut.
+[treeopen] main_tb.
+[treeopen] main_tb.dut.
 [sst_width] 253
 [signals_width] 157
 [sst_expanded] 1
 [sst_vpaned_height] 192
 @28
-romnotes_tb.clk
-romnotes_tb.ch_out
+main_tb.sys_clk
+main_tb.buzzer
 @200
 -
 -ROM
 @28
-romnotes_tb.dut.ROM.clk
+main_tb.dut.ROM.sys_clk
 @22
-romnotes_tb.dut.ROM.addr[7:0]
+main_tb.dut.ROM.addr[7:0]
 @25
-romnotes_tb.dut.ROM.data[15:0]
+main_tb.dut.ROM.data[15:0]
 @200
 -
 -CH0
 @28
-romnotes_tb.dut.CH0.clk
-romnotes_tb.dut.CH0.rstn
-romnotes_tb.dut.CH0.clk_out
+main_tb.dut.CH0.sys_clk
+main_tb.dut.CH0.rstn
+main_tb.dut.CH0.clk_out
 @24
-romnotes_tb.dut.CH0.note[15:0]
+main_tb.dut.CH0.note[15:0]
 [pattern_trace] 1
 [pattern_trace] 0
