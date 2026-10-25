@@ -10,6 +10,8 @@ Each example is a standalone Apio project. Users fetch it with `apio examples fe
 
 `alhambra-ii/blinky/main.v` shows the style.
 
+**Language:** write everything in an example in English: comments, signal and module names, `info`, README files, and comments in `apio.ini` and constraint files. Translate non-English text when reworking an example. Names and quotes that are part of the content, such as a song title, can stay as they are.
+
 ## Which rules apply
 
 The rules in this file are a mix of what `test_examples.py` enforces and repo conventions. Many existing examples predate the conventions. Apply the rules to new examples and to examples you rework. Don't fix other examples unless asked. Where a rule says how many examples follow it today, rename or rewrite the others only when asked or when already reworking that example.
