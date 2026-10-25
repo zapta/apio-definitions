@@ -3,7 +3,7 @@
 //-- Turn on all the leds
 //------------------------------------------------------------------
 
-module leds (
+module main (
     output wire D1,  // Active high.
     output wire D2,  // Active high.
     output wire D3,  // Active high.

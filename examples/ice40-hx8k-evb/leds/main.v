@@ -5,7 +5,7 @@
 //--   * iCE40-HX1K-EVB Olimex
 //------------------------------------------------------------------
 
-module leds (
+module main (
     output wire [1:0] led,  // Active high.
     input  wire [1:0] but   // Push buttons, active low.
 );

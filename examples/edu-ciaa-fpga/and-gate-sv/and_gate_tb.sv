@@ -6,7 +6,7 @@ module and_gate_testbench ();
   logic a, b, s;
 
   // Instantiate device under test
-  and_gate dut (
+  main dut (
       a,
       b,
       s

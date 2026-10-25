@@ -23,7 +23,7 @@ module wire_tb ();
   wire out;
 
   //-- Instantiate the unit to test
-  simplewire UUT (
+  main UUT (
       .in (in),
       .out(out)
   );

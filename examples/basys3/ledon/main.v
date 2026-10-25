@@ -1,7 +1,7 @@
 `default_nettype none
 
 //-- Ejemplo basico para encender un led
-module ledon (
+module main (
 
     //-- LEDs de la BASYS3
     output wire [15:0] leds  // Active high.

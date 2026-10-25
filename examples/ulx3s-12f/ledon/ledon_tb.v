@@ -17,7 +17,7 @@ module ledon_tb ();
   wire led0, led1, led2, led3, led4, led5, led6, led7;
 
   //-- Instantiate the unit to test
-  led_on UUT (.led({led7, led6, led5, led4, led3, led2, led1, led0}));
+  main UUT (.led({led7, led6, led5, led4, led3, led2, led1, led0}));
 
 
   initial begin

@@ -1,4 +1,4 @@
-module and_gate (
+module main (
     input  logic a,
     input  logic b,
     output logic s

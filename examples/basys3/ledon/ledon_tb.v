@@ -19,7 +19,7 @@ module ledon_tb ();
   wire led15 = leds[15];
 
   //-- Instantiate the unit to test
-  ledon UUT (.leds(leds));
+  main UUT (.leds(leds));
 
 
   initial begin

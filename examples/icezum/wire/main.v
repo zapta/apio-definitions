@@ -7,7 +7,7 @@
 //--   * Icezum alhambra (https://github.com/FPGAwars/icezum)
 //------------------------------------------------------------------
 
-module simplewire (
+module main (
     input  wire in,
     output wire out
 );

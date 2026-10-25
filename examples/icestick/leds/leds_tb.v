@@ -22,7 +22,7 @@ module leds_tb ();
   wire d1, d2, d3, d4, d5;
 
   //-- Instantiate the unit to test
-  leds UUT (
+  main UUT (
       .D1(d1),
       .D2(d2),
       .D3(d3),

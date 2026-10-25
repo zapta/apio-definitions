@@ -22,7 +22,7 @@ module leds_tb ();
   reg  [1:0] but;
 
   //-- Instantiate the unit to test
-  leds UUT (
+  main UUT (
       .led(led),
       .but(but)
   );

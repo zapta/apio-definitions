@@ -2,7 +2,7 @@
 //-- Turning on the LED
 //--------------------------------------
 
-module ledon (
+module main (
     output led  // -- LED, active low.
 );
 

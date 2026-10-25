@@ -2,8 +2,8 @@
 //-- Turning on the LED
 //--------------------------------------
 
-module top (
-    output led  // -- LED, active low.
+module main (
+    output logic led  // -- LED, active low.
 );
 
   // -- The LED on the ColorLight-5A-75E works

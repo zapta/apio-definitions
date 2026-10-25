@@ -2,7 +2,7 @@
 //-- Hello world example for the iceWerx board
 //-- Turn on the Red LED
 //------------------------------------------------------------------
-module leds (
+module main (
     output wire LEDR  // Active low.
 );
 
