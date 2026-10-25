@@ -144,7 +144,7 @@ See `pll.v` in `examples/alhambra-ii/pll` or `examples/arty-a7-35t/pll`. The PLL
 ## Lint and formatting
 
 - **Lint:** `apio lint` must report no warnings. It exits with an error on any Verilator warning, so `test_examples.py` already fails on them. Width-explicit constants (`4'd0` rather than `0` where widths differ) avoid most width warnings.
-- **Formatting:** all examples must be formatted with `apio format`, so that running it again changes no file. Run `apio format` in each example you add or edit, or `invoke format` for all. `test_examples.py` runs `apio format` but doesn't check for a diff, so check with `git diff` afterwards. As of 2026-10-22, every example passes this check.
+- **Formatting:** all examples must be formatted with `apio format`, so that running it again changes no file. Run `apio format` in each example you add or edit, or `invoke format` from the repo root for all. `test_examples.py` runs `apio format` but doesn't check for a diff, so check with `git diff` afterwards. As of 2026-10-22, every example passes this check.
 - **`NO_FORMAT_EXAMPLES`** in `test_examples.py` lists examples the test skips formatting for (`fomu/blink`, `icezum/marcha-imperial`). Both now format cleanly, so the list may be stale.
 
 ## Testbenches
