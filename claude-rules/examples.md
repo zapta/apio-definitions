@@ -154,7 +154,7 @@ Use the FPGA's internal oscillator (e.g. `SB_HFOSC`) only when the board has no 
 - **`` `timescale``:** the model's `#5` needs a time unit, so put `` `timescale 1ns / 1ps`` in the oscillator wrapper's file too, not only in the testbench. The other design files don't need it. Apio runs Verilator with `-Wno-TIMESCALEMOD`, and Icarus doesn't warn either, so having it in only some files is fine.
 - **Testbench:** the design makes its own clock, so the testbench reads it instead of driving it: `wire sys_clk = dut.sys_clk;`. `clk_num` and the `.gtkw` file use this `sys_clk` as usual.
 
-`upduino3/blinky` and the other UP5K RGB LED blinky examples (`upduino`, `upduino2`, `upduino21`, `pico-ice`, `vsdsquadron-fm`, `fpga101`) use this pattern, and so does `ecp5-evaluation-board/blinky` with the ECP5 `OSCG` (in `osc.v`). They were checked with `invoke test`.
+`upduino3/blinky` and the other UP5K RGB LED blinky examples (`upduino`, `upduino2`, `upduino21`, `pico-ice`, `vsdsquadron-fm`, `fpga101`) and `odt-icyblue-feather/blinky` use this pattern, and so does `ecp5-evaluation-board/blinky` with the ECP5 `OSCG` (in `osc.v`). They were checked with `invoke test`.
 
 ## Lint and formatting
 
