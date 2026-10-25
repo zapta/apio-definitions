@@ -6,29 +6,29 @@
 [size] 1320 747
 [pos] -1 -1
 *-4.268218 12 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
-[treeopen] test_Main.
+[treeopen] main_tb.
 [sst_width] 253
 [signals_width] 136
 [sst_expanded] 1
 [sst_vpaned_height] 208
 @29
-test_Main.CLK
+main_tb.sys_clk
 @200
 -
 @24
-test_Main.dut.counter[31:0]
+main_tb.dut.counter[31:0]
 @200
 -
 @28
 [color] 3
-test_Main.dut.ROWS[7:0]
+main_tb.dut.rows_n[7:0]
 @200
 -
 @28
-test_Main.dut.COLS[3:0]
+main_tb.dut.cols_n[3:0]
 @200
 -
 @28
-test_Main.tb_error
+main_tb.tb_error
 [pattern_trace] 1
 [pattern_trace] 0

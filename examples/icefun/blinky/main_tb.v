@@ -3,59 +3,60 @@
 
 `default_nettype none
 
-module test_Main;
-  reg CLK = 0;
-  wire [7:0] ROWS;
-  wire [3:0] COLS;
+module main_tb;
+  reg sys_clk = 0;
+  wire [7:0] rows_n;
+  wire [3:0] cols_n;
 
   // Rule 6: Set to high on first error
   reg tb_error = 0;
 
-  Main #(
+  main #(
       .N(3)
   ) dut (
-      .CLK (CLK),
-      .ROWS(ROWS),
-      .COLS(COLS)
+      .sys_clk(sys_clk),
+      .rows_n (rows_n),
+      .cols_n (cols_n)
   );
 
   // Clock: 10ns period (12MHz is ~83.3ns, simplified for sim)
-  always #5 CLK = ~CLK;
+  always #5 sys_clk = ~sys_clk;
 
   initial begin
     // Rule 1: Use $dumpvars with module name
-    $dumpvars(0, test_Main);
+    $dumpvars(0, main_tb);
 
     #1;
-    if (ROWS !== 8'b11111101 || COLS !== 4'b1110) begin
-      $display("ERROR at t=0: Expected ROWS=11111101, COLS=1110, got ROWS=%b, COLS=%b", ROWS, COLS);
+    if (rows_n !== 8'b11111101 || cols_n !== 4'b1110) begin
+      $display("ERROR at t=0: Expected rows_n=11111101, cols_n=1110, got rows_n=%b, cols_n=%b",
+               rows_n, cols_n);
       tb_error = 1;
       if (!`APIO_SIM) $fatal;
     end
 
     // === Toggle 1 ===
-    repeat (3) @(posedge CLK);
+    repeat (3) @(posedge sys_clk);
     #1;
-    if (ROWS !== 8'b11111110) begin
-      $display("ERROR at toggle 1: Expected ROWS=11111110, got ROWS=%b", ROWS);
+    if (rows_n !== 8'b11111110) begin
+      $display("ERROR at toggle 1: Expected rows_n=11111110, got rows_n=%b", rows_n);
       tb_error = 1;
       if (!`APIO_SIM) $fatal;
     end
 
     // === Toggle 2 ===
-    repeat (3) @(posedge CLK);
+    repeat (3) @(posedge sys_clk);
     #1;
-    if (ROWS !== 8'b11111101) begin
-      $display("ERROR at toggle 2: Expected ROWS=11111101, got ROWS=%b", ROWS);
+    if (rows_n !== 8'b11111101) begin
+      $display("ERROR at toggle 2: Expected rows_n=11111101, got rows_n=%b", rows_n);
       tb_error = 1;
       if (!`APIO_SIM) $fatal;
     end
 
     // === Toggle 3 ===
-    repeat (3) @(posedge CLK);
+    repeat (3) @(posedge sys_clk);
     #1;
-    if (ROWS !== 8'b11111110) begin
-      $display("ERROR at toggle 3: Expected ROWS=11111110, got ROWS=%b", ROWS);
+    if (rows_n !== 8'b11111110) begin
+      $display("ERROR at toggle 3: Expected rows_n=11111110, got rows_n=%b", rows_n);
       tb_error = 1;
       if (!`APIO_SIM) $fatal;
     end

@@ -1,10 +1,10 @@
 
-module Main #(
+module main #(
     parameter integer N = 3_000_000
 ) (
-    input        CLK,   // 12MHz clock
-    output [7:0] ROWS,  // LED rows, active low.
-    output [3:0] COLS   // LED columns, active low.
+    input        sys_clk,  // 12MHz clock
+    output [7:0] rows_n,   // LED rows, active low.
+    output [3:0] cols_n    // LED columns, active low.
 );
 
   reg [31:0] counter = 0;
@@ -12,10 +12,10 @@ module Main #(
   reg toggle = 0;
 
   // Rows and columns are active low.
-  assign ROWS = {6'b111111, toggle, ~toggle};
-  assign COLS = 4'b1110;
+  assign rows_n = {6'b111111, toggle, ~toggle};
+  assign cols_n = 4'b1110;
 
-  always @(posedge CLK) begin
+  always @(posedge sys_clk) begin
     if (counter >= N - 1) begin
       counter <= 0;
       toggle  <= !toggle;

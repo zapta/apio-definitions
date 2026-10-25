@@ -1,0 +1,9 @@
+
+# RGB LED (active low)
+set_io -nowarn led_blue 39
+set_io -nowarn led_green 40
+set_io -nowarn led_red 41
+set_io -nowarn sys_clk 35
+
+
+
