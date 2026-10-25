@@ -1,16 +1,13 @@
-//------------------------------------------------------------------
-//-- Hello world example
-//-- Control leds by pushing the buttons
-//-- This example has been tested on the following boards:
-//--   * iCE40-HX1K-EVB Olimex
-//------------------------------------------------------------------
-
+// Each LED is on while its button is pressed.
 module main (
-    output wire [1:0] led,  // Active high.
-    input  wire [1:0] but   // Push buttons, active low.
+    input  [1:0] btns_n,  // Push buttons, active low.
+    output [1:0] leds     // Active high.
 );
 
-  assign led[0] = but[0];
-  assign led[1] = but[1];
+  // The buttons are active low, so invert them.
+  wire [1:0] btns = ~btns_n;
+
+  // Each LED follows its button.
+  assign leds = btns;
 
 endmodule

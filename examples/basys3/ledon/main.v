@@ -1,17 +1,9 @@
-`default_nettype none
-
-//-- Ejemplo basico para encender un led
+// Turns on LED 15 and turns off the others.
 module main (
-
-    //-- LEDs de la BASYS3
-    output wire [15:0] leds  // Active high.
+    output [15:0] leds  // Active high.
 );
 
-  //-- Encender led15!
-  assign leds[15]   = 1'b1;
-
-  //-- El resto de leds, apagados (sin driver emiten warnings en yosys)
-  assign leds[14:0] = 15'b0;
+  // Turn on leds[15] only.
+  assign leds = 16'h8000;
 
 endmodule
-

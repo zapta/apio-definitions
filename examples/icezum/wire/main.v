@@ -1,18 +1,10 @@
-//------------------------------------------------------------------
-//-- A simple wire that connects the input with the output
-//-- In the icezum board this wire is for connecting the DIO 13 with
-//-- the led0
-//--
-//-- This example has been tested on the following boards:
-//--   * Icezum alhambra (https://github.com/FPGAwars/icezum)
-//------------------------------------------------------------------
-
+// Connects a header pin to an LED, so the LED shows the pin's level.
 module main (
-    input  wire in,
-    output wire out
+    input  gpio,  // Header pin D13.
+    output led    // LED0, active high.
 );
 
-  //-- Wire: Connect the input with the output
-  assign out = in;
+  // The LED follows the pin.
+  assign led = gpio;
 
 endmodule

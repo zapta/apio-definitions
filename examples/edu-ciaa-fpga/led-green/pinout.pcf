@@ -1,14 +1,6 @@
-# -----------------------------------------------------------------------------
-#- EDU-CIAA-FPGA constraint file (.pcf)
-#- Sep - 2020
-#- GPL license
-#- Repo: https://gitlab.com/educiaafpga
-# -----------------------------------------------------------------------------
+# Constraint file of the led-green example for the EDU-CIAA-FPGA board.
+# It assigns the design's signals to FPGA pins, and lists only
+# the pins that this example uses.
 
-#------ User LEDs
-#-- Green LED (active high)
-set_io LEDG 4  #-- output 
-
-
-
-
+# Green LED, active high.
+set_io led 4  # output

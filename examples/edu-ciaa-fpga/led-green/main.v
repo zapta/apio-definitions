@@ -1,12 +1,9 @@
-//------------------------------------------------------------------
-//-- Hello world example for the EDU-CIAA-FPGA
-//-- Turn on the green LED
-//------------------------------------------------------------------
+// Turns on the green LED.
 module main (
-    output wire LEDG  // Active high.
+    output led  // The green LED, active high.
 );
 
-  assign LEDG = 1'b1;
+  // Turn on the LED.
+  assign led = 1'b1;
 
 endmodule
-

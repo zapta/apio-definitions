@@ -1,3 +1,10 @@
-set_io --warn-no-port s 1  #-- output
-set_io --warn-no-port a 31  # input
-set_io --warn-no-port b 32  # input
+# Constraint file of the and-gate-sv example for the EDU-CIAA-FPGA board.
+# It assigns the design's signals to FPGA pins, and lists only
+# the pins that this example uses.
+
+# Push buttons. Their polarity is unknown.
+set_io btns[0] 31  # input, BTN1
+set_io btns[1] 32  # input, BTN2
+
+# LED0, active high.
+set_io led 1  # output

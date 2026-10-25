@@ -1,14 +1,12 @@
-//------------------------------------------------------------------
-//-- Hello world example for the iceWerx board
-//-- Turn on the Red LED
-//------------------------------------------------------------------
+// Turns on the red LED.
 module main (
-    output wire LEDR  // Active low.
+    output led_n  // The red LED, active low.
 );
 
-  //-- Red LED on
-  //-- Inverse logic: 0: ON, 1: OFF
-  assign LEDR = 1'b0;
+  // Turn on the LED.
+  wire led = 1'b1;
+
+  // The LED is active low, so invert it.
+  assign led_n = ~led;
 
 endmodule
-

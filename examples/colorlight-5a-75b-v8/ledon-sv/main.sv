@@ -1,19 +1,12 @@
-//--------------------------------------
-//-- Turning on the LED
-//--------------------------------------
-
+// Turns on the LED.
 module main (
-    output logic led  // -- LED, active low.
+    output logic led_n  // The LED, active low.
 );
 
-  // -- The LED on the ColorLight-5A-75E works
-  // -- with inverse logic:
-  // -- 0: Turn on the LED 
-  // -- 1: Turn off the LED
+  // Turn on the LED.
+  logic led = 1'b1;
 
-  // Turn on the led
-  // (output the bit 0 to the led)
-  assign led = 1'b0;
+  // The LED is active low, so invert it.
+  assign led_n = ~led;
 
 endmodule
-
