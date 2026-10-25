@@ -2,10 +2,6 @@
 [*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
 [*] Tue Feb 24 05:21:33 2026
 [*]
-[dumpfile] "/Users/user/work-brisbane/_build/default/blinky_tb.vcd"
-[dumpfile_mtime] "Tue Feb 24 05:19:52 2026"
-[dumpfile_size] 4425
-[savefile] "/Users/user/work-brisbane/blinky_tb.gtkw"
 [timestart] 0
 [size] 1280 600
 [pos] -1 -1

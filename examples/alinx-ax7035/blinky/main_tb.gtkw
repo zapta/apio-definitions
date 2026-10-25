@@ -2,10 +2,6 @@
 [*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
 [*] Thu Aug 27 04:59:18 2026
 [*]
-[dumpfile] "/Users/user/work/_build/blink-slow/main_tb.vcd"
-[dumpfile_mtime] "Thu Aug 27 04:57:48 2026"
-[dumpfile_size] 1111
-[savefile] "/Users/user/work/main_tb.gtkw"
 [timestart] 0
 [size] 1152 717
 [pos] -1 -1

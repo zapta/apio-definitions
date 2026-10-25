@@ -2,10 +2,6 @@
 [*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
 [*] Fri Jun  6 00:45:21 2025
 [*]
-[dumpfile] "/Users/user/work/_build/default/main_tb.vcd"
-[dumpfile_mtime] "Fri Jun  6 00:43:27 2025"
-[dumpfile_size] 851
-[savefile] "/Users/user/work/main_tb.gtkw"
 [timestart] 0
 [size] 1320 747
 [pos] -1 -1

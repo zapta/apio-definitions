@@ -2,10 +2,6 @@
 [*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
 [*] Sat Mar  2 22:47:15 2024
 [*]
-[dumpfile] "main_tb.vcd"
-[dumpfile_mtime] "Sat Mar  2 22:46:12 2024"
-[dumpfile_size] 7168
-[savefile] "main_tb.gtkw"
 [timestart] 0
 [size] 1440 900
 [pos] -1 -26

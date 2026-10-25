@@ -24,7 +24,7 @@ FPGA_TYPE: hx
 FPGA_PACK: tq144:4k
 PROG: black-iceprog /dev/ttyACM0
 yosys -p "synth_ice40 -blif hardware.blif" -q blink.v
-arachne-pnr -d 8k -P tq144:4k -p blink.pcf -o hardware.asc hardware.blif
+arachne-pnr -d 8k -P tq144:4k -p pinout.pcf -o hardware.asc hardware.blif
 [...]
 icepack hardware.asc hardware.bin
 black-iceprog /dev/ttyACM0 hardware.bin

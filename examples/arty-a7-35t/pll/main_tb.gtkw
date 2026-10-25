@@ -1,7 +1,6 @@
 [*]
 [*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
 [*]
-[dumpfile] "main_tb.vcd"
 [timestart] 0
 [size] 1000 600
 [pos] -1 -1

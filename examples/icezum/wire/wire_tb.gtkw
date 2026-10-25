@@ -2,10 +2,6 @@
 [*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
 [*] Thu Apr 14 10:59:17 2016
 [*]
-[dumpfile] "/home/obijuan/development/apio/examples/wire/wire_tb.vcd"
-[dumpfile_mtime] "Thu Apr 14 10:59:08 2016"
-[dumpfile_size] 638
-[savefile] "/home/obijuan/development/apio/examples/wire/wire_tb.gtkw"
 [timestart] 0
 [size] 1022 600
 [pos] 0 65

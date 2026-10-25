@@ -2,10 +2,6 @@
 [*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
 [*] Sun Jan  5 07:47:26 2025
 [*]
-[dumpfile] "/Volumes/projects/apio-examples/repo/examples/sipeed-tang-nano-9k/blinky/_build/blinky_tb.vcd"
-[dumpfile_mtime] "Sun Jan  5 07:45:31 2025"
-[dumpfile_size] 1557
-[savefile] "/Volumes/projects/apio-examples/repo/examples/sipeed-tang-nano-9k/blinky/blinky_tb.gtkw"
 [timestart] 0
 [size] 1296 600
 [pos] -1 -1

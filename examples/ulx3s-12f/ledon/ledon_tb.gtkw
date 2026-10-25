@@ -2,10 +2,6 @@
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
 [*] Thu Apr 28 07:18:35 2022
 [*]
-[dumpfile] "/home/obijuan/Develop/FPGAwars/apio-examples/ulx3s-12f/ledon/ledon_tb.vcd"
-[dumpfile_mtime] "Thu Apr 28 07:14:34 2022"
-[dumpfile_size] 462
-[savefile] "/home/obijuan/Develop/FPGAwars/apio-examples/ulx3s-12f/ledon/ledon_tb.gtkw"
 [timestart] 0
 [size] 1920 1043
 [pos] -39 -39

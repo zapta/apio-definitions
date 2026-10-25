@@ -2,10 +2,6 @@
 [*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
 [*] Fri Jan 10 18:07:58 2025
 [*]
-[dumpfile] "/Volumes/projects/apio-examples/repo/examples/sipeed-tang-nano-9k/pll/_build/blinker_tb.vcd"
-[dumpfile_mtime] "Fri Jan 10 18:07:19 2025"
-[dumpfile_size] 1459
-[savefile] "/Volumes/projects/apio-examples/repo/examples/sipeed-tang-nano-9k/pll/blinker_tb.gtkw"
 [timestart] 0
 [size] 1000 600
 [pos] -1 -1

@@ -2,10 +2,6 @@
 [*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
 [*] Thu Jan 23 06:27:03 2025
 [*]
-[dumpfile] "/Volumes/projects/apio-examples/repo/examples/fomu/dsp/_build/main_tb.vcd"
-[dumpfile_mtime] "Thu Jan 23 06:25:12 2025"
-[dumpfile_size] 21907
-[savefile] "/Volumes/projects/apio-examples/repo/examples/fomu/dsp/main_tb.gtkw"
 [timestart] 0
 [size] 1408 825
 [pos] -1 -1

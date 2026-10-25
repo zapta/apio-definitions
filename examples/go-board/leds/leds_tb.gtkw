@@ -2,10 +2,6 @@
 [*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
 [*] Mon Aug 29 09:15:38 2016
 [*]
-[dumpfile] "/home/jesus/code/apio-examples/go-board-leds/leds_tb.vcd"
-[dumpfile_mtime] "Mon Aug 29 09:15:35 2016"
-[dumpfile_size] 567
-[savefile] "/home/jesus/code/apio-examples/go-board-leds/leds_tb.gtkw"
 [timestart] 0
 [size] 1000 600
 [pos] 12 0
